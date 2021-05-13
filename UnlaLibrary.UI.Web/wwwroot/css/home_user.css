@@ -1,0 +1,150 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+:root {
+    --formMiddleHeightNegative: -0px;
+}
+
+.banner {
+    background-image: url('./images/banner.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 35vh;
+}
+
+@media (max-width: 812px) and (orientation: landscape) {
+    .banner {
+        height: 50vh;
+    }
+}
+
+main {
+    margin-bottom: var(--formMiddleHeight)
+}
+
+form {
+    width: 55%;
+    padding: 2.3em 2em;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--formMiddleHeightNegative);
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.644);
+    border-style: solid;
+    border-width: 2pt;
+    border-color: rgb(255, 255, 255);
+    transition-duration: 1s;
+}
+
+form:hover, form:active, form:focus {
+    background-color: rgba(0, 0, 0, 0.78);
+}
+
+.search-bar {
+    box-sizing: border-box;
+    border-radius: 15pt;
+    overflow: hidden;
+    min-height: 3em;
+}
+
+.search-bar input {
+    flex-grow: 4;
+    background-color: rgb(184, 228, 176);
+    border-style: solid;
+    border-width: 2pt;
+    border-color: rgb(184, 228, 176);
+    text-indent: 1em;
+    border-radius: 15pt 0 0 15pt;
+}
+
+.search-bar select {
+    flex-grow: 1;
+    background-color: rgb(184, 228, 176);
+    border-style: solid;
+    border-width: 2pt;
+    border-color: rgb(184, 228, 176);
+    border-left-color: rgb(107, 107, 107);
+    text-indent: 1em;
+    box-sizing: border-box;
+    color: rgb(31, 31, 31);
+    font-weight: 500;
+}
+
+.search-bar button {
+    border-style: none;
+    background-color: rgb(56, 162, 35);
+    flex-grow: 1;
+    color: white;
+    border-color: rgb(56, 162, 35);
+    border-width: 2pt;
+    border-style: solid;
+    border-radius: 0 15pt 15pt 0;
+    transition-duration: 0.5s;
+}
+
+.search-bar input:focus, .search-bar select:focus {
+    outline: none;
+    border-color: rgba(56, 162, 35, 0.527);
+}
+
+.search-bar button:active, .search-bar button:focus {
+    outline: none;
+    border-color: rgba(238, 255, 0, 0.76);
+}
+
+.search-bar button:hover {
+    background-color: rgb(48, 146, 28);
+}
+
+@media (max-width: 1200px) {
+    form {
+        width: 70%;
+    }
+}
+
+@media (max-width: 800px) {
+    form {
+        width: 95%;
+        margin-left: 1em;
+        margin-right: 1em;
+        padding: 1.5em 2em;
+
+    }
+    .search-bar {
+        flex-direction: column;
+        align-items: center;
+        overflow: auto;
+        height: auto;
+        min-height: 1em;
+        box-sizing: border-box;
+        border-radius: 0pt;
+    }
+    .search-bar input {
+        border-radius: 8pt;
+        width: 100%;
+        height: 2.5em;
+        margin-bottom: 0.8em;
+    }
+    .search-bar select {
+        width: 100%;
+        border-radius: 8pt;
+        border-left-color: rgb(184, 228, 176);
+        height: 2.5em;
+        margin-bottom: 0.8em;
+    }
+    .search-bar button {
+        height: 2.5em;
+        border-radius: 8pt;
+        min-width: 30vw;
+    }
+}
+
+tbody tr:hover {
+    cursor: pointer;
+    color: rgb(12, 9, 175) !important;
+}

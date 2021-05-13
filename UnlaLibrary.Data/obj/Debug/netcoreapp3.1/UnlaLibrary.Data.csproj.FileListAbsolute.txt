@@ -1,0 +1,11 @@
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.deps.json
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.json
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.dev.json
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfo.cs
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\Nehuen\Documents\Library\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache

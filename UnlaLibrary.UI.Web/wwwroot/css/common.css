@@ -1,0 +1,88 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page_container {
+    flex-grow: 1;
+}
+
+.btn-circle {
+    border-radius: 100% !important;
+    width: 3em;
+    height: 3em;
+}
+
+.w-75r {
+    width: 75% !important;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .w-75r {
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .w-75r {
+        width: 100% !important;
+    }
+}
+
+.logo {
+    width: 6.5em;
+}
+
+.font-raleway {
+    font-family: 'Raleway';
+}
+
+::-webkit-scrollbar {
+    width: 10pt;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(34, 34, 34);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(128, 128, 128);
+    border-radius: 10pt;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(158, 158, 158);
+}
+
+.page-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 5.5em;
+    -webkit-text-stroke: 1pt rgb(255, 255, 255);
+    /* width and color */
+    color: rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.4em;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    .page-title {
+        font-size: 4.5em;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page-title {
+        font-size: 4em;
+    }
+}
+
+@media (max-width: 800px) {
+    .page-title {
+        font-size: 3em;
+        letter-spacing: 0.3em;
+    }
+}

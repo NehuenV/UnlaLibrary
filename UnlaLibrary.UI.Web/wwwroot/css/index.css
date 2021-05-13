@@ -1,0 +1,194 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.fullscreen {
+    min-height: 300px;
+    height: 100%;
+}
+
+.landingpage {
+    min-height: 100%;
+    background-image: url('./images/background.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.w-75r {
+    width: 75% !important;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .w-75r {
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .w-75r {
+        width: 100% !important;
+    }
+}
+
+.bg-dark-opacity {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
+}
+
+.logo {
+    width: 7em;
+}
+
+.header-card {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.header-card__content {
+    width: 45%;
+    background-color: rgba(0,0,0,0.2);
+    padding: 2em;
+}
+
+@media (max-width: 1024px) {
+    .header-card__content {
+        width: 60%;
+        padding: 1em;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-card__content {
+        width: 90%;
+        padding: 1em;
+    }
+}
+
+.font-raleway {
+    font-family: 'Raleway';
+}
+
+.header-card__title {
+    font-size: 2.5em;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.596);
+}
+
+.header-card__description {
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 800px) {
+    .header-card__title {
+        font-size: 2.1em;
+    }
+    
+    .header-card__description {
+        font-size: 1em;
+    }
+}
+
+.list-no-style {
+    list-style: none;
+}
+
+.input_text {
+    border-radius: 5px;
+    border-color: rgb(41, 41, 41);
+    border-style: solid;
+    border-width: 1pt;
+    height: 3em;
+    margin-right: 0.5em;
+    min-width: 14em;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-indent: 1pt;
+}
+
+.input_text:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgb(255, 152, 67);
+    border-width: 2pt;
+}
+
+@media (max-width: 800px) {
+    .input_text {
+        margin-bottom: 0.2em;
+        flex-grow: 1;
+    }
+}
+
+.universidades {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.universidades__text {
+    font-size: 0.7em;
+    text-shadow: 1px 1px 2px black;
+    color: white;
+    font-weight: 300;
+}
+
+.universidades__logo {
+    filter: opacity(0.85);
+    min-width: 10vw;
+    padding: 0 3em 0 3em;
+    width: 100%;
+}
+
+.universidades__logo:hover {
+    filter: opacity(1);
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .universidades__logo {
+        width: 100%;
+        padding: 0 2em 0 2em;
+    }
+}
+
+@media (max-width: 800px) {
+    .universidades__logo {
+        padding: 0 1em 0 1em;
+    }
+    .universidades__text {
+        display: none; 
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 10pt;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(34, 34, 34);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(128, 128, 128);
+    border-radius: 10pt;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(158, 158, 158);
+}
