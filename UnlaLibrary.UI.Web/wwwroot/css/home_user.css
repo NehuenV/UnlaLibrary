@@ -11,7 +11,7 @@ body {
 }
 
 .banner {
-    background-image: url('./images/banner.webp');
+    background-image: url('/images/banner.webp');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

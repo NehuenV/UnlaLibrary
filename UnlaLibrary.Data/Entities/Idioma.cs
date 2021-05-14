@@ -12,7 +12,7 @@ namespace UnlaLibrary.Data.Entities
             MaterialEstudios = new HashSet<MaterialEstudio>();
         }
 
-        public int IdIdioma { get; set; }
+        public int IdIdioma { get ; set; }
         public string Idioma1 { get; set; }
 
         public virtual ICollection<MaterialEstudio> MaterialEstudios { get; set; }

@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {}
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "projectName": "UnlaLibrary.Data",
-        "projectPath": "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
-        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Nehuen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
