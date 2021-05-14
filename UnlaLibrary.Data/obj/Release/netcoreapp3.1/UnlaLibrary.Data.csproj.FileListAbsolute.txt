@@ -1,0 +1,11 @@
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\bin\Release\netcoreapp3.1\UnlaLibrary.Data.deps.json
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\bin\Release\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.json
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\bin\Release\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.dev.json
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\bin\Release\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\bin\Release\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfo.cs
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\crist\Source\Repos\UnlaLibrary\UnlaLibrary.Data\obj\Release\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
