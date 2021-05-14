@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ALxoYb+ojlKIIeJewtbcCNjgFlL9CdhIBSo5gmYBAIvzkqE/0W/ygi0AWvyOy1i7RTXy1GG71oiKGnqyqmFXHw==",
+  "dgSpecHash": "slpEV0d2T5ly5jloRtRzYv9H9Y1grVWZlnTeArfsC/ltsw2CishroqRJh7MKDcmHQm3u+WW50KjF2DA3+6zz5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\crist\\Source\\Repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+  "projectFilePath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\crist\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
