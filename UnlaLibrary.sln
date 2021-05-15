@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnlaLibrary.Data", "UnlaLibrary.Data\UnlaLibrary.Data.csproj", "{C398CF33-9278-45CD-9925-7451255869B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnlaLibrary.UI.Web", "UnlaLibrary.UI.Web\UnlaLibrary.UI.Web.csproj", "{0086FCB8-999F-42D3-8708-5D641CB4C4FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnlaLibrary.UI.Web", "UnlaLibrary.UI.Web\UnlaLibrary.UI.Web.csproj", "{0086FCB8-999F-42D3-8708-5D641CB4C4FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

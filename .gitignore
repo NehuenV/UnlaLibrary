@@ -2,3 +2,8 @@ bin/
 debug/
 v16/
 Debug/
+obk/Debug/
+UnlaLibrary.Data/obj/
+UnlaLibrary.Data/obj/*
+*.cache
+*.txt

@@ -8,103 +8,96 @@
 <html lang="es">
 
 <head>
-   
+    <link href="@Url.Content("~/css/home_user.css")" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
-    <div class="page_container bg-light">
-        
-
-        <main class="d-flex flex-column align-items-center">
-            <div class="w-100 banner d-flex flex-column justify-content-end align-items-center">
-                <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                    <h2 class="page-title">CATÁLOGO</h2>
+    <main class="d-flex flex-column align-items-center">
+        <div class="w-100 banner d-flex flex-column justify-content-end align-items-center">
+            <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+                <h2 class="page-title">CATÁLOGO</h2>
+            </div>
+            <form class="d-flex flex-column font-raleway">
+                <div class="form-group d-flex w-100 search-bar">
+                    <input type="search" maxlength="50" placeholder="¿Qué desea buscar?" />
+                    <select>
+                        <option selected>Título</option>
+                        <option>Palabra clave</option>
+                        <option>Autor</option>
+                    </select>
+                    <button type="submit">Buscar</button>
                 </div>
-                <form class="d-flex flex-column font-raleway">
-                    <div class="form-group d-flex w-100 search-bar">
-                        <input type="search" maxlength="50" placeholder="¿Qué desea buscar?" />
-                        <select>
-                            <option selected>Título</option>
-                            <option>Palabra clave</option>
-                            <option>Autor</option>
-                        </select>
-                        <button type="submit">Buscar</button>
-                    </div>
-                </form>
-            </div>
-        </main>
+            </form>
+        </div>
+    </main>
 
-        <div class="w-100 d-flex justify-content-center pb-3">
-            <div class="w-75r table-responsive">
-                <p class="font-raleway fs-4 fw-bold">10 Recursos encontrados</p>
-                <table class="table table-hover table-striped w-100 border border-secondary">
-                    <thead>
-                        <tr class="table-dark">
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Autor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Logica y Programacion</td>
-                            <td>Descripción acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Fundamentos de programación</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 2</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 3</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 4</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 5</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 6</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 7</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                        <tr>
-                            <td>Programación en C Vol. 8</td>
-                            <td>Descripción por acá...</td>
-                            <td>Luis Joyanes</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+    <div class="w-100 d-flex justify-content-center pb-3">
+        <div class="w-75r table-responsive">
+            <p class="font-raleway fs-4 fw-bold">10 Recursos encontrados</p>
+            <table class="table table-hover table-striped w-100 border border-secondary">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Autor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="@Url.Action("Detalle","Catalogo")">Logica y Programacion</a></td>
+                        <td>Descripción acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Fundamentos de programación</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 2</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 3</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 4</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 5</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 6</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 7</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                    <tr>
+                        <td>Programación en C Vol. 8</td>
+                        <td>Descripción por acá...</td>
+                        <td>Luis Joyanes</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <footer class="bg-dark text-white p-3 d-flex justify-content-center">
-        Datos del footer por acá
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"></script>
