@@ -37,13 +37,28 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         public IActionResult Detalle(int algo)
         {
-            // prueba
+            // Ejemplo de traer materialEstudio mediante query
+            /* 
+            var lista = (from ME in _Library.MaterialEstudios
+                         join I in _Library.Idiomas on ME.Idioma equals I.IdIdioma
+                         select
+                         new MaterialEstudio
+                         {
+                             Descripcion = ME.Descripcion,
+                             IdMateriaEstudio = ME.IdMateriaEstudio,
+                             IdiomaNavigation = ME.IdiomaNavigation,
+                             Materia = ME.Materia,
+                             Idioma = ME.Idioma,
+                             Titulo = ME.Titulo
+                         }).ToList();
+
+            //Ejemplo de traer materialEstudios con sql 
+            var aa = _Library.MaterialEstudios.FromSqlRaw("select * from MaterialEstudio").ToList();
+   
+          
+            // Ejemplo con lamda
             MaterialEstudio[] matariales = _Library.MaterialEstudios.Select(s => s).ToArray<MaterialEstudio>();
-
-            Console.WriteLine(matariales[0].IdMateriaEstudio);
-            Console.WriteLine(matariales[0].Titulo);
-            Console.WriteLine(matariales[0].Idioma);
-
+            */
             return View();
         }
 
