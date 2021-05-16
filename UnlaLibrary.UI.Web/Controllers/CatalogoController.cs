@@ -32,19 +32,17 @@ namespace UnlaLibrary.UI.Web.Controllers
             //lista.Select(x => x.Materia).ToList();
             //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
             //_Library.SaveChanges();
-
             return View();
         }
 
         public IActionResult Detalle(int algo)
         {
-            //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-            //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
+            // prueba
+            MaterialEstudio[] matariales = _Library.MaterialEstudios.Select(s => s).ToArray<MaterialEstudio>();
 
-            //List<Materium> lista = new List<Materium>();
-            //lista.Select(x => x.Materia).ToList();
-            //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-            //_Library.SaveChanges();
+            Console.WriteLine(matariales[0].IdMateriaEstudio);
+            Console.WriteLine(matariales[0].Titulo);
+            Console.WriteLine(matariales[0].Idioma);
 
             return View();
         }
