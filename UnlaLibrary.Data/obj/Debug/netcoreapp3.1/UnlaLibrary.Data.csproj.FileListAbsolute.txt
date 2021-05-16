@@ -32,3 +32,15 @@ D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.
 D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
 D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
 D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csprojAssemblyReference.cache
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.deps.json
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.json
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.dev.json
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csprojAssemblyReference.cache
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfoInputs.cache
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfo.cs
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csproj.CoreCompileInputs.cache
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache

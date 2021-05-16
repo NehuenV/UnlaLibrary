@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
+using UnlaLibrary.Data.Interfaces;
+using UnlaLibrary.Data.Repositories;
 
 namespace UnlaLibrary.UI.Web
 {
@@ -25,6 +27,7 @@ namespace UnlaLibrary.UI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddDbContext<Library>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
