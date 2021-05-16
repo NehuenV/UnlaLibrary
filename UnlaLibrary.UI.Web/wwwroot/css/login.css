@@ -1,0 +1,76 @@
+﻿.bg-semidark {
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #3a3a3aDD, #000000DD);
+    background: linear-gradient(to right, #3a3a3aDD, #000000DD);
+}
+
+.login__image {
+    min-height: 65vh;
+    background-image: url(/images/login.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 3pt 0 0 3pt;
+}
+
+@media (max-width: 768px) {
+    .login__image {
+        min-height: 0;
+    }
+}
+
+.login__input {
+    min-height: 3em;
+    background-color: rgb(212, 212, 212);
+    border-style: none;
+    border-radius: 15pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1pt 10pt 1pt 10pt;
+    width: 80%;
+    margin-top: 1em;
+}
+
+    .login__input input {
+        background-color: #00000000;
+        border-style: none;
+    }
+
+        .login__input input:focus {
+            border-style: none;
+            background-color: rgb(212, 212, 212);
+            box-shadow: none;
+        }
+
+.login__button {
+    background-color: #57B846;
+    border-style: none;
+    min-height: 3em;
+    border-radius: 15pt;
+    width: 80%;
+    margin-top: 1em;
+    color: rgb(239, 240, 230);
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .login__input {
+        width: 99%;
+    }
+}
+
+.login__signup {
+    font-family: 'Raleway';
+    color: rgb(14, 14, 212);
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .login__signup {
+        margin-top: 2.5em;
+    }
+}
