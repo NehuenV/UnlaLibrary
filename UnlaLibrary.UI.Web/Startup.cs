@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
+using UnlaLibrary.Data.Interface;
 using UnlaLibrary.Data.Interfaces;
 using UnlaLibrary.Data.Repositories;
 
@@ -28,6 +29,8 @@ namespace UnlaLibrary.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<ICatalogoRepository, CatalogoRepository>();
+
             services.AddDbContext<Library>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));

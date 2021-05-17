@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
+<table class="table table-hover table-striped w-100 border border-secondary" >
+    <thead>
+        <tr class="table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MateriaNavigation.Materia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdiomaNavigation.Idioma1)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MateriaNavigation.Materia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdiomaNavigation.Idioma1)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

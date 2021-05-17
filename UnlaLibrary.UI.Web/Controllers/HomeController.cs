@@ -42,7 +42,7 @@ namespace UnlaLibrary.UI.Web.Controllers
 
             if (aut)
             {
-                var n= _login.GetName(login);
+                var n = _login.GetName(login);
                 return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
             }
             else

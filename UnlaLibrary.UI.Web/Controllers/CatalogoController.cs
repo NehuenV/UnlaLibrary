@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
+using UnlaLibrary.Data.Interface;
 using UnlaLibrary.UI.Web.Models;
 
 namespace UnlaLibrary.UI.Web.Controllers
@@ -16,22 +17,25 @@ namespace UnlaLibrary.UI.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly Library _Library;
+        private readonly ICatalogoRepository _Catalogo;
 
-        public CatalogoController(ILogger<HomeController> logger, Library Library)
+        public CatalogoController(ILogger<HomeController> logger, Library Library, ICatalogoRepository Catalogo)
         {
             _logger = logger;
             _Library = Library;
+            _Catalogo = Catalogo;
         }
+        //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
+        //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
 
-        public IActionResult Catalogo(int algo)
+        //List<Materium> lista = new List<Materium>();
+        //lista.Select(x => x.Materia).ToList();
+        //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
+        //_Library.SaveChanges();
+        public IActionResult Catalogo()
         {
-            //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-            //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
-
-            //List<Materium> lista = new List<Materium>();
-            //lista.Select(x => x.Materia).ToList();
-            //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-            //_Library.SaveChanges();
+            var cat = _Catalogo.GetCatalogo();
+            ViewBag.Catalogo = cat;
             return View();
         }
 
