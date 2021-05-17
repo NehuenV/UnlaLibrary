@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
 using UnlaLibrary.Data.Interfaces;
+using UnlaLibrary.Data.Models;
 using UnlaLibrary.UI.Web.Models;
 
 namespace UnlaLibrary.UI.Web.Controllers
@@ -38,8 +38,19 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult Login(Login login)
         {
-            _login.Authentication();
-            //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
+            var aut = _login.Authentication(login);
+
+            if (aut)
+            {
+                var n= _login.GetName(login);
+                return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
+            }
+            else
+            {
+                return Json(new { status = aut, name = "", email = "", message = "Clave o usuario incorrecto " });
+            }
+        }
+         //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
             //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
 
             //List<Materium> lista = new List<Materium>();
@@ -47,8 +58,6 @@ namespace UnlaLibrary.UI.Web.Controllers
             //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
             //_Library.SaveChanges();
 
-            return View("Index");
-        }
         public IActionResult Privacy()
         {
             return View();

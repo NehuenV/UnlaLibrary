@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {}
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {}
   },
   "projects": {
-    "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "projectName": "UnlaLibrary.Data",
-        "projectPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

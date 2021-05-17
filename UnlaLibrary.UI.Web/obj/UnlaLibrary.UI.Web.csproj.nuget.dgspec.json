@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {}
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {}
   },
   "projects": {
-    "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "projectName": "UnlaLibrary.Data",
-        "projectPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -78,14 +78,14 @@
         }
       }
     },
-    "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
         "projectName": "UnlaLibrary.UI.Web",
-        "projectPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
         "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.UI.Web\\obj\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -106,8 +106,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
-                "projectPath": "D:\\github\\libr\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj"
+              "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+                "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj"
               }
             }
           }

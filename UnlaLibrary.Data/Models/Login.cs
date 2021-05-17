@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace UnlaLibrary.UI.Web.Models
+namespace UnlaLibrary.Data.Models
 {
     public class Login
     {
-        public string user { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
     }
 }

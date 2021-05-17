@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Interfaces;
+using UnlaLibrary.Data.Models;
+using System.Linq;
+
 
 namespace UnlaLibrary.Data.Repositories
 {
@@ -14,9 +17,29 @@ namespace UnlaLibrary.Data.Repositories
         {
             _Library = Library;
         }
-        public void Authentication()
+        public bool Authentication(Login login)
         {
-            string esto = "prueba ";
+            var user = _Library.Usuarios.Where(x => x.Email == login.email && x.Clave == login.password).ToList();
+            if(user.Any())
+            {
+                if (user.Where(x=>x.Email==login.email && x.Clave == login.password).Any())
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        public string GetName(Login login)
+        {
+            var user = _Library.Usuarios.Where(x => x.Email == login.email && x.Clave == login.password).Select(x=>x.Nombre).FirstOrDefault();
+            return user;
         }
 
     }

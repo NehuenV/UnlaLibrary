@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnlaLibrary.Data.Models;
 
 namespace UnlaLibrary.Data.Interfaces
 {
     public interface IAuthenticationRepository
     {
-        void Authentication();
+        bool Authentication(Login login);
+        string GetName(Login login);
     }
 }
