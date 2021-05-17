@@ -9,12 +9,12 @@ namespace UnlaLibrary.Data.Entities
     {
         public TipoUsuario()
         {
-            Usuarios = new HashSet<Usuario>();
+            Usuario = new HashSet<Usuario>();
         }
 
         public int IdTipoUsuario { get; set; }
         public string NombreTipoUsuario { get; set; }
 
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

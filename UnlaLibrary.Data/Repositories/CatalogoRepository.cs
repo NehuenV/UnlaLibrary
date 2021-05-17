@@ -22,8 +22,8 @@ namespace UnlaLibrary.Data.Repositories
         {
             var catalogo =(
 
-                           from ME in _Library.MaterialEstudios
-                              join I in _Library.Idiomas on ME.Idioma equals I.IdIdioma
+                           from ME in _Library.MaterialEstudio
+                              join I in _Library.Idioma on ME.Idioma equals I.IdIdioma
                               join M in _Library.Materia on ME.Materia equals M.IdMateria
                               select
                               new MaterialEstudio

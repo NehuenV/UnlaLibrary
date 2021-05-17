@@ -34,12 +34,14 @@ tipoUsuario int not null,
  )
  go
 
- create table MaterialEstudio (
-idMateriaEstudio int not null primary key identity,
-titulo varchar(45) not null,
-descripcion varchar(45) not null,
-idioma int not null,
-materia int not null,
+Create table MaterialEstudio (
+	idMateriaEstudio int not null primary key identity,
+	titulo varchar(45) not null,
+	descripcion varchar(45) not null,
+	idioma int not null,
+	materia int not null,
+	autor varchar(45) not null,
+	archivo varbinary(MAX) not null,
  CONSTRAINT [FK_Idioma_MateriaEstudio] FOREIGN KEY ([idioma]) REFERENCES [Idioma]([idIdioma]),
  CONSTRAINT [FK_Materia_MateriaEstudio] FOREIGN KEY ([materia]) REFERENCES [Materia]([idMateria])
 )

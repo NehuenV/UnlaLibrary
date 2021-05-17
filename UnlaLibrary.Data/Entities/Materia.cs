@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace UnlaLibrary.Data.Entities
 {
-    public partial class Idioma
+    public partial class Materia
     {
-        public Idioma()
+        public Materia()
         {
             MaterialEstudio = new HashSet<MaterialEstudio>();
         }
 
-        public int IdIdioma { get; set; }
-        public string Idioma1 { get; set; }
+        public int IdMateria { get; set; }
+        public string Materia1 { get; set; }
 
         public virtual ICollection<MaterialEstudio> MaterialEstudio { get; set; }
     }

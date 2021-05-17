@@ -12,8 +12,10 @@ namespace UnlaLibrary.Data.Entities
         public string Descripcion { get; set; }
         public int Idioma { get; set; }
         public int Materia { get; set; }
+        public string Autor { get; set; }
+        public byte[] Archivo { get; set; }
 
         public virtual Idioma IdiomaNavigation { get; set; }
-        public virtual Materium MateriaNavigation { get; set; }
+        public virtual Materia MateriaNavigation { get; set; }
     }
 }

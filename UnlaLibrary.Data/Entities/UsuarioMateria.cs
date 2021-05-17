@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace UnlaLibrary.Data.Entities
 {
-    public partial class UsuarioMaterium
+    public partial class UsuarioMateria
     {
         public int IdUsuario { get; set; }
         public int IdMateria { get; set; }
 
-        public virtual Materium IdMateriaNavigation { get; set; }
+        public virtual Materia IdMateriaNavigation { get; set; }
         public virtual Usuario IdUsuarioNavigation { get; set; }
     }
 }

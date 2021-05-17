@@ -19,7 +19,7 @@ namespace UnlaLibrary.Data.Repositories
         }
         public bool Authentication(Login login)
         {
-            var user = _Library.Usuarios.Where(x => x.Email == login.email && x.Clave == login.password).ToList();
+            var user = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).ToList();
             if(user.Any())
             {
                 if (user.Where(x=>x.Email==login.email && x.Clave == login.password).Any())
@@ -38,7 +38,7 @@ namespace UnlaLibrary.Data.Repositories
         }
         public string GetName(Login login)
         {
-            var user = _Library.Usuarios.Where(x => x.Email == login.email && x.Clave == login.password).Select(x=>x.Nombre).FirstOrDefault();
+            var user = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).Select(x=>x.Nombre).FirstOrDefault();
             return user;
         }
 

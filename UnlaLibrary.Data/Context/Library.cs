@@ -18,20 +18,19 @@ namespace UnlaLibrary.Data.Context
         {
         }
 
-        public virtual DbSet<Carrera> Carreras { get; set; }
-        public virtual DbSet<CarreraMaterium> CarreraMateria { get; set; }
-        public virtual DbSet<Idioma> Idiomas { get; set; }
-        public virtual DbSet<MaterialEstudio> MaterialEstudios { get; set; }
-        public virtual DbSet<Materium> Materia { get; set; }
-        public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
-        public virtual DbSet<Universidad> Universidads { get; set; }
-        public virtual DbSet<UniversidadCarrera> UniversidadCarreras { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<UsuarioMaterium> UsuarioMateria { get; set; }
+        public virtual DbSet<Carrera> Carrera { get; set; }
+        public virtual DbSet<CarreraMateria> CarreraMateria { get; set; }
+        public virtual DbSet<Idioma> Idioma { get; set; }
+        public virtual DbSet<Materia> Materia { get; set; }
+        public virtual DbSet<MaterialEstudio> MaterialEstudio { get; set; }
+        public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
+        public virtual DbSet<Universidad> Universidad { get; set; }
+        public virtual DbSet<UniversidadCarrera> UniversidadCarrera { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<UsuarioMateria> UsuarioMateria { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,8 +42,6 @@ namespace UnlaLibrary.Data.Context
                 entity.HasKey(e => e.IdCarrera)
                     .HasName("PK__Carrera__7B19E7913E1F87D6");
 
-                entity.ToTable("Carrera");
-
                 entity.Property(e => e.IdCarrera).HasColumnName("idCarrera");
 
                 entity.Property(e => e.Carrera1)
@@ -54,7 +51,7 @@ namespace UnlaLibrary.Data.Context
                     .HasColumnName("carrera");
             });
 
-            modelBuilder.Entity<CarreraMaterium>(entity =>
+            modelBuilder.Entity<CarreraMateria>(entity =>
             {
                 entity.HasNoKey();
 
@@ -82,8 +79,6 @@ namespace UnlaLibrary.Data.Context
                 entity.HasKey(e => e.IdIdioma)
                     .HasName("PK__Idioma__A96571FC398F9DC2");
 
-                entity.ToTable("Idioma");
-
                 entity.Property(e => e.IdIdioma).HasColumnName("idIdioma");
 
                 entity.Property(e => e.Idioma1)
@@ -93,14 +88,36 @@ namespace UnlaLibrary.Data.Context
                     .HasColumnName("idioma");
             });
 
+            modelBuilder.Entity<Materia>(entity =>
+            {
+                entity.HasKey(e => e.IdMateria)
+                    .HasName("PK__Materia__4B740AB3F639A85A");
+
+                entity.Property(e => e.IdMateria).HasColumnName("idMateria");
+
+                entity.Property(e => e.Materia1)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false)
+                    .HasColumnName("materia");
+            });
+
             modelBuilder.Entity<MaterialEstudio>(entity =>
             {
                 entity.HasKey(e => e.IdMateriaEstudio)
-                    .HasName("PK__Material__518559FD2DAB5BE6");
-
-                entity.ToTable("MaterialEstudio");
+                    .HasName("PK__Material__518559FD11C7A94B");
 
                 entity.Property(e => e.IdMateriaEstudio).HasColumnName("idMateriaEstudio");
+
+                entity.Property(e => e.Archivo)
+                    .IsRequired()
+                    .HasColumnName("archivo");
+
+                entity.Property(e => e.Autor)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false)
+                    .HasColumnName("autor");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
@@ -119,38 +136,22 @@ namespace UnlaLibrary.Data.Context
                     .HasColumnName("titulo");
 
                 entity.HasOne(d => d.IdiomaNavigation)
-                    .WithMany(p => p.MaterialEstudios)
+                    .WithMany(p => p.MaterialEstudio)
                     .HasForeignKey(d => d.Idioma)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Idioma_MateriaEstudio");
 
                 entity.HasOne(d => d.MateriaNavigation)
-                    .WithMany(p => p.MaterialEstudios)
+                    .WithMany(p => p.MaterialEstudio)
                     .HasForeignKey(d => d.Materia)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Materia_MateriaEstudio");
-            });
-
-            modelBuilder.Entity<Materium>(entity =>
-            {
-                entity.HasKey(e => e.IdMateria)
-                    .HasName("PK__Materia__4B740AB3F639A85A");
-
-                entity.Property(e => e.IdMateria).HasColumnName("idMateria");
-
-                entity.Property(e => e.Materia)
-                    .IsRequired()
-                    .HasMaxLength(45)
-                    .IsUnicode(false)
-                    .HasColumnName("materia");
             });
 
             modelBuilder.Entity<TipoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
                     .HasName("PK__TipoUsua__03006BFF287FB897");
-
-                entity.ToTable("TipoUsuario");
 
                 entity.Property(e => e.IdTipoUsuario).HasColumnName("idTipoUsuario");
 
@@ -165,8 +166,6 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => e.IdUniversidad)
                     .HasName("PK__Universi__AFB9D2244D38274E");
-
-                entity.ToTable("Universidad");
 
                 entity.Property(e => e.IdUniversidad).HasColumnName("idUniversidad");
 
@@ -205,8 +204,6 @@ namespace UnlaLibrary.Data.Context
                 entity.HasKey(e => e.IdUsuario)
                     .HasName("PK__Usuario__645723A6B1240B31");
 
-                entity.ToTable("Usuario");
-
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 
                 entity.Property(e => e.Clave)
@@ -230,13 +227,13 @@ namespace UnlaLibrary.Data.Context
                 entity.Property(e => e.TipoUsuario).HasColumnName("tipoUsuario");
 
                 entity.HasOne(d => d.TipoUsuarioNavigation)
-                    .WithMany(p => p.Usuarios)
+                    .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.TipoUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Usuario_TipoUsuario");
             });
 
-            modelBuilder.Entity<UsuarioMaterium>(entity =>
+            modelBuilder.Entity<UsuarioMateria>(entity =>
             {
                 entity.HasNoKey();
 

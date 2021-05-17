@@ -1,6 +1,3 @@
-
-use unlalibrary
-
 insert into Universidad values('Universidad Nacional de Lanus')
 insert into Universidad values('Universidad de Buenos Aires')
 
@@ -11,6 +8,13 @@ insert into Materia values('Matematica')
 insert into Materia values('Programación')
 insert into Materia values('Fisica')
 
+insert into Idioma values('Español')
+insert into Idioma values ('Inglés')
+
+insert into TipoUsuario values('Estudiante')
+insert into TipoUsuario values('Profesor')
+insert into TipoUsuario values('Administrador')
+
 insert into Carrera_Materia values(1, 1)
 insert into Carrera_Materia values(1, 2)
 insert into Carrera_Materia values(2, 3)
@@ -19,12 +23,9 @@ insert into Carrera_Materia values(2, 1)
 insert into Universidad_Carrera values(1, 1)
 insert into Universidad_Carrera values(2, 2)
 
-insert into Idioma values('Español')
-insert into Idioma values ('Inglés')
 
-insert into TipoUsuario values('Estudiante')
-insert into TipoUsuario values('Profesor')
-insert into TipoUsuario values('Administrador')
+
+
 
 insert into Usuario values('Juan Gomez', 'juangomez@email.com', '1234', 1)
 insert into Usuario values('Jose Perez', 'joseperez@email.com', '1234', 1)
