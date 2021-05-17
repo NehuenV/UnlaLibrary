@@ -43,6 +43,5 @@ D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.
 D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
 D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
 D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
-D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csprojAssemblyReference.cache
 D:\github\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\datos.sql
 D:\github\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\insertMaterial.sql

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UnlaLibrary.Data.Migrations
 {
-    public partial class inicial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,36 +96,6 @@ namespace UnlaLibrary.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MaterialEstudio",
-                columns: table => new
-                {
-                    idMateriaEstudio = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    titulo = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    idioma = table.Column<int>(type: "int", nullable: false),
-                    materia = table.Column<int>(type: "int", nullable: false),
-                    autor = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    archivo = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Material__518559FD11C7A94B", x => x.idMateriaEstudio);
-                    table.ForeignKey(
-                        name: "FK_Idioma_MateriaEstudio",
-                        column: x => x.idioma,
-                        principalTable: "Idioma",
-                        principalColumn: "idIdioma",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Materia_MateriaEstudio",
-                        column: x => x.materia,
-                        principalTable: "Materia",
-                        principalColumn: "idMateria",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -171,6 +141,44 @@ namespace UnlaLibrary.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MaterialEstudio",
+                columns: table => new
+                {
+                    idMateriaEstudio = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    titulo = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
+                    descripcion = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
+                    idioma = table.Column<int>(type: "int", nullable: false),
+                    materia = table.Column<int>(type: "int", nullable: false),
+                    usuario = table.Column<int>(type: "int", nullable: false),
+                    autor = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
+                    miniatura = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    archivo = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Material__518559FD9A647BD5", x => x.idMateriaEstudio);
+                    table.ForeignKey(
+                        name: "FK_Idioma_MateriaEstudio",
+                        column: x => x.idioma,
+                        principalTable: "Idioma",
+                        principalColumn: "idIdioma",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Materia_MateriaEstudio",
+                        column: x => x.materia,
+                        principalTable: "Materia",
+                        principalColumn: "idMateria",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Usuario_MateriaEstudio",
+                        column: x => x.usuario,
+                        principalTable: "Usuario",
+                        principalColumn: "idUsuario",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UsuarioMateria",
                 columns: table => new
                 {
@@ -212,6 +220,11 @@ namespace UnlaLibrary.Data.Migrations
                 name: "IX_MaterialEstudio_materia",
                 table: "MaterialEstudio",
                 column: "materia");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MaterialEstudio_usuario",
+                table: "MaterialEstudio",
+                column: "usuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Universidad_Carrera_idCarrera",

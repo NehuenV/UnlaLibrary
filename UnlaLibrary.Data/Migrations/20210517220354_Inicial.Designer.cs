@@ -10,8 +10,8 @@ using UnlaLibrary.Data.Context;
 namespace UnlaLibrary.Data.Migrations
 {
     [DbContext(typeof(Library))]
-    [Migration("20210517032212_inicial")]
-    partial class inicial
+    [Migration("20210517220354_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,9 +53,9 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idMateria");
 
-                    b.HasIndex("IdCarrera");
+                    b.HasIndex(new[] { "IdCarrera" }, "IX_Carrera_Materia_idCarrera");
 
-                    b.HasIndex("IdMateria");
+                    b.HasIndex(new[] { "IdMateria" }, "IX_Carrera_Materia_idMateria");
 
                     b.ToTable("Carrera_Materia");
                 });
@@ -137,6 +137,11 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("materia");
 
+                    b.Property<byte[]>("Miniatura")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("miniatura");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(45)
@@ -144,12 +149,18 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("titulo");
 
+                    b.Property<int>("Usuario")
+                        .HasColumnType("int")
+                        .HasColumnName("usuario");
+
                     b.HasKey("IdMateriaEstudio")
-                        .HasName("PK__Material__518559FD11C7A94B");
+                        .HasName("PK__Material__518559FD9A647BD5");
 
                     b.HasIndex("Idioma");
 
                     b.HasIndex("Materia");
+
+                    b.HasIndex("Usuario");
 
                     b.ToTable("MaterialEstudio");
                 });
@@ -206,9 +217,9 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idUniversidad");
 
-                    b.HasIndex("IdCarrera");
+                    b.HasIndex(new[] { "IdCarrera" }, "IX_Universidad_Carrera_idCarrera");
 
-                    b.HasIndex("IdUniversidad");
+                    b.HasIndex(new[] { "IdUniversidad" }, "IX_Universidad_Carrera_idUniversidad");
 
                     b.ToTable("Universidad_Carrera");
                 });
@@ -249,7 +260,7 @@ namespace UnlaLibrary.Data.Migrations
                     b.HasKey("IdUsuario")
                         .HasName("PK__Usuario__645723A6B1240B31");
 
-                    b.HasIndex("TipoUsuario");
+                    b.HasIndex(new[] { "TipoUsuario" }, "IX_Usuario_tipoUsuario");
 
                     b.ToTable("Usuario");
                 });
@@ -264,9 +275,9 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idUsuario");
 
-                    b.HasIndex("IdMateria");
+                    b.HasIndex(new[] { "IdMateria" }, "IX_UsuarioMateria_idMateria");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex(new[] { "IdUsuario" }, "IX_UsuarioMateria_idUsuario");
 
                     b.ToTable("UsuarioMateria");
                 });
@@ -304,9 +315,17 @@ namespace UnlaLibrary.Data.Migrations
                         .HasConstraintName("FK_Materia_MateriaEstudio")
                         .IsRequired();
 
+                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "UsuarioNavigation")
+                        .WithMany("MaterialEstudio")
+                        .HasForeignKey("Usuario")
+                        .HasConstraintName("FK_Usuario_MateriaEstudio")
+                        .IsRequired();
+
                     b.Navigation("IdiomaNavigation");
 
                     b.Navigation("MateriaNavigation");
+
+                    b.Navigation("UsuarioNavigation");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.UniversidadCarrera", b =>
@@ -371,6 +390,11 @@ namespace UnlaLibrary.Data.Migrations
             modelBuilder.Entity("UnlaLibrary.Data.Entities.TipoUsuario", b =>
                 {
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Usuario", b =>
+                {
+                    b.Navigation("MaterialEstudio");
                 });
 #pragma warning restore 612, 618
         }
