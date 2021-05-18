@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -43,6 +44,11 @@ namespace UnlaLibrary.UI.Web.Controllers
             if (aut)
             {
                 var n = _login.GetName(login);
+                string cookieNameKey = "name";
+                string cookieNameValue = n;
+                CookieOptions cookieOptions = new CookieOptions();
+                cookieOptions.Expires = DateTime.Now.AddDays(7);
+                Response.Cookies.Append(cookieNameKey, cookieNameValue, cookieOptions);
                 return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
             }
             else
