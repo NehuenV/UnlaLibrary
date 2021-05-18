@@ -45,3 +45,17 @@ D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.
 D:\github\libr\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
 D:\github\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\datos.sql
 D:\github\UnlaLibrary\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\insertMaterial.sql
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\datos.sql
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\Migrations\Scripts\insertMaterial.sql
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.deps.json
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.json
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.runtimeconfig.dev.json
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\bin\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csprojAssemblyReference.cache
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfoInputs.cache
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.AssemblyInfo.cs
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csproj.CoreCompileInputs.cache
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
+C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
