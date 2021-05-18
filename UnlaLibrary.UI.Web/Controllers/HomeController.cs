@@ -56,13 +56,22 @@ namespace UnlaLibrary.UI.Web.Controllers
                 return Json(new { status = aut, name = "", email = "", message = "Clave o usuario incorrecto " });
             }
         }
-         //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-            //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
+        //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
+        //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
 
-            //List<Materium> lista = new List<Materium>();
-            //lista.Select(x => x.Materia).ToList();
-            //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-            //_Library.SaveChanges();
+        //List<Materium> lista = new List<Materium>();
+        //lista.Select(x => x.Materia).ToList();
+        //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
+        //_Library.SaveChanges();
+
+        public IActionResult Logout()
+        {
+            string cookieNameKey = "name";
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Append(cookieNameKey, "", cookieOptions);
+            return View("Index");
+        }
 
         public IActionResult Privacy()
         {
