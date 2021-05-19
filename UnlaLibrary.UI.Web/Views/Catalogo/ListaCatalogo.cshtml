@@ -1,5 +1,8 @@
-﻿@model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
-<table class="table table-hover table-striped w-100 border border-secondary" >
+﻿@{
+    Layout = "";
+}
+@model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
+<table class="table table-hover table-striped w-100 border border-secondary">
     <thead>
         <tr class="table-dark">
             <th>
@@ -18,22 +21,23 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a href="@Url.Action("Detalle","Catalogo")">
-                    @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MateriaNavigation.Materia1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdiomaNavigation.Idioma1)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Detalle","Catalogo")">
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MateriaNavigation.Materia1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdiomaNavigation.Idioma1)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

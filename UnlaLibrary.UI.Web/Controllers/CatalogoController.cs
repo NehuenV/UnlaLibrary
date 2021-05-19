@@ -36,7 +36,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             return View();
         }
-        public IActionResult ListaCatalogo()
+        public IActionResult ListaCatalogo(string a)
         {
             var cat = _Catalogo.GetCatalogo();
             ViewBag.Catalogo = cat;
