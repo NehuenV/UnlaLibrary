@@ -10,7 +10,7 @@ using UnlaLibrary.Data.Context;
 namespace UnlaLibrary.Data.Migrations
 {
     [DbContext(typeof(Library))]
-    [Migration("20210517220404_datos")]
+    [Migration("20210519012222_datos")]
     partial class datos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,6 +238,10 @@ namespace UnlaLibrary.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")
                         .HasColumnName("clave");
+
+                    b.Property<long>("Dni")
+                        .HasColumnType("bigint")
+                        .HasColumnName("dni");
 
                     b.Property<string>("Email")
                         .IsRequired()

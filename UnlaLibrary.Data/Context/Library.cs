@@ -232,6 +232,10 @@ namespace UnlaLibrary.Data.Context
                 entity.HasIndex(e => e.TipoUsuario, "IX_Usuario_tipoUsuario");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
+                
+                entity.Property(e => e.Dni)
+                    .IsRequired()
+                    .HasColumnName("dni");
 
                 entity.Property(e => e.Clave)
                     .IsRequired()

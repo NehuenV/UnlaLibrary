@@ -237,6 +237,10 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("clave");
 
+                    b.Property<long>("Dni")
+                        .HasColumnType("bigint")
+                        .HasColumnName("dni");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(45)
