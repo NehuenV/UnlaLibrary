@@ -10,8 +10,8 @@ using UnlaLibrary.Data.Context;
 namespace UnlaLibrary.Data.Migrations
 {
     [DbContext(typeof(Library))]
-    [Migration("20210519010216_datos")]
-    partial class datos
+    [Migration("20210519012211_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
