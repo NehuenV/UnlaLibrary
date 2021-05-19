@@ -34,11 +34,14 @@ namespace UnlaLibrary.UI.Web.Controllers
         //_Library.SaveChanges();
         public IActionResult Catalogo()
         {
-            var cat = _Catalogo.GetCatalogo();
-            ViewBag.Catalogo = cat;
             return View();
         }
-
+        public IActionResult ListaCatalogo()
+        {
+            var cat = _Catalogo.GetCatalogo();
+            ViewBag.Catalogo = cat;
+            return View(cat);
+        }
         public IActionResult Detalle(int algo)
         {
             // Ejemplo de traer materialEstudio mediante query

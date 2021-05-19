@@ -13,28 +13,14 @@
 
 <body>
     <main class="d-flex flex-column align-items-center">
-        <div class="w-100 banner d-flex flex-column justify-content-end align-items-center">
-            <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                <h2 class="page-title">CATÁLOGO</h2>
-            </div>
-            <form class="d-flex flex-column font-raleway">
-                <div class="form-group d-flex w-100 search-bar">
-                    <input type="search" maxlength="50" placeholder="¿Qué desea buscar?" />
-                    <select>
-                        <option selected>Título</option>
-                        <option>Palabra clave</option>
-                        <option>Autor</option>
-                    </select>
-                    <button type="submit">Buscar</button>
-                </div>
-            </form>
-        </div>
+       @Html.Partial("_Buscador");
     </main>
 
     <div class="w-100 d-flex justify-content-center pb-3">
         <div class="w-75r table-responsive">
             <p class="font-raleway fs-4 fw-bold">10 Recursos encontrados</p>
-            @Html.Partial("ListaCatalogo", ViewData["Catalogo"]);
+            <div id="Results"></div>
+            @*@Html.Partial("ListaCatalogo", ViewData["Catalogo"]);*@
             @*<table class="table table-hover table-striped w-100 border border-secondary">
                 <thead>
                     <tr class="table-dark">

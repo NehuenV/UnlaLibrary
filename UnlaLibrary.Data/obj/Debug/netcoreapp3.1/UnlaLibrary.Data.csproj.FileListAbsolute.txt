@@ -59,3 +59,4 @@ C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.
 C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.dll
 C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.pdb
 C:\Users\crist\source\repos\UnlaLibrary2\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.genruntimeconfig.cache
+D:\github\UnlaLibrary\UnlaLibrary.Data\obj\Debug\netcoreapp3.1\UnlaLibrary.Data.csprojAssemblyReference.cache

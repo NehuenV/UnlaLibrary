@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {}
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
         "projectName": "UnlaLibrary.Data",
-        "projectPath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
-        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\obj\\",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj",
+        "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nehuen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -70,21 +74,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {
+    "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
+        "projectUniqueName": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
         "projectName": "UnlaLibrary.UI.Web",
-        "projectPath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
-        "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.UI.Web\\obj\\",
+        "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\UnlaLibrary.UI.Web.csproj",
+        "packagesPath": "C:\\Users\\Nehuen\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.UI.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nehuen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,8 +106,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
-                "projectPath": "C:\\Users\\crist\\source\\repos\\UnlaLibrary2\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj"
+              "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj": {
+                "projectPath": "D:\\github\\UnlaLibrary\\UnlaLibrary.Data\\UnlaLibrary.Data.csproj"
               }
             }
           }
@@ -155,7 +163,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
