@@ -27,13 +27,13 @@ insert into Universidad_Carrera values(2, 2)
 
 
 
-insert into Usuario values('Juan Gomez', 'juangomez@email.com', '1234', 1)
-insert into Usuario values('Jose Perez', 'joseperez@email.com', '1234', 1)
-insert into Usuario values('Julio Perro', 'lic1@email.com', '1234', 2)
-insert into Usuario values('Rick Sanchez', 'lic2@email.com', '1234', 2)
-insert into Usuario values('Bruno Diaz', 'lic3@email.com', '1234', 2)
-insert into Usuario values('Pedro Caballo', 'lic4@email.com', '1234', 2)
-insert into Usuario values('Señor Administrador', 'admin@email.com', 1234, 3)
+insert into Usuario values(1111, 'Juan Gomez', 'juangomez@email.com', '1234', 1)
+insert into Usuario values(1112, 'Jose Perez', 'joseperez@email.com', '1234', 1)
+insert into Usuario values(1113, 'Julio Perro', 'lic1@email.com', '1234', 2)
+insert into Usuario values(1114, 'Rick Sanchez', 'lic2@email.com', '1234', 2)
+insert into Usuario values(1115, 'Bruno Diaz', 'lic3@email.com', '1234', 2)
+insert into Usuario values(1116, 'Pedro Caballo', 'lic4@email.com', '1234', 2)
+insert into Usuario values(1117, 'Señor Administrador', 'admin@email.com', 1234, 3)
 
 insert into UsuarioMateria values(1, 1)
 insert into UsuarioMateria values(1, 2)

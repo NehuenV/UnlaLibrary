@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UnlaLibrary.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -101,6 +101,7 @@ namespace UnlaLibrary.Data.Migrations
                 {
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    dni = table.Column<long>(type: "bigint", nullable: false),
                     nombre = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
                     email = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
                     clave = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
