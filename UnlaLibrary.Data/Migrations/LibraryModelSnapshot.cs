@@ -60,10 +60,13 @@ namespace UnlaLibrary.Data.Migrations
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Idioma", b =>
                 {
                     b.Property<int>("IdIdioma")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idIdioma");
+                        .HasColumnName("idIdioma")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Idioma1")
+                        .IsRequired()
                         .HasMaxLength(45)
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")

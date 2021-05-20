@@ -24,8 +24,9 @@ namespace UnlaLibrary.Data.Migrations
                 name: "Idioma",
                 columns: table => new
                 {
-                    idIdioma = table.Column<int>(type: "int", nullable: false),
-                    idioma = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: true)
+                    idIdioma = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idioma = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false)
                 },
                 constraints: table =>
                 {

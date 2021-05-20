@@ -10,7 +10,7 @@ using UnlaLibrary.Data.Context;
 namespace UnlaLibrary.Data.Migrations
 {
     [DbContext(typeof(Library))]
-    [Migration("20210520030716_Inicial")]
+    [Migration("20210520044056_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,10 +62,13 @@ namespace UnlaLibrary.Data.Migrations
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Idioma", b =>
                 {
                     b.Property<int>("IdIdioma")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idIdioma");
+                        .HasColumnName("idIdioma")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Idioma1")
+                        .IsRequired()
                         .HasMaxLength(45)
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")
