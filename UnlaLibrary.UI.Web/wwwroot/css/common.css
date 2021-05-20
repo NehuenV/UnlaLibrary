@@ -86,3 +86,25 @@ body {
         letter-spacing: 0.3em;
     }
 }
+
+.w-50r {
+    width: 30%;
+}
+
+@media (max-width: 1200px) {
+    .w-50r {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .w-50r {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .w-50r {
+        width: 98%;
+    }
+}
