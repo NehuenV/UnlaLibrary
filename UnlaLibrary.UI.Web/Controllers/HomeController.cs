@@ -34,7 +34,8 @@ namespace UnlaLibrary.UI.Web.Controllers
             //lista.Select(x => x.Materia).ToList();
             //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
             //_Library.SaveChanges();
-
+           // _login.Authentication(new Login());
+        
             return View();
         }
         public IActionResult Login(Login login)

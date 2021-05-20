@@ -5,7 +5,7 @@ using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Interfaces;
 using UnlaLibrary.Data.Models;
 using System.Linq;
-
+using System.IO;
 
 namespace UnlaLibrary.Data.Repositories
 {
@@ -38,7 +38,8 @@ namespace UnlaLibrary.Data.Repositories
         }
         public string GetName(Login login)
         {
-            var user = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).Select(x=>x.Nombre).FirstOrDefault();
+        //   
+            var user = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).Select(x => x.Nombre).FirstOrDefault();
             return user;
         }
 

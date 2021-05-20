@@ -4,7 +4,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
@@ -48,7 +50,19 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewBag.Detalle = detalle;
             return View(detalle);
         }
+        public FileResult DownloadFile(int id)
+        {
 
+            var detalle = _Catalogo.GetMaterial(id);
+            string contentType = "application/pdf";
+            return File(detalle.Archivo, contentType, detalle.Titulo);
+        }
+        public FileResult ViewFile(int id)
+        {
+            var detalle = _Catalogo.GetMaterial(id);
+            string contentType = "application/pdf";
+            return File(detalle.Archivo, contentType);
+        }
         // Ejemplo de traer materialEstudio mediante query
         /* 
         var lista = (from ME in _Library.MaterialEstudios

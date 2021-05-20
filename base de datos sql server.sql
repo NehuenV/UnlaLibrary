@@ -14,17 +14,18 @@ idTipoUsuario int primary key not null identity,
 nombreTipoUsuario varchar(45) not null)
 go
 
-create table Carrera(
-idCarrera int not null primary key identity,
-carrera varchar(45) not null,
-idUniversidad int not null
-CONSTRAINT [FK_Carrera_Universidad] FOREIGN KEY ([idCarrera]) REFERENCES [Carrera]([idCarrera]))
-go
-
 create table Universidad(
 idUniversidad int not null primary key identity,
 nombreUniversidad varchar(45) not null)
 go
+
+create table Carrera(
+idCarrera int not null primary key identity,
+carrera varchar(45) not null,
+idUniversidad int not null
+CONSTRAINT [FK_Carrera_Universidad] FOREIGN KEY ([idUniversidad]) REFERENCES [Universidad]([idUniversidad]))
+go
+
 
 CREATE TABLE Usuario (
 idUsuario int not null primary key identity,
