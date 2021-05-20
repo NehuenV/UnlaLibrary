@@ -23,20 +23,29 @@ namespace UnlaLibrary.Data.Repositories
             var catalogo =(
 
                            from ME in _Library.MaterialEstudio
-                              join I in _Library.Idioma on ME.Idioma equals I.IdIdioma
-                              join M in _Library.Materia on ME.Materia equals M.IdMateria
+                              join I in _Library.Idioma on ME.IdIdioma equals I.IdIdioma
+                              join M in _Library.Materia on ME.IdMateria equals M.IdMateria
                               select
                               new MaterialEstudio
                               {
                                   Descripcion = ME.Descripcion,
-                                  IdMateriaEstudio = ME.IdMateriaEstudio,
-                                  IdiomaNavigation = ME.IdiomaNavigation,
-                                  MateriaNavigation = ME.MateriaNavigation,
-                                  Materia = ME.Materia,
-                                  Idioma = ME.Idioma,
+                                  Archivo = ME.Archivo,
+                                  Autor = ME.Autor,
+                                  Prologo= ME.Prologo,
+                                  Reseña = ME.Reseña,
+                                  Miniatura = ME.Miniatura,
+                                  IdIdioma = I.IdIdioma,
+                                  IdMateria= M.IdMateria,
+                                  IdMaterial = ME.IdMaterial,
+                                  IdIdiomaNavigation = ME.IdIdiomaNavigation,
+                                  IdMateriaNavigation = ME.IdMateriaNavigation,
                                   Titulo = ME.Titulo
                               }).ToList();
             return catalogo;
+        }
+        public MaterialEstudio GetMaterial(int id)
+        {
+            return _Library.MaterialEstudio.Where(x => x.IdMaterial==id).FirstOrDefault();
         }
 
     }

@@ -35,8 +35,7 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("carrera");
 
-                    b.HasKey("IdCarrera")
-                        .HasName("PK__Carrera__7B19E7913E1F87D6");
+                    b.HasKey("IdCarrera");
 
                     b.ToTable("Carrera");
                 });
@@ -51,30 +50,26 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idMateria");
 
-                    b.HasIndex(new[] { "IdCarrera" }, "IX_Carrera_Materia_idCarrera");
+                    b.HasKey("IdCarrera", "IdMateria");
 
-                    b.HasIndex(new[] { "IdMateria" }, "IX_Carrera_Materia_idMateria");
+                    b.HasIndex("IdMateria");
 
-                    b.ToTable("Carrera_Materia");
+                    b.ToTable("CarreraMateria");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Idioma", b =>
                 {
                     b.Property<int>("IdIdioma")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idIdioma")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("idIdioma");
 
                     b.Property<string>("Idioma1")
-                        .IsRequired()
                         .HasMaxLength(45)
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")
                         .HasColumnName("idioma");
 
-                    b.HasKey("IdIdioma")
-                        .HasName("PK__Idioma__A96571FC398F9DC2");
+                    b.HasKey("IdIdioma");
 
                     b.ToTable("Idioma");
                 });
@@ -92,20 +87,18 @@ namespace UnlaLibrary.Data.Migrations
                         .HasMaxLength(45)
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")
-                        .HasColumnName("materia");
+                        .HasColumnName("Materia");
 
-                    b.HasKey("IdMateria")
-                        .HasName("PK__Materia__4B740AB3F639A85A");
+                    b.HasKey("IdMateria");
 
                     b.ToTable("Materia");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.MaterialEstudio", b =>
                 {
-                    b.Property<int>("IdMateriaEstudio")
+                    b.Property<int>("IdMaterial")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idMateriaEstudio")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte[]>("Archivo")
@@ -127,18 +120,33 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("descripcion");
 
-                    b.Property<int>("Idioma")
+                    b.Property<int>("IdIdioma")
                         .HasColumnType("int")
-                        .HasColumnName("idioma");
+                        .HasColumnName("idIdioma");
 
-                    b.Property<int>("Materia")
+                    b.Property<int>("IdMateria")
                         .HasColumnType("int")
-                        .HasColumnName("materia");
+                        .HasColumnName("idMateria");
+
+                    b.Property<int>("IdUniversidad")
+                        .HasColumnType("int")
+                        .HasColumnName("idUniversidad");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("idUsuario");
 
                     b.Property<byte[]>("Miniatura")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
                         .HasColumnName("miniatura");
+
+                    b.Property<string>("Prologo")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(45)")
+                        .HasColumnName("prologo");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -147,20 +155,53 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("titulo");
 
-                    b.Property<int>("Usuario")
-                        .HasColumnType("int")
-                        .HasColumnName("usuario");
+                    b.HasKey("IdMaterial");
 
-                    b.HasKey("IdMateriaEstudio")
-                        .HasName("PK__Material__518559FD9A647BD5");
+                    b.HasIndex("IdIdioma");
 
-                    b.HasIndex("Idioma");
+                    b.HasIndex("IdMateria");
 
-                    b.HasIndex("Materia");
+                    b.HasIndex("IdUniversidad");
 
-                    b.HasIndex("Usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("MaterialEstudio");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Reseña", b =>
+                {
+                    b.Property<int>("IdReseña")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("idReseña")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comentario")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(45)")
+                        .HasColumnName("comentario");
+
+                    b.Property<int>("IdMaterial")
+                        .HasColumnType("int")
+                        .HasColumnName("idMaterial");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("idUsuario");
+
+                    b.Property<int>("Puntuacion")
+                        .HasColumnType("int")
+                        .HasColumnName("puntuacion");
+
+                    b.HasKey("IdReseña");
+
+                    b.HasIndex("IdMaterial");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("Reseña");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.TipoUsuario", b =>
@@ -178,8 +219,7 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("nombreTipoUsuario");
 
-                    b.HasKey("IdTipoUsuario")
-                        .HasName("PK__TipoUsua__03006BFF287FB897");
+                    b.HasKey("IdTipoUsuario");
 
                     b.ToTable("TipoUsuario");
                 });
@@ -199,27 +239,26 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("nombreUniversidad");
 
-                    b.HasKey("IdUniversidad")
-                        .HasName("PK__Universi__AFB9D2244D38274E");
+                    b.HasKey("IdUniversidad");
 
                     b.ToTable("Universidad");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.UniversidadCarrera", b =>
                 {
-                    b.Property<int>("IdCarrera")
-                        .HasColumnType("int")
-                        .HasColumnName("idCarrera");
-
                     b.Property<int>("IdUniversidad")
                         .HasColumnType("int")
                         .HasColumnName("idUniversidad");
 
-                    b.HasIndex(new[] { "IdCarrera" }, "IX_Universidad_Carrera_idCarrera");
+                    b.Property<int>("IdCarrera")
+                        .HasColumnType("int")
+                        .HasColumnName("idCarrera");
 
-                    b.HasIndex(new[] { "IdUniversidad" }, "IX_Universidad_Carrera_idUniversidad");
+                    b.HasKey("IdUniversidad", "IdCarrera");
 
-                    b.ToTable("Universidad_Carrera");
+                    b.HasIndex("IdCarrera");
+
+                    b.ToTable("UniversidadCarrera");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Usuario", b =>
@@ -230,6 +269,13 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnName("idUsuario")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(45)")
+                        .HasColumnName("apellido");
+
                     b.Property<string>("Clave")
                         .IsRequired()
                         .HasMaxLength(45)
@@ -237,8 +283,11 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("clave");
 
-                    b.Property<long>("Dni")
-                        .HasColumnType("bigint")
+                    b.Property<string>("Dni")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(8)")
                         .HasColumnName("dni");
 
                     b.Property<string>("Email")
@@ -248,6 +297,10 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("email");
 
+                    b.Property<int>("IdTipoUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("idTipoUsuario");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(45)
@@ -255,31 +308,49 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("varchar(45)")
                         .HasColumnName("nombre");
 
-                    b.Property<int>("TipoUsuario")
-                        .HasColumnType("int")
-                        .HasColumnName("tipoUsuario");
+                    b.HasKey("IdUsuario");
 
-                    b.HasKey("IdUsuario")
-                        .HasName("PK__Usuario__645723A6B1240B31");
-
-                    b.HasIndex(new[] { "TipoUsuario" }, "IX_Usuario_tipoUsuario");
+                    b.HasIndex("IdTipoUsuario");
 
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("UnlaLibrary.Data.Entities.UsuarioMateria", b =>
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.UsuarioCarreraUniversidad", b =>
                 {
-                    b.Property<int>("IdMateria")
-                        .HasColumnType("int")
-                        .HasColumnName("idMateria");
-
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int")
                         .HasColumnName("idUsuario");
 
-                    b.HasIndex(new[] { "IdMateria" }, "IX_UsuarioMateria_idMateria");
+                    b.Property<int>("IdCarrera")
+                        .HasColumnType("int")
+                        .HasColumnName("idCarrera");
 
-                    b.HasIndex(new[] { "IdUsuario" }, "IX_UsuarioMateria_idUsuario");
+                    b.Property<int>("IdUniversidad")
+                        .HasColumnType("int")
+                        .HasColumnName("idUniversidad");
+
+                    b.HasKey("IdUsuario", "IdCarrera", "IdUniversidad");
+
+                    b.HasIndex("IdCarrera");
+
+                    b.HasIndex("IdUniversidad");
+
+                    b.ToTable("UsuarioCarreraUniversidad");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.UsuarioMateria", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("idUsuario");
+
+                    b.Property<int>("IdMateria")
+                        .HasColumnType("int")
+                        .HasColumnName("idMateria");
+
+                    b.HasKey("IdUsuario", "IdMateria");
+
+                    b.HasIndex("IdMateria");
 
                     b.ToTable("UsuarioMateria");
                 });
@@ -287,15 +358,15 @@ namespace UnlaLibrary.Data.Migrations
             modelBuilder.Entity("UnlaLibrary.Data.Entities.CarreraMateria", b =>
                 {
                     b.HasOne("UnlaLibrary.Data.Entities.Carrera", "IdCarreraNavigation")
-                        .WithMany()
+                        .WithMany("CarreraMateria")
                         .HasForeignKey("IdCarrera")
-                        .HasConstraintName("FK_Carrera_Materia")
+                        .HasConstraintName("FK_CarreraMateria_Carrera")
                         .IsRequired();
 
                     b.HasOne("UnlaLibrary.Data.Entities.Materia", "IdMateriaNavigation")
-                        .WithMany()
+                        .WithMany("CarreraMateria")
                         .HasForeignKey("IdMateria")
-                        .HasConstraintName("FK_Materia_Carrera")
+                        .HasConstraintName("FK_CarreraMateria_Materia")
                         .IsRequired();
 
                     b.Navigation("IdCarreraNavigation");
@@ -305,43 +376,70 @@ namespace UnlaLibrary.Data.Migrations
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.MaterialEstudio", b =>
                 {
-                    b.HasOne("UnlaLibrary.Data.Entities.Idioma", "IdiomaNavigation")
+                    b.HasOne("UnlaLibrary.Data.Entities.Idioma", "IdIdiomaNavigation")
                         .WithMany("MaterialEstudio")
-                        .HasForeignKey("Idioma")
-                        .HasConstraintName("FK_Idioma_MateriaEstudio")
+                        .HasForeignKey("IdIdioma")
+                        .HasConstraintName("FK_MaterialEstudio_Idioma")
                         .IsRequired();
 
-                    b.HasOne("UnlaLibrary.Data.Entities.Materia", "MateriaNavigation")
+                    b.HasOne("UnlaLibrary.Data.Entities.Materia", "IdMateriaNavigation")
                         .WithMany("MaterialEstudio")
-                        .HasForeignKey("Materia")
-                        .HasConstraintName("FK_Materia_MateriaEstudio")
+                        .HasForeignKey("IdMateria")
+                        .HasConstraintName("FK_MaterialEstudio_Materia")
                         .IsRequired();
 
-                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "UsuarioNavigation")
+                    b.HasOne("UnlaLibrary.Data.Entities.Universidad", "IdUniversidadNavigation")
                         .WithMany("MaterialEstudio")
-                        .HasForeignKey("Usuario")
-                        .HasConstraintName("FK_Usuario_MateriaEstudio")
+                        .HasForeignKey("IdUniversidad")
+                        .HasConstraintName("FK_MaterialEstudio_Universidad")
                         .IsRequired();
 
-                    b.Navigation("IdiomaNavigation");
+                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "IdUsuarioNavigation")
+                        .WithMany("MaterialEstudio")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("FK_MaterialEstudio_Usuario")
+                        .IsRequired();
 
-                    b.Navigation("MateriaNavigation");
+                    b.Navigation("IdIdiomaNavigation");
 
-                    b.Navigation("UsuarioNavigation");
+                    b.Navigation("IdMateriaNavigation");
+
+                    b.Navigation("IdUniversidadNavigation");
+
+                    b.Navigation("IdUsuarioNavigation");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Reseña", b =>
+                {
+                    b.HasOne("UnlaLibrary.Data.Entities.MaterialEstudio", "IdMaterialNavigation")
+                        .WithMany("Reseña")
+                        .HasForeignKey("IdMaterial")
+                        .HasConstraintName("FK_Reseña_MaterialEstudio")
+                        .IsRequired();
+
+                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "IdUsuarioNavigation")
+                        .WithMany("Reseña")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("FK_Reseña_Usuario")
+                        .IsRequired();
+
+                    b.Navigation("IdMaterialNavigation");
+
+                    b.Navigation("IdUsuarioNavigation");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.UniversidadCarrera", b =>
                 {
                     b.HasOne("UnlaLibrary.Data.Entities.Carrera", "IdCarreraNavigation")
-                        .WithMany()
+                        .WithMany("UniversidadCarrera")
                         .HasForeignKey("IdCarrera")
-                        .HasConstraintName("FK_Carrera_Universidad")
+                        .HasConstraintName("FK_UniversidadCarrera_Carrera")
                         .IsRequired();
 
                     b.HasOne("UnlaLibrary.Data.Entities.Universidad", "IdUniversidadNavigation")
-                        .WithMany()
+                        .WithMany("UniversidadCarrera")
                         .HasForeignKey("IdUniversidad")
-                        .HasConstraintName("FK_Universidad_Carrera")
+                        .HasConstraintName("FK_UniversidadCarrera_Universidad")
                         .IsRequired();
 
                     b.Navigation("IdCarreraNavigation");
@@ -351,32 +449,68 @@ namespace UnlaLibrary.Data.Migrations
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Usuario", b =>
                 {
-                    b.HasOne("UnlaLibrary.Data.Entities.TipoUsuario", "TipoUsuarioNavigation")
+                    b.HasOne("UnlaLibrary.Data.Entities.TipoUsuario", "IdTipoUsuarioNavigation")
                         .WithMany("Usuario")
-                        .HasForeignKey("TipoUsuario")
+                        .HasForeignKey("IdTipoUsuario")
                         .HasConstraintName("FK_Usuario_TipoUsuario")
                         .IsRequired();
 
-                    b.Navigation("TipoUsuarioNavigation");
+                    b.Navigation("IdTipoUsuarioNavigation");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.UsuarioCarreraUniversidad", b =>
+                {
+                    b.HasOne("UnlaLibrary.Data.Entities.Carrera", "IdCarreraNavigation")
+                        .WithMany("UsuarioCarreraUniversidad")
+                        .HasForeignKey("IdCarrera")
+                        .HasConstraintName("FK_UsuarioCarreraUniversidad_Carrera")
+                        .IsRequired();
+
+                    b.HasOne("UnlaLibrary.Data.Entities.Universidad", "IdUniversidadNavigation")
+                        .WithMany("UsuarioCarreraUniversidad")
+                        .HasForeignKey("IdUniversidad")
+                        .HasConstraintName("FK_UsuarioCarreraUniversidad_Universidad")
+                        .IsRequired();
+
+                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "IdUsuarioNavigation")
+                        .WithMany("UsuarioCarreraUniversidad")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("FK_UsuarioCarreraUniversidad_Usuario")
+                        .IsRequired();
+
+                    b.Navigation("IdCarreraNavigation");
+
+                    b.Navigation("IdUniversidadNavigation");
+
+                    b.Navigation("IdUsuarioNavigation");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.UsuarioMateria", b =>
                 {
                     b.HasOne("UnlaLibrary.Data.Entities.Materia", "IdMateriaNavigation")
-                        .WithMany()
+                        .WithMany("UsuarioMateria")
                         .HasForeignKey("IdMateria")
-                        .HasConstraintName("FK_Usuario_Materia")
+                        .HasConstraintName("FK_UsuarioMateria_Materia")
                         .IsRequired();
 
                     b.HasOne("UnlaLibrary.Data.Entities.Usuario", "IdUsuarioNavigation")
-                        .WithMany()
+                        .WithMany("UsuarioMateria")
                         .HasForeignKey("IdUsuario")
-                        .HasConstraintName("FK_Materia_Usuario")
+                        .HasConstraintName("FK_UsuarioMateria_Usuario")
                         .IsRequired();
 
                     b.Navigation("IdMateriaNavigation");
 
                     b.Navigation("IdUsuarioNavigation");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Carrera", b =>
+                {
+                    b.Navigation("CarreraMateria");
+
+                    b.Navigation("UniversidadCarrera");
+
+                    b.Navigation("UsuarioCarreraUniversidad");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Idioma", b =>
@@ -386,7 +520,16 @@ namespace UnlaLibrary.Data.Migrations
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Materia", b =>
                 {
+                    b.Navigation("CarreraMateria");
+
                     b.Navigation("MaterialEstudio");
+
+                    b.Navigation("UsuarioMateria");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.MaterialEstudio", b =>
+                {
+                    b.Navigation("Reseña");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.TipoUsuario", b =>
@@ -394,9 +537,24 @@ namespace UnlaLibrary.Data.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Universidad", b =>
+                {
+                    b.Navigation("MaterialEstudio");
+
+                    b.Navigation("UniversidadCarrera");
+
+                    b.Navigation("UsuarioCarreraUniversidad");
+                });
+
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Usuario", b =>
                 {
                     b.Navigation("MaterialEstudio");
+
+                    b.Navigation("Reseña");
+
+                    b.Navigation("UsuarioCarreraUniversidad");
+
+                    b.Navigation("UsuarioMateria");
                 });
 #pragma warning restore 612, 618
         }

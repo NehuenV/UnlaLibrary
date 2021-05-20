@@ -16,7 +16,9 @@ go
 
 create table Carrera(
 idCarrera int not null primary key identity,
-carrera varchar(45) not null)
+carrera varchar(45) not null,
+idUniversidad int not null
+CONSTRAINT [FK_Carrera_Universidad] FOREIGN KEY ([idCarrera]) REFERENCES [Carrera]([idCarrera]))
 go
 
 create table Universidad(
@@ -30,7 +32,10 @@ nombre varchar(45) not null,
 email varchar(45) not null,
 clave varchar(45) not null,
 tipoUsuario int not null, 
- CONSTRAINT [FK_Usuario_TipoUsuario] FOREIGN KEY ([tipoUsuario]) REFERENCES [TipoUsuario]([idTipoUsuario])
+dni varchar(8) not null,
+idCarrera int not null,
+ CONSTRAINT [FK_Usuario_TipoUsuario] FOREIGN KEY ([tipoUsuario]) REFERENCES [TipoUsuario]([idTipoUsuario]),
+  CONSTRAINT [FK_Usuario_Carrera] FOREIGN KEY ([idCarrera]) REFERENCES [Carrera]([idCarrera])
  )
  go
 
@@ -40,10 +45,14 @@ Create table MaterialEstudio (
 	descripcion varchar(45) not null,
 	idioma int not null,
 	materia int not null,
+	usuario int not null,
 	autor varchar(45) not null,
 	archivo varbinary(MAX) not null,
+	miniatura varbinary(MAX) not null,
+	prologo varchar(max) not null,
  CONSTRAINT [FK_Idioma_MateriaEstudio] FOREIGN KEY ([idioma]) REFERENCES [Idioma]([idIdioma]),
- CONSTRAINT [FK_Materia_MateriaEstudio] FOREIGN KEY ([materia]) REFERENCES [Materia]([idMateria])
+ CONSTRAINT [FK_Materia_MateriaEstudio] FOREIGN KEY ([materia]) REFERENCES [Materia]([idMateria]),
+ CONSTRAINT [FK_Material_Usuario] FOREIGN KEY ([usuario]) REFERENCES [Usuario]([idUsuario])
 )
 go
 
@@ -64,11 +73,12 @@ idMateria int not null,
 )
 go
 
-Create table Universidad_Carrera
-(
-idUniversidad int not null,
-idCarrera int not null,
- CONSTRAINT [FK_Universidad_Carrera] FOREIGN KEY ([idUniversidad]) REFERENCES [Universidad]([idUniversidad]),
- CONSTRAINT [FK_Carrera_Universidad] FOREIGN KEY ([idCarrera]) REFERENCES [Carrera]([idCarrera])
+create table PuntuacionMaterial(
+	idPuntuacion int identity not null primary key,
+	idUsuario int not null,
+	idMaterial int not null,
+	puntuacion int not null,
+	comentario varchar(200) not null,
+	CONSTRAINT [FK_Puntuacion_Usuario] FOREIGN KEY ([idUsuario]) REFERENCES [Usuario]([idUsuario]),
+	CONSTRAINT [FK_Puntuacion_Material] FOREIGN KEY ([idMaterial]) REFERENCES [MaterialEstudio]([idMateriaEstudio])
 )
-go

@@ -7,3 +7,4 @@ UnlaLibrary.Data/obj/
 UnlaLibrary.Data/obj/*
 *.cache
 *.txt
+.vs

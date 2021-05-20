@@ -42,34 +42,35 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewBag.Catalogo = cat;
             return View(cat);
         }
-        public IActionResult Detalle(int algo)
+        public IActionResult Detalle(int id)
         {
-            // Ejemplo de traer materialEstudio mediante query
-            /* 
-            var lista = (from ME in _Library.MaterialEstudios
-                         join I in _Library.Idiomas on ME.Idioma equals I.IdIdioma
-                         select
-                         new MaterialEstudio
-                         {
-                             Descripcion = ME.Descripcion,
-                             IdMateriaEstudio = ME.IdMateriaEstudio,
-                             IdiomaNavigation = ME.IdiomaNavigation,
-                             Materia = ME.Materia,
-                             Idioma = ME.Idioma,
-                             Titulo = ME.Titulo
-                         }).ToList();
-
-            //Ejemplo de traer materialEstudios con sql 
-            var aa = _Library.MaterialEstudios.FromSqlRaw("select * from MaterialEstudio").ToList();
-   
-          
-            // Ejemplo con lamda
-            MaterialEstudio[] matariales = _Library.MaterialEstudios.Select(s => s).ToArray<MaterialEstudio>();
-            */
-            return View();
+            var detalle = _Catalogo.GetMaterial(id);
+            ViewBag.Detalle = detalle;
+            return View(detalle);
         }
 
+        // Ejemplo de traer materialEstudio mediante query
+        /* 
+        var lista = (from ME in _Library.MaterialEstudios
+                     join I in _Library.Idiomas on ME.Idioma equals I.IdIdioma
+                     select
+                     new MaterialEstudio
+                     {
+                         Descripcion = ME.Descripcion,
+                         IdMateriaEstudio = ME.IdMateriaEstudio,
+                         IdiomaNavigation = ME.IdiomaNavigation,
+                         Materia = ME.Materia,
+                         Idioma = ME.Idioma,
+                         Titulo = ME.Titulo
+                     }).ToList();
 
+        //Ejemplo de traer materialEstudios con sql 
+        var aa = _Library.MaterialEstudios.FromSqlRaw("select * from MaterialEstudio").ToList();
+
+
+        // Ejemplo con lamda
+        MaterialEstudio[] matariales = _Library.MaterialEstudios.Select(s => s).ToArray<MaterialEstudio>();
+        */
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

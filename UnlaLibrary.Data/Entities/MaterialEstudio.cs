@@ -7,18 +7,27 @@ namespace UnlaLibrary.Data.Entities
 {
     public partial class MaterialEstudio
     {
-        public int IdMateriaEstudio { get; set; }
+        public MaterialEstudio()
+        {
+            Reseña = new HashSet<Reseña>();
+        }
+
+        public int IdMaterial { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
-        public int Idioma { get; set; }
-        public int Materia { get; set; }
-        public int Usuario { get; set; }
+        public string Prologo { get; set; }
         public string Autor { get; set; }
-        public byte[] Miniatura { get; set; }
         public byte[] Archivo { get; set; }
+        public byte[] Miniatura { get; set; }
+        public int IdIdioma { get; set; }
+        public int IdUsuario { get; set; }
+        public int IdMateria { get; set; }
+        public int IdUniversidad { get; set; }
 
-        public virtual Idioma IdiomaNavigation { get; set; }
-        public virtual Materia MateriaNavigation { get; set; }
-        public virtual Usuario UsuarioNavigation { get; set; }
+        public virtual Idioma IdIdiomaNavigation { get; set; }
+        public virtual Materia IdMateriaNavigation { get; set; }
+        public virtual Universidad IdUniversidadNavigation { get; set; }
+        public virtual Usuario IdUsuarioNavigation { get; set; }
+        public virtual ICollection<Reseña> Reseña { get; set; }
     }
 }

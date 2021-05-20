@@ -12,10 +12,10 @@
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MateriaNavigation.Materia1)
+                @Html.DisplayNameFor(model => model.IdMateriaNavigation.Materia1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdiomaNavigation.Idioma1)
+                @Html.DisplayNameFor(model => model.IdIdiomaNavigation.Idioma1)
             </th>
             <th></th>
         </tr>
@@ -25,17 +25,17 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("Detalle","Catalogo")">
+                    <a href="@Url.Action("Detalle","Catalogo", new { id = item.IdMaterial})">
                         @Html.DisplayFor(modelItem => item.Titulo)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MateriaNavigation.Materia1)
+                    @Html.DisplayFor(modelItem => item.IdMateriaNavigation.Materia1)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdiomaNavigation.Idioma1)
+                    @Html.DisplayFor(modelItem => item.IdIdiomaNavigation.Idioma1)
                 </td>
             </tr>
         }

@@ -1,8 +1,8 @@
 insert into Universidad values('Universidad Nacional de Lanus')
 insert into Universidad values('Universidad de Buenos Aires')
 
-insert into Carrera values('Licenciatura en Sistemas')
-insert into Carrera values('Ingenieria Civil')
+insert into Carrera values('Licenciatura en Sistemas',1)
+insert into Carrera values('Ingenieria Civil',1)
 
 insert into Materia values('Matematica')
 insert into Materia values('Programación')
@@ -19,9 +19,6 @@ insert into Carrera_Materia values(1, 1)
 insert into Carrera_Materia values(1, 2)
 insert into Carrera_Materia values(2, 3)
 insert into Carrera_Materia values(2, 1)
-
-insert into Universidad_Carrera values(1, 1)
-insert into Universidad_Carrera values(2, 2)
 
 
 
