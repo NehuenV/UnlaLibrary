@@ -108,3 +108,20 @@ body {
         width: 98%;
     }
 }
+
+/* agregar alumnos */
+#filtrar {
+    width: 20%;
+}
+
+@media (max-width:1200px) {
+    #filtrar {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    #filtrar {
+        width: 70%;
+    }
+}

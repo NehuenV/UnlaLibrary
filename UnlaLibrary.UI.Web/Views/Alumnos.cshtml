@@ -1,0 +1,76 @@
+﻿<html>
+<head>
+    <title>Agregar Alumnos</title>
+    <!-- referenciar al common si no está -->
+</head>
+<body>
+    <div class="w-75r  table-responsive align-middle">
+        <div class="d-flex flex-column align-items-end p-1">
+            <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
+        </div>
+        <table class="table table-striped table-hover table-bordered table-sm text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Carrera</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row" class="dni">12345678</td>
+                    <td>Pepe</td>
+                    <td>Ingeniería</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm boton-estado"
+                                data-estado="auscente">
+                            Agregar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row" class="dni">11222333</td>
+                    <td>Timi</td>
+                    <td>Licenciatura en Sistemas</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm boton-estado"
+                                data-estado="auscente">
+                            Agregar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        window.onload = () => {
+            let botones = document.querySelectorAll('.boton-estado')
+            botones.forEach(boton => {
+                boton.addEventListener('click', agregar);
+            });
+            let filtro = document.getElementById("filtrar");
+            filtro.addEventListener('input', filtrar);
+        }
+
+        function agregar(e) {
+            let button = e.target;
+            e.target.classList.add('btn-success');
+            button.innerText = "Agregado";
+            button.disabled = true;
+        }
+
+        function filtrar(e) {
+            let filtro = e.target.value;
+            let lista_dni = document.querySelectorAll('.dni');
+            lista_dni.forEach(dni => {
+                if (dni.innerText.includes(filtro)) {
+                    dni.parentElement.classList.remove('d-none')
+                } else {
+                    dni.parentElement.classList.add('d-none')
+                }
+            })
+        }
+    </script>
+</body>
+</html>
