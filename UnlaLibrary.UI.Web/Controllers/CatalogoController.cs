@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -36,6 +37,11 @@ namespace UnlaLibrary.UI.Web.Controllers
         //_Library.SaveChanges();
         public IActionResult Catalogo()
         {
+            var algo = HttpContext.Session.GetString("Email");
+            if(string.IsNullOrEmpty(algo))
+            {
+                return View("Error");
+            }
             return View();
         }
         public IActionResult ListaCatalogo(string a)

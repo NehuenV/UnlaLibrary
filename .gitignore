@@ -8,3 +8,11 @@ UnlaLibrary.Data/obj/*
 *.cache
 *.txt
 .vs
+UnlaLibrary.ConsoleApp1/obj/
+UnlaLibrary.ConsoleApp1/obj/*
+UnlaLibrary.ConsoleApp1/bin/
+UnlaLibrary.ConsoleApp1/bin/*
+UnlaLibrary.UI.Web/bin/
+UnlaLibrary.UI.Web/bin/*
+UnlaLibrary.UI.Web/obj/
+UnlaLibrary.UI.Web/obj/*

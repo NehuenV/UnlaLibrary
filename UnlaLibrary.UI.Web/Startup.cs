@@ -32,6 +32,8 @@ namespace UnlaLibrary.UI.Web
             services.AddScoped<ICatalogoRepository, CatalogoRepository>();
             services.AddScoped<IProfesoresRepository, ProfesoresRepository>();
             
+            services.AddDistributedMemoryCache();
+            services.AddSession();
 
             services.AddDbContext<Library>(options =>
                options.UseSqlServer(
@@ -58,6 +60,8 @@ namespace UnlaLibrary.UI.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

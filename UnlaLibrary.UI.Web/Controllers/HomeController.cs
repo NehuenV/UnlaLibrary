@@ -40,6 +40,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult Login(Login login)
         {
+            
             var aut = _login.Authentication(login);
 
             if (aut)
@@ -50,6 +51,8 @@ namespace UnlaLibrary.UI.Web.Controllers
                 CookieOptions cookieOptions = new CookieOptions();
                 cookieOptions.Expires = DateTime.Now.AddDays(7);
                 Response.Cookies.Append(cookieNameKey, cookieNameValue, cookieOptions);
+                HttpContext.Session.SetString("User",n);
+                HttpContext.Session.SetString("Email", login.email);
                 return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
             }
             else
