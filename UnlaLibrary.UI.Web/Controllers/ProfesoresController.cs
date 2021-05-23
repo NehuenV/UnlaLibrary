@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
@@ -26,10 +28,40 @@ namespace UnlaLibrary.UI.Web.Controllers
             _Library = Library;
             _ProfesoresRepository = ProfesoresRepository;
         }
-        public IActionResult Index()
+        #region Actions
+        public IActionResult SubirMaterial()
         {
+            var uni = _ProfesoresRepository.GetUniverdades();
+            ViewBag.Universidades = uni;
+            var idioma = _ProfesoresRepository.GetIdiomas();
+            ViewBag.Idioma = idioma;
             return View();
         }
+
+
+        #endregion
+
+
+        #region RequestJson
+        public JsonResult up(Material m)
+        {
+            bool estado = _ProfesoresRepository.AgregarMaterial(m);
+            if (estado)
+            {
+                return Json(new { status = estado, message = string.Format("El material {0} fue agregado con exito", m.Titulo) });
+            }
+            else
+            {
+                return Json(new { status = estado, message = string.Format("El material {0} no pudo ser agregado", m.Titulo) });
+            }
+        }
+        public JsonResult GetMaterias(int idUniversidad, int idUsuario = 1)
+        {
+            var lista= _ProfesoresRepository.GetMateriaByCarreraUsuario(idUniversidad, idUsuario);
+            return Json(new SelectList(lista, "IdMateria", "Materia1"));
+        }
+
+        #endregion
         public IActionResult AlumnoMateria()
         {
 
@@ -41,6 +73,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             return View();
         }
 
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

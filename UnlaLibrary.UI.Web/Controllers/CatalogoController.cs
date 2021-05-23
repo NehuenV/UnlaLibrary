@@ -37,11 +37,11 @@ namespace UnlaLibrary.UI.Web.Controllers
         //_Library.SaveChanges();
         public IActionResult Catalogo()
         {
-            var algo = HttpContext.Session.GetString("Email");
-            if(string.IsNullOrEmpty(algo))
-            {
-                return View("Error");
-            }
+            //var algo = HttpContext.Session.GetString("Email");
+            //if(string.IsNullOrEmpty(algo))
+            //{
+            //    return View("Error");
+            //}
             return View();
         }
         public IActionResult ListaCatalogo(string a)

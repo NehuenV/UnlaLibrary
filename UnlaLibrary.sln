@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnlaLibrary.Data", "UnlaLib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnlaLibrary.UI.Web", "UnlaLibrary.UI.Web\UnlaLibrary.UI.Web.csproj", "{0086FCB8-999F-42D3-8708-5D641CB4C4FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{186E67D5-BDA3-4E0A-89A3-B09AE039F2BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{186E67D5-BDA3-4E0A-89A3-B09AE039F2BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
