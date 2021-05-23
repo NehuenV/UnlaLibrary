@@ -55,7 +55,7 @@ namespace UnlaLibrary.UI.Web.Controllers
 
             var detalle = _Catalogo.GetMaterial(id);
             string contentType = "application/pdf";
-            return File(detalle.Archivo, contentType, detalle.Titulo);
+            return File(detalle.Archivo, contentType, string.Format("{0}.pdf", detalle.Titulo));
         }
         public FileResult ViewFile(int id)
         {

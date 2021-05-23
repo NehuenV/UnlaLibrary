@@ -30,6 +30,8 @@ namespace UnlaLibrary.UI.Web
         {
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<ICatalogoRepository, CatalogoRepository>();
+            services.AddScoped<IProfesoresRepository, ProfesoresRepository>();
+            
 
             services.AddDbContext<Library>(options =>
                options.UseSqlServer(
