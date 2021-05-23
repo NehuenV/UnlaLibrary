@@ -1,57 +1,171 @@
-﻿<html>
+﻿
+@{
+    ViewData["Title"] = "Agregar Alumno";
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+<html>
 <head>
     <title>Agregar Alumnos</title>
-    <!-- referenciar al common si no está -->
 </head>
 <body>
-    <div class="w-75r  table-responsive align-middle">
-        <div class="d-flex flex-column align-items-end p-1">
-            <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
+    <div class="d-flex flex-column align-items-center w-100 py-4">
+        <h2 class="display-5 my-3">Agregar Alumnos</h2>
+
+        <form class="my-4 d-flex flex-wrap">
+            <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="universidad" class="text-center">Universidad</label>
+                <select class="form-select" id="select_universidad" name="universidad">
+                    <option selected disabled >Elegir</option>
+                </select>
+            </div>
+            <div class="px-1  d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="select_carrera">Carrera</label>
+                <select class="form-select" id="select_carrera" disabled>
+                    <option selected disabled>Elegir</option>
+                </select>
+            </div>
+            <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="select_materia">Materia</label>
+                <select class="form-select" id="select_materia" disabled>
+                    <option selected disabled>Elegir</option>
+                </select>
+            </div>
+        </form>
+        <div class="w-75r table-responsive align-middle">
+            <div class="d-flex flex-column align-items-end p-1">
+                <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
+            </div>
+            <table class="table table-striped table-hover table-bordered table-sm text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row" class="dni">12345678</td>
+                        <td>Pepe</td>
+                        <td>Ingeniería</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm boton-estado"
+                                    data-estado="auscente">
+                                Agregar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row" class="dni">11222333</td>
+                        <td>Timi</td>
+                        <td>Licenciatura en Sistemas</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm boton-estado"
+                                    data-estado="auscente">
+                                Agregar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table class="table table-striped table-hover table-bordered table-sm text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Carrera</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row" class="dni">12345678</td>
-                    <td>Pepe</td>
-                    <td>Ingeniería</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm boton-estado"
-                                data-estado="auscente">
-                            Agregar
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row" class="dni">11222333</td>
-                    <td>Timi</td>
-                    <td>Licenciatura en Sistemas</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm boton-estado"
-                                data-estado="auscente">
-                            Agregar
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script>
-        window.onload = () => {
-            let botones = document.querySelectorAll('.boton-estado')
-            botones.forEach(boton => {
-                boton.addEventListener('click', agregar);
-            });
-            let filtro = document.getElementById("filtrar");
-            filtro.addEventListener('input', filtrar);
-        }
+        const select_universidad = $('#select_universidad');
+        const select_carrera = $('#select_carrera');
+        const select_materia = $('#select_materia');
+
+        $(function () {
+            $.ajax({
+                url: "@Url.Action("UniversidadesDisponibles", "Profesores")",
+                type: "post"
+                })
+                .done(function (result) {
+                    for (let universidad of result.universidades) {
+                        let option = $("<option></option>").text(universidad.nombreUniversidad);
+                        option.attr("value", universidad.idUniversidad);
+                        select_universidad.append(option);
+                    }
+                })
+                .fail(function (jqXHR, status, error) {
+                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                    alert("Hubo un error en el servidor")
+                })
+
+            select_universidad.on('change', function () {
+                let idUniversidad = this.value;
+                select_carrera.prop('disabled', true);
+                select_carrera.empty();
+                select_materia.prop('disabled', true);
+                select_materia.empty();
+                $.ajax({
+                    url: "@Url.Action("CarrerasDisponibles", "Profesores")",
+                    type: "post",
+                    data: {  iduniversidad: idUniversidad  }
+                })
+                    .done(function (result) {
+                        let defaultoption = $("<option></option>").text('elegir');
+                        defaultoption.prop('disabled', true);
+                        defaultoption.prop('selected', true);
+
+                        select_carrera.append(defaultoption);
+
+                    for (let carrera of result.carreras) {
+                       let option = $("<option></option>").text(carrera.carrera1);
+                       option.attr("value", carrera.idCarrera);
+                       select_carrera.append(option);
+                    }
+                    select_carrera.prop('disabled', false);
+                })
+                .fail(function (jqXHR, status, error) {
+                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                    alert("Hubo un error en el servidor")
+                })
+            })
+
+            select_carrera.on('change', function () {
+                let idcarrera = this.value;
+                let iduniversidad = $('#select_universidad option:selected').val();
+                select_materia.prop('disabled', true);
+                select_materia.empty();
+                $.ajax({
+                    url: "@Url.Action("MateriasDisponibles", "Profesores")",
+                    type: "post",
+                    data: {
+                        idcarrera: idcarrera,
+                        iduniversidad: iduniversidad
+                    }
+                })
+                    .done(function (result) {
+                        let defaultoption = $("<option></option>").text('elegir');
+                        defaultoption.prop('disabled', true);
+                        defaultoption.prop('selected', true);
+                        select_materia.append(defaultoption);
+                    for (let materia of result.materias) {
+                       let option = $("<option></option>").text(materia.materia1);
+                       option.attr("value", materia.idMateria);
+                       select_materia.append(option);
+                    }
+                    select_materia.prop('disabled', false);
+                })
+                .fail(function (jqXHR, status, error) {
+                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                    alert("Hubo un error en el servidor")
+                })
+            })
+        });
+
+
+        let botones = document.querySelectorAll('.boton-estado')
+        botones.forEach(boton => {
+            boton.addEventListener('click', agregar);
+        });
+        let filtro = document.getElementById("filtrar");
+        filtro.addEventListener('input', filtrar);
 
         function agregar(e) {
             let button = e.target;
@@ -61,6 +175,7 @@
         }
 
         function filtrar(e) {
+            console.log(e)
             let filtro = e.target.value;
             let lista_dni = document.querySelectorAll('.dni');
             lista_dni.forEach(dni => {
