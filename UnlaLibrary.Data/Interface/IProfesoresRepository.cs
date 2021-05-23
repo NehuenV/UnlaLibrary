@@ -8,7 +8,7 @@ namespace UnlaLibrary.Data.Interface
 {
     public interface IProfesoresRepository
     {
-
+        #region AgregarAlumnosMateria
         List<Universidad> GetUniverdades();
         List<UsuarioCarreraUniversidad> GetUsuariosByCarreraUniversidad(int iduser, int iduni);
 
@@ -17,5 +17,12 @@ namespace UnlaLibrary.Data.Interface
         List<Alumno> GetAlumnosByCarrera(int idMat, int idcarr);
         List<Alumno> GetAlumnosAgregadosMateria(int idMat);
         List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat);
+        #endregion
+        #region AgregarMaterial
+        List<Idioma> GetIdiomas();
+        bool AgregarMaterial(Material m);
+
+        List<Materia> GetMateriaByCarreraUsuario(int idUniversidad, int idUsuario);
+        #endregion
     }
 }

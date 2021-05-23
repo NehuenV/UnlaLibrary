@@ -6,6 +6,7 @@ using UnlaLibrary.Data.Interface;
 using System.Linq;
 using UnlaLibrary.Data.Entities;
 using UnlaLibrary.Data.Models;
+using System.IO;
 
 namespace UnlaLibrary.Data.Repositories
 {
@@ -142,5 +143,61 @@ namespace UnlaLibrary.Data.Repositories
 
             return usuariosAgregado;
         }
+
+
+        public bool AgregarMaterial(Material m)
+        {
+            try
+            {
+
+
+                var materialEstudio = new MaterialEstudio
+                {
+                    Autor = m.Autor,
+                    Descripcion = m.Descripcion,
+                    Titulo = m.Titulo,
+                    Prologo = m.Prologo,
+                    IdIdioma = m.Idioma,
+                    IdMateria = m.Materia,
+                    IdUsuario = 1,
+                    IdUniversidad = m.Universidad
+
+                };
+
+                using (var archivo = new MemoryStream())
+                {
+                    m.Archivo.CopyTo(archivo);
+                    var fileBytes = archivo.ToArray();
+                    materialEstudio.Archivo = fileBytes;
+                }
+                using (var miniatura = new MemoryStream())
+                {
+                    m.Miniatura.CopyTo(miniatura);
+                    var fileBytes = miniatura.ToArray();
+                    materialEstudio.Miniatura = fileBytes;
+                }
+                _Library.MaterialEstudio.Add(materialEstudio);
+                _Library.SaveChanges();
+                return true;
+            }catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public List<Idioma> GetIdiomas()
+        {
+            var idioma = _Library.Idioma.ToList();
+            return idioma;
+        }
+
+        public List<Materia> GetMateriaByCarreraUsuario(int idUniversidad, int idUsuario )
+        {
+            int idCarrera = _Library.UsuarioCarreraUniversidad.Where(x => x.IdUniversidad == idUniversidad && x.IdUsuario == idUsuario).Select(x=>x.IdCarrera).FirstOrDefault();
+
+            return GetMateriasByCarrera(idCarrera);
+            
+        }
+
     }
 }

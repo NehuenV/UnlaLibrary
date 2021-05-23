@@ -1,0 +1,81 @@
+﻿@model UnlaLibrary.Data.Models.Material
+<script src="~/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#Universidad").change(function () {
+              $("#Materia").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMaterias")', // we are calling json method
+
+                    dataType: 'json',
+
+                    data: { idUniversidad: $("#Universidad").val() },
+
+                    success: function (materias) {
+                        debugger;
+                        $.each(materias, function (i, materia) {
+                            $("#Materia").append('<option value="' + materia.value + '">' +
+                                materia.text + '</option>');
+
+                        });
+                    }
+                });
+                return false;
+      
+          });
+
+    });
+</script>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link href="@Url.Content("~/css/common.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <div class="d-flex flex-column align-items-center w-100 py-4">
+        <h2 class="display-5 my-3">Agregar Material</h2>
+
+        <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r" enctype="multipart/form-data" asp-action="up" asp-controller="Profesores">
+            <select class="form-select my-2" asp-for="Universidad" asp-items="@(new SelectList(ViewBag.Universidades,"IdUniversidad","NombreUniversidad") )"><option selected disabled>Seleccionar universidad</option></select>
+
+            <select class="form-select my-2" asp-for="Materia">
+                <option selected disabled>Primero debe seleccionar una universidad</option>
+            </select>
+
+            <div class="w-100">
+                <label for="archivo" class="form-label">Archivo</label>
+                <input type="file" class="form-control mb-2" asp-for="Archivo" accept=".pdf" placeholder="eliga un archivo" id="Archivo" />
+            </div>
+            <div class="w-100">
+                <label for="archivo" class="form-label">Miniatura</label>
+                <input type="file" class="form-control mb-2" accept="image/*" placeholder="eliga un archivo" asp-for="Miniatura" />
+            </div>
+
+            <div class="w-100">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control" asp-for="Titulo" placeholder="" maxlength="100">
+            </div>
+
+            <div class="w-100">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" class="form-control" asp-for="Autor" placeholder="" maxlength="80">
+            </div>
+            <div class="w-100">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" asp-for="Descripcion" placeholder="">
+            </div>
+            <div class="w-100">
+                <label for="prologo" class="form-label">Prólogo</label>
+                <textarea class="form-control" asp-for="Prologo" rows="3"></textarea>
+            </div>
+            <select class="form-select my-2" asp-for="Idioma" asp-items="@(new SelectList(ViewBag.Idioma,"IdIdioma","Idioma1") )">
+            </select>
+            <button type="submit" class="btn btn-primary my-2">Subir</button>
+        </form>
+    </div>
+</body>
+</html>
