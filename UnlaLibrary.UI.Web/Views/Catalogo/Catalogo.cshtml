@@ -18,9 +18,16 @@
             $.ajax({
                 type: 'POST',
                 url: '/Catalogo/ListaCatalogo',
+                data: {
+                    texto: $('#buscador').val()
+                },
                 success: function (result) {
                     $('#Results').html(result);
-                }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }     
             });
         });
 
