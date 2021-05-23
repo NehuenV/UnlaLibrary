@@ -16,3 +16,7 @@ UnlaLibrary.UI.Web/bin/
 UnlaLibrary.UI.Web/bin/*
 UnlaLibrary.UI.Web/obj/
 UnlaLibrary.UI.Web/obj/*
+ConsoleApp1/obj/*
+ConsoleApp1/obj/
+ConsoleApp1/Properties
+ConsoleApp1ConsoleApp1.csproj.user

@@ -8,6 +8,7 @@ namespace UnlaLibrary.Data.Interface
     public interface ICatalogoRepository
     {
         List<MaterialEstudio> GetCatalogo();
+        List<MaterialEstudio> GetCatalogo(string texto);
         MaterialEstudio GetMaterial(int id);
     }
 }
