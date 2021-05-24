@@ -17,12 +17,9 @@ namespace UnlaLibrary.Data.Interface
         List<Alumno> GetAlumnosByCarrera(int idMat, int idcarr);
         List<Alumno> GetAlumnosAgregadosMateria(int idMat);
         List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat);
-        #endregion
-        #region AgregarMaterial
         List<Idioma> GetIdiomas();
         bool AgregarMaterial(Material m);
 
         List<Materia> GetMateriaByCarreraUsuario(int idUniversidad, int idUsuario);
-        #endregion
     }
 }
