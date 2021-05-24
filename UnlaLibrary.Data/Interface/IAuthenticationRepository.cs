@@ -9,5 +9,7 @@ namespace UnlaLibrary.Data.Interfaces
     {
         bool Authentication(Login login);
         string GetName(Login login);
+        public int GetId(Login login);
+        public int GetIdTipoDeUsuario(Login login);
     }
 }

@@ -18,6 +18,42 @@ namespace UnlaLibrary.Data.Repositories
             _Library = Library;
         }
 
+        public List<Universidad> GetUniverdadesByUsuario(int iduser)
+        {
+            var uni = _Library.UsuarioCarreraUniversidad
+               .Where(x => x.IdUsuario == iduser)
+               .Select(x => x.IdUniversidadNavigation)
+               .Distinct()
+               .ToList();
+            return uni;
+        }
+
+        public List<Carrera> GetCarrerasByUniversidadAndUser(int iduser, int iduniversidad)
+        {
+            var carreras = _Library.UsuarioCarreraUniversidad
+              .Where(x => x.IdUsuario == iduser && x.IdUniversidad == iduniversidad)
+              .Select(x => x.IdCarreraNavigation)
+              .Distinct()
+              .ToList();
+            return carreras;
+        }
+
+        public List<Materia> GetMateriasByUserAndCarreraAndUniversidad(int iduser, int idcarrera, int iduniversidad)
+        {
+            var materias = (
+                    from M in _Library.Materia
+                    join UM in _Library.UsuarioMateria on M.IdMateria equals UM.IdMateria
+                    join CM in _Library.CarreraMateria on UM.IdMateria equals CM.IdMateria
+                    join UC in _Library.UniversidadCarrera on CM.IdCarrera equals UC.IdCarrera
+                    where UM.IdUsuario == iduser && CM.IdCarrera == idcarrera && UC.IdUniversidad == iduniversidad
+                    select new Materia
+                    {
+                        IdMateria = M.IdMateria,
+                        Materia1 = M.Materia1
+                    })
+                            .ToList();
+            return materias;
+        }
 
         public List<Universidad> GetUniverdades()
         {

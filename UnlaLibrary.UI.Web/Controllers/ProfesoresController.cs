@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json;
 using System.IO;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
@@ -62,18 +63,56 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
 
         #endregion
+        //return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
+
+        public bool ValidarTipoUsuario()
+        {
+            var userType = HttpContext.Session.GetInt32("TipoDeUsuarioId");
+            if (userType != null) return (int)userType == 2;
+            return false;
+        }
+
         public IActionResult AlumnoMateria()
         {
-
+           if(!ValidarTipoUsuario()) return View("Error");
+            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            List<Universidad> lista = _ProfesoresRepository.GetUniverdadesByUsuario(iduser);
+            ViewBag.Universidad = lista;
             return View();
         }
         public IActionResult AgregarAlumnoMateria(string dni)
         {
-            
             return View();
         }
+        /*
+        public IActionResult MateriasDisponibles()
+        {
+            return View();
+        }
+        */
+        public IActionResult UniversidadesDisponibles()
+        {
+            if (!ValidarTipoUsuario()) return View("Error");
+            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            List<Universidad> lista =_ProfesoresRepository.GetUniverdadesByUsuario(iduser);
+            return Json(new { universidades = lista });
+        }
 
-       
+        public IActionResult CarrerasDisponibles(int iduniversidad)
+        {
+            if (!ValidarTipoUsuario()) return View("Error");
+            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            List<Carrera> lista = _ProfesoresRepository.GetCarrerasByUniversidadAndUser(iduser, iduniversidad);
+            return Json(new { carreras = lista });
+        }
+
+        public IActionResult MateriasDisponibles(int idcarrera, int iduniversidad)
+        {
+            if (!ValidarTipoUsuario()) return View("Error");
+            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            List<Materia> lista = _ProfesoresRepository.GetMateriasByUserAndCarreraAndUniversidad(iduser, idcarrera, iduniversidad);
+            return Json(new { materias = lista });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
