@@ -170,16 +170,21 @@ form {
 .button__visualizar {
     border-style: solid;
     border-width: 2pt;
-    border-color: rgb(0, 0, 0);
+    border-color: rgb(36, 36, 36);
     padding: 5pt;
     background-color: rgba(11, 97, 0, 0.726);
     color: white;
-    width: 80%;
     font-size: large;
     font-family: 'Raleway';
     font-weight: bold;
     letter-spacing: 0.1em;
+    text-align: center;
+    transition-duration: 0.5s;
+    display: block;
 }
+    .button__visualizar:hover {
+        background-color: rgba(18, 158, 0, 0.726);
+    }
 
 .stars {
     width: 55%;
