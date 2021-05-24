@@ -15,19 +15,19 @@
             <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="universidad" class="text-center">Universidad</label>
                 <select class="form-select" id="select_universidad" name="universidad">
-                    <option selected disabled >Elegir</option>
+                    <option selected disabled >Elegir universidad</option>
                 </select>
             </div>
             <div class="px-1  d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="select_carrera">Carrera</label>
                 <select class="form-select" id="select_carrera" disabled>
-                    <option selected disabled>Elegir</option>
+                    <option selected disabled>Elegir carrera</option>
                 </select>
             </div>
             <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="select_materia">Materia</label>
                 <select class="form-select" id="select_materia" disabled>
-                    <option selected disabled>Elegir</option>
+                    <option selected disabled>Elegir materia</option>
                 </select>
             </div>
         </form>
@@ -56,17 +56,6 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td scope="row" class="dni">11222333</td>
-                        <td>Timi</td>
-                        <td>Licenciatura en Sistemas</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm boton-estado"
-                                    data-estado="auscente">
-                                Agregar
-                            </button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -78,6 +67,18 @@
         const select_universidad = $('#select_universidad');
         const select_carrera = $('#select_carrera');
         const select_materia = $('#select_materia');
+
+        function setDefaultOption(select, campo) {
+            let defaultoption = $("<option></option>").text('Elegir ' + campo);
+            defaultoption.prop('disabled', true);
+            defaultoption.prop('selected', true);
+            select.append(defaultoption);
+        }
+
+        function disableSelect(select) {
+            select.prop('disabled', true);
+            select.empty();
+        }
 
         $(function () {
             $.ajax({
@@ -98,28 +99,21 @@
 
             select_universidad.on('change', function () {
                 let idUniversidad = this.value;
-                select_carrera.prop('disabled', true);
-                select_carrera.empty();
-                select_materia.prop('disabled', true);
-                select_materia.empty();
+                disableSelect(select_carrera);
+                disableSelect(select_materia);
                 $.ajax({
                     url: "@Url.Action("CarrerasDisponibles", "Profesores")",
                     type: "post",
                     data: {  iduniversidad: idUniversidad  }
                 })
                     .done(function (result) {
-                        let defaultoption = $("<option></option>").text('elegir');
-                        defaultoption.prop('disabled', true);
-                        defaultoption.prop('selected', true);
-
-                        select_carrera.append(defaultoption);
-
-                    for (let carrera of result.carreras) {
-                       let option = $("<option></option>").text(carrera.carrera1);
-                       option.attr("value", carrera.idCarrera);
-                       select_carrera.append(option);
-                    }
-                    select_carrera.prop('disabled', false);
+                        setDefaultOption(select_carrera, 'carrera');
+                        for (let carrera of result.carreras) {
+                           let option = $("<option></option>").text(carrera.carrera1);
+                           option.attr("value", carrera.idCarrera);
+                           select_carrera.append(option);
+                        }
+                        select_carrera.prop('disabled', false);
                 })
                 .fail(function (jqXHR, status, error) {
                     console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
@@ -130,8 +124,7 @@
             select_carrera.on('change', function () {
                 let idcarrera = this.value;
                 let iduniversidad = $('#select_universidad option:selected').val();
-                select_materia.prop('disabled', true);
-                select_materia.empty();
+                disableSelect(select_materia);
                 $.ajax({
                     url: "@Url.Action("MateriasDisponibles", "Profesores")",
                     type: "post",
@@ -141,16 +134,13 @@
                     }
                 })
                     .done(function (result) {
-                        let defaultoption = $("<option></option>").text('elegir');
-                        defaultoption.prop('disabled', true);
-                        defaultoption.prop('selected', true);
-                        select_materia.append(defaultoption);
-                    for (let materia of result.materias) {
-                       let option = $("<option></option>").text(materia.materia1);
-                       option.attr("value", materia.idMateria);
-                       select_materia.append(option);
-                    }
-                    select_materia.prop('disabled', false);
+                        setDefaultOption(select_materia, 'materia');
+                        for (let materia of result.materias) {
+                           let option = $("<option></option>").text(materia.materia1);
+                           option.attr("value", materia.idMateria);
+                           select_materia.append(option);
+                        }
+                        select_materia.prop('disabled', false);
                 })
                 .fail(function (jqXHR, status, error) {
                     console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
@@ -158,7 +148,6 @@
                 })
             })
         });
-
 
         let botones = document.querySelectorAll('.boton-estado')
         botones.forEach(boton => {
