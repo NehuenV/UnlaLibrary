@@ -20,6 +20,7 @@ namespace UnlaLibrary.UI.Web.Controllers
 {
     public class ProfesoresController : Controller
     {
+        #region constructor
         private readonly ILogger<HomeController> _logger;
         private readonly Library _Library;
         private readonly IProfesoresRepository _ProfesoresRepository;
@@ -29,6 +30,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             _Library = Library;
             _ProfesoresRepository = ProfesoresRepository;
         }
+        #endregion
         #region Actions
         public IActionResult SubirMaterial()
         {
@@ -41,7 +43,18 @@ namespace UnlaLibrary.UI.Web.Controllers
 
 
         #endregion
-
+        public IActionResult CambiarAlumnoMateria(int idUsuario, bool estado, int idMat)
+        {
+            if (estado)
+            {
+                _ProfesoresRepository.EliminarAlumnoMateria(idUsuario, idMat);
+            }
+            else
+            {
+                _ProfesoresRepository.AgregarAlumnoMateria(idUsuario,idMat);
+            }
+            return View();
+        }
 
         #region RequestJson
         public JsonResult up(Material m)
@@ -63,12 +76,12 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
 
         #endregion
-        //return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
 
         public bool ValidarTipoUsuario()
         {
             var userType = HttpContext.Session.GetInt32("TipoDeUsuarioId");
-            if (userType != null) return (int)userType == 2;
+            if (userType != null) 
+                return (int)userType == 2;
             return false;
         }
 
@@ -80,16 +93,16 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewBag.Universidad = lista;
             return View();
         }
-        public IActionResult AgregarAlumnoMateria(string dni)
+        public IActionResult ListaAlumnoMateria(int idMat, int idCarrera)
         {
-            return View();
+            var lista2 = _ProfesoresRepository.GetAlumnosAgregadosMateria(idMat, idCarrera);
+            var lista1 = _ProfesoresRepository.GetAlumnosNoagregadosByCarrera(idMat, idCarrera);
+            List<Alumno> listaUsuarios = new List<Alumno>();
+            listaUsuarios.AddRange(lista2);
+            listaUsuarios.AddRange(lista1);
+            return View(listaUsuarios);
         }
-        /*
-        public IActionResult MateriasDisponibles()
-        {
-            return View();
-        }
-        */
+
         public IActionResult UniversidadesDisponibles()
         {
             if (!ValidarTipoUsuario()) return View("Error");
@@ -98,20 +111,18 @@ namespace UnlaLibrary.UI.Web.Controllers
             return Json(new { universidades = lista });
         }
 
-        public IActionResult CarrerasDisponibles(int iduniversidad)
+        public JsonResult CarrerasDisponibles(int iduniversidad)
         {
-            if (!ValidarTipoUsuario()) return View("Error");
             int iduser = (int)HttpContext.Session.GetInt32("UserId");
             List<Carrera> lista = _ProfesoresRepository.GetCarrerasByUniversidadAndUser(iduser, iduniversidad);
-            return Json(new { carreras = lista });
+            return Json(new SelectList(lista, "IdCarrera", "Carrera1"));
         }
 
-        public IActionResult MateriasDisponibles(int idcarrera, int iduniversidad)
+        public JsonResult MateriasDisponibles(int idcarrera, int iduniversidad)
         {
-            if (!ValidarTipoUsuario()) return View("Error");
             int iduser = (int)HttpContext.Session.GetInt32("UserId");
             List<Materia> lista = _ProfesoresRepository.GetMateriasByUserAndCarreraAndUniversidad(iduser, idcarrera, iduniversidad);
-            return Json(new { materias = lista });
+            return Json(new SelectList(lista, "IdMateria", "Materia1"));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

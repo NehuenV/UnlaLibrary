@@ -34,6 +34,7 @@ insert into UsuarioMateria values(1, 1)
 insert into UsuarioMateria values(1, 2)
 insert into UsuarioMateria values(2, 1)
 insert into UsuarioMateria values(2, 3)
+insert into UsuarioMateria values(3,1)
 
 insert into UsuarioCarreraUniversidad values(1, 1, 1)
 insert into UsuarioCarreraUniversidad values(2, 2, 2)

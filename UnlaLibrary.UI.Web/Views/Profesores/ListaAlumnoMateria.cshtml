@@ -1,0 +1,165 @@
+﻿@{
+    Layout = "";
+}
+@model IEnumerable<UnlaLibrary.Data.Models.Alumno>
+
+<script>
+    $(document).ready(function () {
+
+        /*inicio de filtros*/
+
+        let filtro = document.getElementById("filtrar");
+        filtro.addEventListener('input', filtrar);
+
+        function filtrar(e) {
+            console.log(e)
+            let filtro = e.target.value;
+            let lista_dni = document.querySelectorAll('.dni');
+            lista_dni.forEach(dni => {
+                if (dni.innerText.includes(filtro)) {
+                    dni.parentElement.classList.remove('d-none')
+                } else {
+                    dni.parentElement.classList.add('d-none')
+                }
+            })
+        }
+
+
+        /*fin del filtro*/
+
+        /*inicio de agregar*/
+
+        let botones = document.querySelectorAll('.boton-estado')
+        let botonesVerdes = document.querySelectorAll('.btn-success')
+        botones.forEach(boton => {
+            boton.addEventListener('click', agregar);
+        });
+        botonesVerdes.forEach(boton => {
+            boton.addEventListener('click', agregar);
+        });
+
+
+
+
+        function agregar(e) {
+            debugger;
+            var idMateria = $("#Materia").val();
+            let button = e.target;
+            var valor = button.dataset.est;
+            if (valor) {
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("CambiarAlumnoMateria", "Profesores")",
+                    data: {
+                        idUsuario: button.dataset.value,
+                        estado: button.dataset.estado,
+                        idMat: idMateria
+                    }
+                }).done(function (result) {
+                        debugger;
+                         if (result.status) {
+                                $(location).attr('href', "@Url.Action("ListaAlumnoMateria","Profesores")")
+                            } else {
+                                $("#message").text(result.message);
+                            }
+                    })
+                .fail(function (jqXHR, status, error) {
+                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                    alert("Hubo un error en el servidor")
+                })
+
+                //    success: function (result) {
+                //        e.target.classList.add('btn btn-primary btn-sm boton-estado');
+                //        button.innerText = "Agregar";
+                //    },
+                //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //        console.log("Status: " + textStatus);
+                //        alert("Error: " + errorThrown);
+                //    }
+                //});
+            } else
+            {
+                 $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("CambiarAlumnoMateria", "Profesores")",
+                    data: {
+                        idUsuario: button.dataset.value,
+                        estado: button.dataset.estado,
+                        idMat: idMateria
+                    },
+                    success: function (result) {
+                        e.target.classList.add('btn-success');
+                        button.innerText = "Agregado";
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            }
+
+        }
+
+        /*fin de agregar*/
+
+    });
+
+</script>
+
+
+<div class="d-flex flex-column align-items-end p-1">
+    <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
+</div>
+<table class="table table-striped table-hover table-bordered table-sm text-center">
+    <thead class="table-dark">
+        <tr>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.Dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="row" class="dni">
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @if (!item.Estado)
+                    {
+                        <button class="btn btn-primary btn-sm boton-estado" id="Estado" data-value="@item.IdUsuario"
+                                data-estado="@item.Estado">
+                            Agregar
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn-success" id="Estado" data-value="@item.IdUsuario"
+                                data-estado="@item.Estado">
+                            Agregado
+                        </button>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

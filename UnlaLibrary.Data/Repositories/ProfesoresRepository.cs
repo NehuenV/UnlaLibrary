@@ -18,6 +18,19 @@ namespace UnlaLibrary.Data.Repositories
             _Library = Library;
         }
 
+        public bool AgregarAlumnoMateria(int idAlumno, int idMat)
+        {
+            _Library.UsuarioMateria.Add(new UsuarioMateria {IdMateria=idMat,IdUsuario=idAlumno });
+            _Library.SaveChanges();
+            return true;
+        }
+        public bool EliminarAlumnoMateria(int idAlumno, int idMat)
+        {
+            var usuario = _Library.UsuarioMateria.Find(idAlumno, idMat);
+            _Library.UsuarioMateria.Remove(usuario);
+            _Library.SaveChanges();
+            return true;
+        }
         public List<Universidad> GetUniverdadesByUsuario(int iduser)
         {
             var uni = _Library.UsuarioCarreraUniversidad
@@ -89,7 +102,7 @@ namespace UnlaLibrary.Data.Repositories
         }
 
         //todos los alumnos de la carrera
-        public List<Alumno> GetAlumnosByCarrera(int idMat, int idcarr)
+        public List<Alumno> GetAlumnosByCarrera(int idcarr)
         {
             var alumnosCarrera = (from A in _Library.UsuarioCarreraUniversidad
                                   join U in _Library.Usuario on A.IdUsuario equals U.IdUsuario
@@ -104,14 +117,14 @@ namespace UnlaLibrary.Data.Repositories
                                       Tipo = T.NombreTipoUsuario,
                                       Estado = false
                                   })
-                           .Where(x => x.IdCarrera == idcarr && x.Tipo == "Estudiante")
+                                  //&& x.Tipo == "Estudiante"
+                           .Where(x => x.IdCarrera == idcarr )
                            .ToList();
             return alumnosCarrera;
         }
 
-        public List<Alumno> GetAlumnosAgregadosMateria(int idMat) 
+        public List<Alumno> GetAlumnosAgregadosMateria(int idMat, int idCarrera) 
         {
-            var alumnosCarrera = GetAlumnosByCarrera(1, 1);
             var aAgregados = (from UM in _Library.UsuarioMateria
                             join U in _Library.Usuario on UM.IdUsuario equals U.IdUsuario
                             join T in _Library.TipoUsuario on U.IdTipoUsuario equals T.IdTipoUsuario
@@ -126,7 +139,7 @@ namespace UnlaLibrary.Data.Repositories
                                 Tipo = T.NombreTipoUsuario,
                                 Estado = true,
                                 IdMateria = UM.IdMateria
-                            }).Where(x=> x.IdMateria == idMat).ToList();
+                            }).Where(x=> x.IdMateria == idMat && x.IdCarrera ==idCarrera).ToList();
 
             List<Alumno> usuariosAgregado = new List<Alumno>();
 
@@ -142,42 +155,35 @@ namespace UnlaLibrary.Data.Repositories
             });
             return usuariosAgregado;
         }
-        public List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat)
+        public List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat, int idCarrera)
         {
-                var alumnosCarrera = GetAlumnosByCarrera(1, 1);
+            var alumnosCarrera = GetAlumnosByCarrera( idCarrera);
 
 
-                var aAgregados = (from UM in _Library.UsuarioMateria
-                                  join U in _Library.Usuario on UM.IdUsuario equals U.IdUsuario
-                                  join T in _Library.TipoUsuario on U.IdTipoUsuario equals T.IdTipoUsuario
-                                  join A in _Library.UsuarioCarreraUniversidad on UM.IdUsuario equals A.IdUsuario
-                                  select new
-                                  {
-                                      IdCarrera = A.IdCarrera,
-                                      IdUsuario = U.IdUsuario,
-                                      Nombre = U.Nombre,
-                                      Apellido = U.Apellido,
-                                      Dni = U.Dni,
-                                      Tipo = T.NombreTipoUsuario,
-                                      Estado = true,
-                                      IdMateria = UM.IdMateria
-                                  }).Where(x => x.IdMateria == idMat).ToList();
+            var aAgregados = GetAlumnosAgregadosMateria(idMat, idCarrera);
 
-                List<Alumno> usuariosAgregado = new List<Alumno>();
+            List<Alumno> usuariosAgregado = new List<Alumno>();
 
-                foreach (var L in aAgregados) usuariosAgregado.Add(new Alumno
+            foreach (var L in aAgregados) usuariosAgregado.Add(new Alumno
+            {
+                IdCarrera = L.IdCarrera,
+                IdUsuario = L.IdUsuario,
+                Nombre = L.Nombre,
+                Apellido = L.Apellido,
+                Dni = L.Dni,
+                Tipo = L.Tipo,
+                Estado = L.Estado
+            });
+            foreach (var item in aAgregados)
+            {
+                var u = alumnosCarrera.Where(x => x.Dni == item.Dni).FirstOrDefault();
+                if(u != null)
                 {
-                    IdCarrera = L.IdCarrera,
-                    IdUsuario = L.IdUsuario,
-                    Nombre = L.Nombre,
-                    Apellido = L.Apellido,
-                    Dni = L.Dni,
-                    Tipo = L.Tipo,
-                    Estado = L.Estado
-                });
-                foreach (var item in usuariosAgregado) alumnosCarrera.Remove(item);
+                    alumnosCarrera.Remove(u);
+                }
+            }
 
-            return usuariosAgregado;
+            return alumnosCarrera;
         }
 
 
