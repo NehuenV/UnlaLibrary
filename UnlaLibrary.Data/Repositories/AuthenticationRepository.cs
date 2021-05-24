@@ -43,5 +43,17 @@ namespace UnlaLibrary.Data.Repositories
             return user;
         }
 
+        public int GetId(Login login)
+        {
+            var userId = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).Select(x => x.IdUsuario).FirstOrDefault();
+            return userId;
+        }
+
+        public int GetIdTipoDeUsuario(Login login)
+        {
+            var userType = _Library.Usuario.Where(x => x.Email == login.email && x.Clave == login.password).Select(x => x.IdTipoUsuario).FirstOrDefault();
+            return userType;
+        }
+
     }
 }

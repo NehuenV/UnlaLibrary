@@ -44,9 +44,9 @@ namespace UnlaLibrary.UI.Web.Controllers
             //}
             return View();
         }
-        public IActionResult ListaCatalogo(string a)
+        public IActionResult ListaCatalogo(string texto)
         {
-            var cat = _Catalogo.GetCatalogo();
+            var cat = texto == null ? _Catalogo.GetCatalogo() : _Catalogo.GetCatalogo(texto);
             ViewBag.Catalogo = cat;
             return View(cat);
         }

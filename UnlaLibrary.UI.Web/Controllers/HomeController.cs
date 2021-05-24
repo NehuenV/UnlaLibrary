@@ -45,15 +45,13 @@ namespace UnlaLibrary.UI.Web.Controllers
 
             if (aut)
             {
-                var n = _login.GetName(login);
-                string cookieNameKey = "name";
-                string cookieNameValue = n;
+                string name = _login.GetName(login);
                 CookieOptions cookieOptions = new CookieOptions();
                 cookieOptions.Expires = DateTime.Now.AddDays(7);
-                Response.Cookies.Append(cookieNameKey, cookieNameValue, cookieOptions);
-                HttpContext.Session.SetString("User",n);
-                HttpContext.Session.SetString("Email", login.email);
-                return Json( new { status = aut, name = n, email = login.email, message ="Bienvenido " });
+                Response.Cookies.Append("name", name, cookieOptions);
+                HttpContext.Session.SetInt32("UserId", _login.GetId(login));
+                HttpContext.Session.SetInt32("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login));
+                return Json( new { status = aut, name = name, email = login.email, message ="Bienvenido " });
             }
             else
             {
