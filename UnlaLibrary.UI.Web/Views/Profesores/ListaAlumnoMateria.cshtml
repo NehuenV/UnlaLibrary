@@ -42,11 +42,9 @@
 
 
         function agregar(e) {
-            debugger;
             var idMateria = $("#Materia").val();
             let button = e.target;
-            var valor = button.dataset.est;
-            if (valor) {
+            var valor = button.dataset.estado;
                 $.ajax({
                     type: 'POST',
                     url: "@Url.Action("CambiarAlumnoMateria", "Profesores")",
@@ -56,12 +54,17 @@
                         idMat: idMateria
                     }
                 }).done(function (result) {
-                        debugger;
-                         if (result.status) {
-                                $(location).attr('href', "@Url.Action("ListaAlumnoMateria","Profesores")")
-                            } else {
-                                $("#message").text(result.message);
-                            }
+                    valor = button.dataset.estado;
+                    debugger;
+                    if (valor == "True") {
+                        button.classList.remove('btn-success');
+                        button.innerText = "Agregar";
+                        button.dataset.estado = "False";
+                    } else {
+                        button.classList.add('btn-success');
+                        button.innerText = "Agregado";
+                        button.dataset.estado = "True";
+                    }
                     })
                 .fail(function (jqXHR, status, error) {
                     console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
@@ -77,26 +80,7 @@
                 //        alert("Error: " + errorThrown);
                 //    }
                 //});
-            } else
-            {
-                 $.ajax({
-                    type: 'POST',
-                    url: "@Url.Action("CambiarAlumnoMateria", "Profesores")",
-                    data: {
-                        idUsuario: button.dataset.value,
-                        estado: button.dataset.estado,
-                        idMat: idMateria
-                    },
-                    success: function (result) {
-                        e.target.classList.add('btn-success');
-                        button.innerText = "Agregado";
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
-                    }
-                });
-            }
+            
 
         }
 
@@ -145,14 +129,14 @@
                 <td>
                     @if (!item.Estado)
                     {
-                        <button class="btn btn-primary btn-sm boton-estado" id="Estado" data-value="@item.IdUsuario"
+                        <button class="btn btn-primary btn-sm boton-estado " id="Estado" data-value="@item.IdUsuario"
                                 data-estado="@item.Estado">
                             Agregar
                         </button>
                     }
                     else
                     {
-                        <button class="btn-success" id="Estado" data-value="@item.IdUsuario"
+                        <button class="btn btn-primary btn-sm boton-estado btn-success" id="Estado" data-value="@item.IdUsuario"
                                 data-estado="@item.Estado">
                             Agregado
                         </button>

@@ -43,7 +43,11 @@ namespace UnlaLibrary.UI.Web.Controllers
 
 
         #endregion
-        public IActionResult CambiarAlumnoMateria(int idUsuario, bool estado, int idMat)
+
+
+        #region RequestJson
+
+        public JsonResult CambiarAlumnoMateria(int idUsuario, bool estado, int idMat)
         {
             if (estado)
             {
@@ -51,12 +55,11 @@ namespace UnlaLibrary.UI.Web.Controllers
             }
             else
             {
-                _ProfesoresRepository.AgregarAlumnoMateria(idUsuario,idMat);
+                _ProfesoresRepository.AgregarAlumnoMateria(idUsuario, idMat);
             }
-            return View();
+            return Json(new { status = "Ok" });
         }
 
-        #region RequestJson
         public JsonResult up(Material m)
         {
             bool estado = _ProfesoresRepository.AgregarMaterial(m);
@@ -97,10 +100,8 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             var lista2 = _ProfesoresRepository.GetAlumnosAgregadosMateria(idMat, idCarrera);
             var lista1 = _ProfesoresRepository.GetAlumnosNoagregadosByCarrera(idMat, idCarrera);
-            List<Alumno> listaUsuarios = new List<Alumno>();
-            listaUsuarios.AddRange(lista2);
-            listaUsuarios.AddRange(lista1);
-            return View(listaUsuarios);
+            lista2.AddRange(lista1);
+            return View(lista2);
         }
 
         public IActionResult UniversidadesDisponibles()

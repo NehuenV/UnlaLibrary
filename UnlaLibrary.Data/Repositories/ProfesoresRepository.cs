@@ -118,7 +118,7 @@ namespace UnlaLibrary.Data.Repositories
                                       Estado = false
                                   })
                                   //&& x.Tipo == "Estudiante"
-                           .Where(x => x.IdCarrera == idcarr )
+                           .Where(x => x.IdCarrera == idcarr && x.Tipo == "Estudiante")
                            .ToList();
             return alumnosCarrera;
         }
@@ -139,7 +139,7 @@ namespace UnlaLibrary.Data.Repositories
                                 Tipo = T.NombreTipoUsuario,
                                 Estado = true,
                                 IdMateria = UM.IdMateria
-                            }).Where(x=> x.IdMateria == idMat && x.IdCarrera ==idCarrera).ToList();
+                            }).Where(x=> x.IdMateria == idMat && x.IdCarrera ==idCarrera && x.Tipo =="Estudiante").ToList();
 
             List<Alumno> usuariosAgregado = new List<Alumno>();
 
