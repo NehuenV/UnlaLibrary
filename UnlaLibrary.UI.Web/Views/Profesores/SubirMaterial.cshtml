@@ -17,7 +17,6 @@
                     data: { idUniversidad: $("#Universidad").val() },
 
                     success: function (materias) {
-                        debugger;
                         $.each(materias, function (i, materia) {
                             $("#Materia").append('<option value="' + materia.value + '">' +
                                 materia.text + '</option>');
@@ -27,6 +26,46 @@
                 });
                 return false;
 
+        });
+        function getFile(idinput) {
+            var input = document.getElementById(idinput);
+            var files = input.files;
+            return files[0];
+        }
+       
+        $("#form").click(function () {
+            debugger;
+            var formData = new FormData();
+            var arc = getFile('Archivo');
+            var min = getFile('Miniatura')
+            var mat = $('#Materia option:selected').val();
+            var uni = parseInt($('#Universidad option:selected').val());
+            var titulo = $('#Titulo').val();
+            var aut = $('#Autor').val();
+            var desc = $('#Descripcion').val();
+            var pro = $('#Prologo').val();
+            var id = parseInt($('#Idioma option:selected').val());
+            formData.append("Archivo",arc);
+            formData.append("Materia",mat );
+            formData.append("Universidad", uni );
+            formData.append("Miniatura", min);
+            formData.append("Titulo",titulo);
+            formData.append("Autor", aut);
+            formData.append("Descripcion",desc);
+            formData.append("Prologo", pro);
+            formData.append("Idioma", id );
+            $.ajax(
+                {
+                    url: "/Profesores/up",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    success: function (data) {
+                        alert("Files Uploaded!");
+                    }
+                }
+            );
         });
 
     });
@@ -43,7 +82,7 @@
     <div class="d-flex flex-column align-items-center w-100 py-4">
         <h2 class="display-5 my-3">Agregar Material</h2>
 
-        <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r" enctype="multipart/form-data" asp-action="up" asp-controller="Profesores">
+        <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r" enctype="multipart/form-data" >
             <select class="form-select my-2" asp-for="Universidad" asp-items="@(new SelectList(ViewBag.Universidades,"IdUniversidad","NombreUniversidad") )"><option selected disabled>Seleccionar universidad</option></select>
 
             <select class="form-select my-2" asp-for="Materia">
@@ -78,7 +117,7 @@
             </div>
             <select class="form-select my-2" asp-for="Idioma" asp-items="@(new SelectList(ViewBag.Idioma,"IdIdioma","Idioma1") )">
             </select>
-            <button type="submit" class="btn btn-primary my-2">Subir</button>
+            <button type="submit"  id="form" class="btn btn-primary my-2">Subir</button>
         </form>
     </div>
 </body>

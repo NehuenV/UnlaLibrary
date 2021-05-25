@@ -28,31 +28,29 @@ namespace UnlaLibrary.UI.Web.Controllers
             _Library = Library;
             _Catalogo = Catalogo;
         }
-        //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-        //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
+        public bool ValidarTipoUsuario()
+        {
+            var userType = HttpContext.Session.GetInt32("TipoDeUsuarioId");
+            if (userType != null)
+                return true;
+            return false;
+        }
 
-        //List<Materium> lista = new List<Materium>();
-        //lista.Select(x => x.Materia).ToList();
-        //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-        //_Library.SaveChanges();
         public IActionResult Catalogo()
         {
-            var algo = HttpContext.Session.GetInt32("UserId");
-            //if(string.IsNullOrEmpty(algo))
-            //{
-            //    return View("Error");
-            //}
-
+            if (!ValidarTipoUsuario()) return View("Error");
             return View();
         }
         public IActionResult ListaCatalogo(string texto)
         {
+            if (!ValidarTipoUsuario()) return View("Error");
             var cat = texto == null ? _Catalogo.GetCatalogo() : _Catalogo.GetCatalogo(texto);
             ViewBag.Catalogo = cat;
             return View(cat);
         }
         public IActionResult Detalle(int id)
         {
+            if (!ValidarTipoUsuario()) return View("Error");
             var detalle = _Catalogo.GetMaterial(id);
             ViewBag.Detalle = detalle;
             return View(detalle);
@@ -70,29 +68,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             string contentType = "application/pdf";
             return File(detalle.Archivo, contentType);
         }
-        // Ejemplo de traer materialEstudio mediante query
-        /* 
-        var lista = (from ME in _Library.MaterialEstudios
-                     join I in _Library.Idiomas on ME.Idioma equals I.IdIdioma
-                     select
-                     new MaterialEstudio
-                     {
-                         Descripcion = ME.Descripcion,
-                         IdMateriaEstudio = ME.IdMateriaEstudio,
-                         IdiomaNavigation = ME.IdiomaNavigation,
-                         Materia = ME.Materia,
-                         Idioma = ME.Idioma,
-                         Titulo = ME.Titulo
-                     }).ToList();
-
-        //Ejemplo de traer materialEstudios con sql 
-        var aa = _Library.MaterialEstudios.FromSqlRaw("select * from MaterialEstudio").ToList();
-
-
-        // Ejemplo con lamda
-        MaterialEstudio[] matariales = _Library.MaterialEstudios.Select(s => s).ToArray<MaterialEstudio>();
-        */
-
+     
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
