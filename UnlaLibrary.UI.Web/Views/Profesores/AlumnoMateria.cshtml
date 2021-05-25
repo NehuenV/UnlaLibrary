@@ -42,6 +42,12 @@
     <script>
         $(document).ready(function () {
             $("#Universidad").change(function () {
+                $("#Carrera").empty();
+                $("#Carrera").prop('disabled', true);
+                $("#Carrera").append("<option disabled selected>Elegir carrera</option>");
+                $("#Materia").empty();
+                $("#Materia").append("<option disabled selected>Elegir materia</option>");
+                $("#Materia").prop('disabled', true);
                 $.ajax({
                     type: 'POST',
                     url: '@Url.Action("CarrerasDisponibles", "Profesores")', // we are calling json method
@@ -52,13 +58,15 @@
                         $.each(universidades, function (i, universidad) {
                             $("#Carrera").append('<option value="' + universidad.value + '">' +
                                 universidad.text + '</option>');
-
                         });
                     }
                 });
                 return false;
             });
             $("#Carrera").change(function () {
+                $("#Materia").prop('disabled', true);
+                $("#Materia").empty();
+                $("#Materia").append("<option disabled selected>Elegir materia</option>");
                 $.ajax({
                     type: 'POST',
                     url: "@Url.Action("MateriasDisponibles", "Profesores")", // we are calling json method
