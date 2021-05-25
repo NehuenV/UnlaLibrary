@@ -14,168 +14,90 @@
         <form class="my-4 d-flex flex-wrap">
             <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="universidad" class="text-center">Universidad</label>
-                <select class="form-select" id="select_universidad" name="universidad">
+                <select class="form-select" id="Universidad" asp-items="@(new SelectList(ViewBag.Universidad,"IdUniversidad","NombreUniversidad") )">
                     <option selected disabled>Elegir universidad</option>
                 </select>
             </div>
             <div class="px-1  d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="select_carrera">Carrera</label>
-                <select class="form-select" id="select_carrera" disabled>
+                <select class="form-select" id="Carrera" disabled>
                     <option selected disabled>Elegir carrera</option>
                 </select>
             </div>
             <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
                 <label for="select_materia">Materia</label>
-                <select class="form-select" id="select_materia" disabled>
+                <select class="form-select" id="Materia" disabled>
                     <option selected disabled>Elegir materia</option>
                 </select>
             </div>
         </form>
+
         <div class="w-75r table-responsive align-middle">
-            <div class="d-flex flex-column align-items-end p-1">
-                <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
-            </div>
-            <table class="table table-striped table-hover table-bordered table-sm text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Carrera</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row" class="dni">12345678</td>
-                        <td>Pepe</td>
-                        <td>Ingeniería</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm boton-estado"
-                                    data-estado="auscente">
-                                Agregar
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="Results"></div>
         </div>
     </div>
 
     <script src="~/js/jquery-3.6.0.js"></script>
 
-
     <script>
-        const select_universidad = $('#select_universidad');
-        const select_carrera = $('#select_carrera');
-        const select_materia = $('#select_materia');
+        $(document).ready(function () {
+            $("#Universidad").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CarrerasDisponibles", "Profesores")', // we are calling json method
+                    dataType: 'json',
+                    data: { idUniversidad: $("#Universidad").val() },
+                    success: function (universidades) {
+                        $("#Carrera").prop('disabled', false);
+                        $.each(universidades, function (i, universidad) {
+                            $("#Carrera").append('<option value="' + universidad.value + '">' +
+                                universidad.text + '</option>');
 
-        function setDefaultOption(select, campo) {
-            let defaultoption = $("<option></option>").text('Elegir ' + campo);
-            defaultoption.prop('disabled', true);
-            defaultoption.prop('selected', true);
-            select.append(defaultoption);
-        }
-
-        function disableSelect(select) {
-            select.prop('disabled', true);
-            select.empty();
-        }
-
-        $(function () {
-            $.ajax({
-                url: "@Url.Action("UniversidadesDisponibles", "Profesores")",
-                type: "post"
-                })
-                .done(function (result) {
-                    for (let universidad of result.universidades) {
-                        let option = $("<option></option>").text(universidad.nombreUniversidad);
-                        option.attr("value", universidad.idUniversidad);
-                        select_universidad.append(option);
+                        });
                     }
-                })
-                .fail(function (jqXHR, status, error) {
-                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
-                    alert("Hubo un error en el servidor")
-                })
-
-            select_universidad.on('change', function () {
-                let idUniversidad = this.value;
-                disableSelect(select_carrera);
-                disableSelect(select_materia);
+                });
+                return false;
+            });
+            $("#Carrera").change(function () {
                 $.ajax({
-                    url: "@Url.Action("CarrerasDisponibles", "Profesores")",
-                    type: "post",
-                    data: {  iduniversidad: idUniversidad  }
-                })
-                    .done(function (result) {
-                        setDefaultOption(select_carrera, 'carrera');
-                        for (let carrera of result.carreras) {
-                           let option = $("<option></option>").text(carrera.carrera1);
-                           option.attr("value", carrera.idCarrera);
-                           select_carrera.append(option);
-                        }
-                        select_carrera.prop('disabled', false);
-                })
-                .fail(function (jqXHR, status, error) {
-                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
-                    alert("Hubo un error en el servidor")
-                })
-            })
-
-            select_carrera.on('change', function () {
-                let idcarrera = this.value;
-                let iduniversidad = $('#select_universidad option:selected').val();
-                disableSelect(select_materia);
-                $.ajax({
-                    url: "@Url.Action("MateriasDisponibles", "Profesores")",
-                    type: "post",
+                    type: 'POST',
+                    url: "@Url.Action("MateriasDisponibles", "Profesores")", // we are calling json method
+                    dataType: 'json',
                     data: {
-                        idcarrera: idcarrera,
-                        iduniversidad: iduniversidad
+                        idCarrera: $("#Carrera").val(),
+                        idUniversidad: $("#Universidad").val()
+                    },
+                    success: function (materias) {
+                        $("#Materia").prop('disabled', false);
+                        $.each(materias, function (i, materia) {
+                            $("#Materia").append('<option value="' + materia.value + '">' +
+                                materia.text + '</option>');
+
+                        });
                     }
-                })
-                    .done(function (result) {
-                        setDefaultOption(select_materia, 'materia');
-                        for (let materia of result.materias) {
-                           let option = $("<option></option>").text(materia.materia1);
-                           option.attr("value", materia.idMateria);
-                           select_materia.append(option);
-                        }
-                        select_materia.prop('disabled', false);
-                })
-                .fail(function (jqXHR, status, error) {
-                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
-                    alert("Hubo un error en el servidor")
-                })
-            })
+                });
+                return false;
+            });
+
+            $("#Materia").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("ListaAlumnoMateria", "Profesores")",
+                    data: {
+                        idMat: $('#Materia').val(),
+                        idCarrera: $('#Carrera').val()
+                    },
+                    success: function (result) {
+                        $('#Results').html(result);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+                                   
         });
-
-        let botones = document.querySelectorAll('.boton-estado')
-        botones.forEach(boton => {
-            boton.addEventListener('click', agregar);
-        });
-        let filtro = document.getElementById("filtrar");
-        filtro.addEventListener('input', filtrar);
-
-        function agregar(e) {
-            let button = e.target;
-            e.target.classList.add('btn-success');
-            button.innerText = "Agregado";
-            button.disabled = true;
-        }
-
-        function filtrar(e) {
-            console.log(e)
-            let filtro = e.target.value;
-            let lista_dni = document.querySelectorAll('.dni');
-            lista_dni.forEach(dni => {
-                if (dni.innerText.includes(filtro)) {
-                    dni.parentElement.classList.remove('d-none')
-                } else {
-                    dni.parentElement.classList.add('d-none')
-                }
-            })
-        }
     </script>
 </body>
 </html>

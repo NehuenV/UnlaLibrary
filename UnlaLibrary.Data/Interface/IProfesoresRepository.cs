@@ -14,12 +14,16 @@ namespace UnlaLibrary.Data.Interface
         List<Universidad> GetUniverdades();
         List<UsuarioCarreraUniversidad> GetUsuariosByCarreraUniversidad(int iduser, int iduni);
         List<Materia> GetMateriasByCarrera(int idcarr);
-        List<Alumno> GetAlumnosByCarrera(int idMat, int idcarr);
-        List<Alumno> GetAlumnosAgregadosMateria(int idMat);
-        List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat);
+        List<Alumno> GetAlumnosByCarrera(int idcarr);
+        List<Alumno> GetAlumnosAgregadosMateria(int idMat, int idCarrera);
+        List<Alumno> GetAlumnosNoagregadosByCarrera(int idMat, int idCarrera);
         List<Idioma> GetIdiomas();
         bool AgregarMaterial(Material m);
 
         List<Materia> GetMateriaByCarreraUsuario(int idUniversidad, int idUsuario);
+        #region alumnoMateria
+        bool AgregarAlumnoMateria(int idMat, int idAlumno);
+        bool EliminarAlumnoMateria(int idMat, int idAlumno);
+        #endregion
     }
 }

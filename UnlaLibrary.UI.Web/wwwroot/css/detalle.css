@@ -87,6 +87,9 @@ form {
         width: 80%;
     }
 }
+.button__visualizar:hover {
+    background-color: rgba(18, 158, 0, 0.726);
+}
 
 @media (max-width: 800px) {
     .search-bar {

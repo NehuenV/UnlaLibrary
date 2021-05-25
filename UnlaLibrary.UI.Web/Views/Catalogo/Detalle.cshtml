@@ -4,6 +4,7 @@
     ViewData["Title"] = "Catalogo";
     Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
 }
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -61,7 +62,7 @@
                             <img src="/images/starts.png" alt="" class="stars" />
                             <figcaption>4.5 estrellas de 15 calificaciones</figcaption>
                         </figure>
-                        <div class="w-100  d-flex justify-content-center">
+                        <div class="w-100 justify-content-center d-flex">
                             <a href="@Url.Action("ViewFile","Catalogo", new { id = Model.IdMaterial})" target="_nblank" class="text-decoration-none">
                                 <span class="button__visualizar">
                                     VISUALIZAR
@@ -69,10 +70,11 @@
                             </a>
                         </div>
                         <div class="d-flex flex-row justify-content-center">
-                            <a href="@Url.Action("DownloadFile","Catalogo", new { id = Model.IdMaterial})" target="_nblank" 
-                             class="no-button"  data-bs-toggle="tooltip" data-bs-placement="bottom"  title="Descargar">
+                            <a href="@Url.Action("DownloadFile","Catalogo", new { id = Model.IdMaterial})" target="_nblank"
+                               class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Descargar">
                                 <i class="fas fa-file-download text-success fs-1"></i>
                             </a>
+
                             <button type="button" class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Agregar a favoritos">
                                 <i class="fas fa-heart text-danger fs-1"></i>
