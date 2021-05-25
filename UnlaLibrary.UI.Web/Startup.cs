@@ -34,7 +34,7 @@ namespace UnlaLibrary.UI.Web
             
             services.AddDistributedMemoryCache();
             services.AddSession();
-
+            services.AddRazorPages();
             services.AddDbContext<Library>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
@@ -70,7 +70,7 @@ namespace UnlaLibrary.UI.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                endpoints.MapRazorPages();
             });
         }
     }

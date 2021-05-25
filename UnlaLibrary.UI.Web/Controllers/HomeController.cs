@@ -27,15 +27,6 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult Index()
         {
-            //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-            //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
-
-            //List<Materium> lista = new List<Materium>();
-            //lista.Select(x => x.Materia).ToList();
-            //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-            //_Library.SaveChanges();
-           // _login.Authentication(new Login());
-        
             return View();
         }
         public IActionResult Login(Login login)
@@ -51,6 +42,7 @@ namespace UnlaLibrary.UI.Web.Controllers
                 Response.Cookies.Append("name", name, cookieOptions);
                 HttpContext.Session.SetInt32("UserId", _login.GetId(login));
                 HttpContext.Session.SetInt32("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login));
+                ViewBag.Nombre = name;
                 return Json( new { status = aut, name = name, email = login.email, message ="Bienvenido " });
             }
             else
@@ -58,14 +50,6 @@ namespace UnlaLibrary.UI.Web.Controllers
                 return Json(new { status = aut, name = "", email = "", message = "Clave o usuario incorrecto " });
             }
         }
-        //var algo = _Library.Carreras.Where(x=> x.Carrera1 == "algo").Select(x=>x.IdCarrera).ToList();
-        //_Library.CarreraMateria.Add(new CarreraMaterium { IdMateria = 1 });
-
-        //List<Materium> lista = new List<Materium>();
-        //lista.Select(x => x.Materia).ToList();
-        //var a = _Library.Carreras.Select(x => x.Carrera1);//Add(new Carrera { Carrera1 = "Licenciatura en sistemas" });
-        //_Library.SaveChanges();
-
         public IActionResult Logout()
         {
             string cookieNameKey = "name";

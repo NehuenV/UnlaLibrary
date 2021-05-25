@@ -34,6 +34,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         #region Actions
         public IActionResult SubirMaterial()
         {
+            if (!ValidarTipoUsuario()) return View("Error");
             var uni = _ProfesoresRepository.GetUniverdades();
             ViewBag.Universidades = uni;
             var idioma = _ProfesoresRepository.GetIdiomas();
@@ -60,16 +61,16 @@ namespace UnlaLibrary.UI.Web.Controllers
             return Json(new { status = "Ok" });
         }
 
-        public JsonResult up(Material m)
+        public JsonResult up(Material mat)
         {
-            bool estado = _ProfesoresRepository.AgregarMaterial(m);
+            bool estado = _ProfesoresRepository.AgregarMaterial(mat);
             if (estado)
             {
-                return Json(new { status = estado, message = string.Format("El material {0} fue agregado con exito", m.Titulo) });
+                return Json(new { status = estado, message = string.Format("El material {0} fue agregado con exito", mat.Titulo) });
             }
             else
             {
-                return Json(new { status = estado, message = string.Format("El material {0} no pudo ser agregado", m.Titulo) });
+                return Json(new { status = estado, message = string.Format("El material {0} no pudo ser agregado", mat.Titulo) });
             }
         }
         public JsonResult GetMaterias(int idUniversidad, int idUsuario = 1)
@@ -98,6 +99,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult ListaAlumnoMateria(int idMat, int idCarrera)
         {
+            if (!ValidarTipoUsuario()) return View("Error");
             var lista2 = _ProfesoresRepository.GetAlumnosAgregadosMateria(idMat, idCarrera);
             var lista1 = _ProfesoresRepository.GetAlumnosNoagregadosByCarrera(idMat, idCarrera);
             lista2.AddRange(lista1);
@@ -114,6 +116,7 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         public JsonResult CarrerasDisponibles(int iduniversidad)
         {
+            if (!ValidarTipoUsuario()) return Json(new {status=401, message = "unauthorized" });
             int iduser = (int)HttpContext.Session.GetInt32("UserId");
             List<Carrera> lista = _ProfesoresRepository.GetCarrerasByUniversidadAndUser(iduser, iduniversidad);
             return Json(new SelectList(lista, "IdCarrera", "Carrera1"));
@@ -121,6 +124,7 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         public JsonResult MateriasDisponibles(int idcarrera, int iduniversidad)
         {
+            if (!ValidarTipoUsuario()) return Json(new { status = 401, message = "unauthorized" });
             int iduser = (int)HttpContext.Session.GetInt32("UserId");
             List<Materia> lista = _ProfesoresRepository.GetMateriasByUserAndCarreraAndUniversidad(iduser, idcarrera, iduniversidad);
             return Json(new SelectList(lista, "IdMateria", "Materia1"));
