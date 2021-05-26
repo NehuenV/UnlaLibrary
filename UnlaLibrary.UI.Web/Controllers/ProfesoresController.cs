@@ -6,9 +6,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text.Json;
-using System.IO;
-using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Security.Principal;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
 using UnlaLibrary.Data.Interface;
@@ -16,6 +15,7 @@ using UnlaLibrary.Data.Interfaces;
 using UnlaLibrary.Data.Models;
 using UnlaLibrary.UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using UnlaLibrary.Data.Utils;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
@@ -85,7 +85,8 @@ namespace UnlaLibrary.UI.Web.Controllers
        
         public IActionResult AlumnoMateria()
         {
-            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User)); 
             List<Universidad> lista = _ProfesoresRepository.GetUniverdadesByUsuario(iduser);
             ViewBag.Universidad = lista;
             return View();
@@ -100,21 +101,21 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         public IActionResult UniversidadesDisponibles()
         {
-            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             List<Universidad> lista =_ProfesoresRepository.GetUniverdadesByUsuario(iduser);
             return Json(new { universidades = lista });
         }
 
         public JsonResult CarrerasDisponibles(int iduniversidad)
         {
-            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             List<Carrera> lista = _ProfesoresRepository.GetCarrerasByUniversidadAndUser(iduser, iduniversidad);
             return Json(new SelectList(lista, "IdCarrera", "Carrera1"));
         }
 
         public JsonResult MateriasDisponibles(int idcarrera, int iduniversidad)
         {
-            int iduser = (int)HttpContext.Session.GetInt32("UserId");
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             List<Materia> lista = _ProfesoresRepository.GetMateriasByUserAndCarreraAndUniversidad(iduser, idcarrera, iduniversidad);
             return Json(new SelectList(lista, "IdMateria", "Materia1"));
         }
