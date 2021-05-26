@@ -27,14 +27,16 @@
                 return false;
 
         });
+
         function getFile(idinput) {
             var input = document.getElementById(idinput);
             var files = input.files;
             return files[0];
         }
-       
-        $("#form").click(function () {
-            debugger;
+
+        $("#form").submit(function (e) {
+            e.preventDefault();
+            //debugger;
             var formData = new FormData();
             var arc = getFile('Archivo');
             var min = getFile('Miniatura')
@@ -62,13 +64,28 @@
                     contentType: false,
                     type: "POST",
                     success: function (data) {
-                        alert("Files Uploaded!");
+                        var alertBody = $(`<div class='alert ${data.status ? 'alert-success' : 'alert-danger'} alert-dismissible fade show d-flex align-items-center' role='alert'></div>`);
+                        let alertIcon = $(`<i  class='fas ${data.status ? 'fa-check-circle' : 'fa-exclamation-triangle'} mx-2'></i>`);
+                        let alertText = $(`<div>${data.message}</div>`);
+                        let alertButton = $('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="cerrar(this)"></button>');
+                        alertBody.append(alertIcon, alertText, alertButton);
+                        $('#alertcontainer').append(alertBody);
+                        if (data.status) $('#form').trigger('reset');
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Error: " + errorThrown);
+                    },
+                    complete: function (data) {
+                        $('html, body').animate({ scrollTop: 0 }, 'fast');
                     }
                 }
             );
         });
 
     });
+    function cerrar(e) {
+        e.parentElement.classList.add('d-none');
+    }
 </script>
 
 <!DOCTYPE html>
@@ -80,9 +97,10 @@
 <body>
 
     <div class="d-flex flex-column align-items-center w-100 py-4">
+        <div class="position-absolute w-100 p-1 d-flex flex-column align-items-end" id="alertcontainer"></div>
         <h2 class="display-5 my-3">Agregar Material</h2>
 
-        <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r" enctype="multipart/form-data" >
+        <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r" enctype="multipart/form-data" id="form">
             <select class="form-select my-2" asp-for="Universidad" asp-items="@(new SelectList(ViewBag.Universidades,"IdUniversidad","NombreUniversidad") )"><option selected disabled>Seleccionar universidad</option></select>
 
             <select class="form-select my-2" asp-for="Materia">
@@ -117,7 +135,7 @@
             </div>
             <select class="form-select my-2" asp-for="Idioma" asp-items="@(new SelectList(ViewBag.Idioma,"IdIdioma","Idioma1") )">
             </select>
-            <button type="submit"  id="form" class="btn btn-primary my-2">Subir</button>
+            <button type="submit" class="btn btn-primary my-2">Subir</button>
         </form>
     </div>
 </body>
