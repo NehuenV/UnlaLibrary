@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using UnlaLibrary.UI.Web.Helper;
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -33,23 +34,29 @@
                             <a class="nav-link" aria-current="page" href="@Url.Action("Index", "Home")">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Catálogo</a>
+                            <a class="nav-link" aria-current="page" href="@Url.Action("Catalogo","Catalogo")">Catalogo</a>
                         </li>
+                        @if (SessionHelper.GetValue(User, "TipoDeUsuarioId") == "2")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("SubirMaterial","Profesores")">Gestionar Material</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("AlumnoMateria","Profesores")">Gestionar Alumnos</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Materias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
+                            <a class="nav-link" href="#">Nosotros</a>
                         </li>
                     </ul>
                     <div class="btn-group">
                         <button class="btn btn-outline-light me-2 rounded" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false" id="session">
-                            ...
+                            @User.Identity.Name
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Cuenta</a></li>
-                            <li><a class="dropdown-item" href="#">Favoritos</a></li>
+                            <li><a class="dropdown-item" href="#" disabled>Cuenta</a></li>
+                            <li><a class="dropdown-item" href="#" disabled>Favoritos</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("Logout", "Home")">Salir</a></li>
                         </ul>
                     </div>
@@ -61,8 +68,9 @@
     <footer class="bg-dark text-white p-3 d-flex justify-content-center">
         Datos del footer por acá
     </footer>
-    <script src="~/js/layout.js"></script>
     <script src="https://kit.fontawesome.com/a83f82191e.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -40,20 +40,12 @@ namespace UnlaLibrary.UI.Web.Controllers
             if (aut)
             {
                 string name = _login.GetName(login);
-                //CookieOptions cookieOptions = new CookieOptions();
-                //cookieOptions.Expires = DateTime.Now.AddDays(7);
-                //Response.Cookies.Append("name", name, cookieOptions);
-                //HttpContext.Session.SetInt32("UserId", _login.GetId(login));
-                //HttpContext.Session.SetInt32("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login));
-
-
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, _login.GetId(login).ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, name));
                 identity.AddClaim(new Claim("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login).ToString()));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddDays(1), IsPersistent =true});
-
                 return Json( new { status = aut, name = name, email = login.email, message ="Bienvenido " });
             }
             else
@@ -61,13 +53,10 @@ namespace UnlaLibrary.UI.Web.Controllers
                 return Json(new { status = aut, name = "", email = "", message = "Clave o usuario incorrecto " });
             }
         }
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            string cookieNameKey = "name";
-            CookieOptions cookieOptions = new CookieOptions();
-            cookieOptions.Expires = DateTime.Now.AddDays(-1);
-            Response.Cookies.Append(cookieNameKey, "", cookieOptions);
-            return View("Index");
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
