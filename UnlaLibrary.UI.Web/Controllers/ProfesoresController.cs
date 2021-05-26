@@ -15,11 +15,11 @@ using UnlaLibrary.Data.Interfaces;
 using UnlaLibrary.Data.Models;
 using UnlaLibrary.UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
-using UnlaLibrary.Data.Utils;
+using UnlaLibrary.UI.Web.Helper;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "UserType")]
     public class ProfesoresController : Controller
     {
         #region constructor

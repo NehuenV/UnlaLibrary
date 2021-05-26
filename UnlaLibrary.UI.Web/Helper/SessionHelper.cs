@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 
-namespace UnlaLibrary.Data.Utils
+namespace UnlaLibrary.UI.Web.Helper
 {
     public class SessionHelper
     {

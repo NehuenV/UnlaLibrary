@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Interface;
 using UnlaLibrary.Data.Interfaces;
 using UnlaLibrary.Data.Repositories;
+using UnlaLibrary.UI.Web.Helper;
 
 namespace UnlaLibrary.UI.Web
 {
@@ -29,7 +31,11 @@ namespace UnlaLibrary.UI.Web
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<ICatalogoRepository, CatalogoRepository>();
             services.AddScoped<IProfesoresRepository, ProfesoresRepository>();
-            
+
+            services.AddAuthorization( x=> x.AddPolicy("UserType", policy => policy.Requirements.Add(new UserType(2))));
+            services.AddSingleton<IAuthorizationHandler,UserTypeHandler>();
+
+
             services.AddDistributedMemoryCache();
             services.AddSession();
             services.AddRazorPages();
@@ -45,7 +51,7 @@ namespace UnlaLibrary.UI.Web
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-            }).AddCookie(options=> { options.LoginPath = "/Home/index"; }) ;
+            }).AddCookie(options=> { options.LoginPath = "/Home/index"; options.AccessDeniedPath = "/Home/index"; }) ;
 
 
 
