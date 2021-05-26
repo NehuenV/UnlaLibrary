@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
@@ -29,7 +32,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             return View();
         }
-        public IActionResult Login(Login login)
+        public async Task<IActionResult>Login(Login login)
         {
             
             var aut = _login.Authentication(login);
@@ -37,12 +40,20 @@ namespace UnlaLibrary.UI.Web.Controllers
             if (aut)
             {
                 string name = _login.GetName(login);
-                CookieOptions cookieOptions = new CookieOptions();
-                cookieOptions.Expires = DateTime.Now.AddDays(7);
-                Response.Cookies.Append("name", name, cookieOptions);
-                HttpContext.Session.SetInt32("UserId", _login.GetId(login));
-                HttpContext.Session.SetInt32("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login));
-                ViewBag.Nombre = name;
+                //CookieOptions cookieOptions = new CookieOptions();
+                //cookieOptions.Expires = DateTime.Now.AddDays(7);
+                //Response.Cookies.Append("name", name, cookieOptions);
+                //HttpContext.Session.SetInt32("UserId", _login.GetId(login));
+                //HttpContext.Session.SetInt32("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login));
+
+
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, _login.GetId(login).ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Name, name));
+                identity.AddClaim(new Claim("TipoDeUsuarioId", _login.GetIdTipoDeUsuario(login).ToString()));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddDays(1), IsPersistent =true});
+
                 return Json( new { status = aut, name = name, email = login.email, message ="Bienvenido " });
             }
             else

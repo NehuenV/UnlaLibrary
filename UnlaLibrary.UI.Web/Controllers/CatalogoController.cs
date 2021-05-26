@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -16,8 +17,10 @@ using UnlaLibrary.UI.Web.Models;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
+    [Authorize]
     public class CatalogoController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
         private readonly Library _Library;
         private readonly ICatalogoRepository _Catalogo;
@@ -28,29 +31,18 @@ namespace UnlaLibrary.UI.Web.Controllers
             _Library = Library;
             _Catalogo = Catalogo;
         }
-        public bool ValidarTipoUsuario()
-        {
-            var userType = HttpContext.Session.GetInt32("TipoDeUsuarioId");
-            if (userType != null)
-                return true;
-            return false;
-        }
-
         public IActionResult Catalogo()
         {
-            if (!ValidarTipoUsuario()) return View("Error");
             return View();
         }
         public IActionResult ListaCatalogo(string texto)
         {
-            if (!ValidarTipoUsuario()) return View("Error");
             var cat = texto == null ? _Catalogo.GetCatalogo() : _Catalogo.GetCatalogo(texto);
             ViewBag.Catalogo = cat;
             return View(cat);
         }
         public IActionResult Detalle(int id)
         {
-            if (!ValidarTipoUsuario()) return View("Error");
             var detalle = _Catalogo.GetMaterial(id);
             ViewBag.Detalle = detalle;
             return View(detalle);
