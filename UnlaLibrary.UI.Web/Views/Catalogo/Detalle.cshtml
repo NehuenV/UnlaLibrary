@@ -19,13 +19,12 @@
                 <a href="#" onclick="history.go(-1); return false;" class="col-1 h-100 d-flex justify-content-center align-items-center p-0 p-sm-3 p-lg-4">
                     <img src="/images/left-arrow.png" alt="Volver" class="w-100" />
                 </a>
-                <form class="d-flex align-items-center justify-content-center flex-column col ">
+                <form class="d-flex align-items-center justify-content-center flex-column col"
+                      asp-controller="Catalogo" asp-action="CatalogoCargado" method="post">
                     <div class="form-group d-flex search-bar font-raleway">
-                        <input type="search" maxlength="50" placeholder="¿Qué desea buscar?" />
+                        <input type="search" maxlength="50" placeholder="¿Qué desea buscar?" name="texto" id="texto"/>
                         <select>
-                            <option selected>Título</option>
-                            <option>Palabra clave</option>
-                            <option>Autor</option>
+                            <option selected>Todas las materias</option>
                         </select>
                         <button type="submit">
                             <img src="/images/search.png" alt="buscar" />

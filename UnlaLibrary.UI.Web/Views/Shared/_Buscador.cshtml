@@ -1,14 +1,17 @@
-﻿    <div class="w-100 banner d-flex flex-column justify-content-end align-items-center">
-        <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-            <h2 class="page-title">CATÁLOGO</h2>
-        </div>
-        <form class="d-flex flex-column font-raleway" onsubmit="return false">
-            <div class="form-group d-flex w-100 search-bar">
-                <input type="search" maxlength="50" id="buscador" name="buscador" placeholder="¿Qué desea buscar?" />
-                <select>
-                    <option selected disabled>Todas las materias</option> 
-                </select>
-                <button type="submit" id="ajaxform">Buscar</button>
-            </div>
-        </form>
+﻿@{
+    var texto = ViewData["texto"];
+}
+<div class="w-100 banner d-flex flex-column justify-content-end align-items-center">
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <h2 class="page-title">CATÁLOGO</h2>
     </div>
+    <form class="d-flex flex-column font-raleway" onsubmit="return false">
+        <div class="form-group d-flex w-100 search-bar">
+            <input type="search" maxlength="50" id="buscador" name="buscador" placeholder="¿Qué desea buscar?" value="@texto" />
+            <select>
+                <option selected disabled>Todas las materias</option>
+            </select>
+            <button type="submit" id="ajaxform">Buscar</button>
+        </div>
+    </form>
+</div>

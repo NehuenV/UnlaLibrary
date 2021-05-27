@@ -43,6 +43,13 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewBag.Catalogo = cat;
             return View(cat);
         }
+
+        public IActionResult CatalogoCargado(string texto)
+        {
+            ViewData["texto"] = texto;
+            return View("Catalogo");
+        }
+
         public IActionResult Detalle(int id)
         {
             var detalle = _Catalogo.GetMaterial(id);

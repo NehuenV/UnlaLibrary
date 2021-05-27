@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
 @{
     ViewData["Title"] = "Catalogo";
+    var texto = ViewData["texto"];
     @if (User.Identity.IsAuthenticated)
     {
         Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
@@ -15,25 +16,24 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-
-            $('#ajaxform').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '/Catalogo/ListaCatalogo',
-                    data: {
-                        texto: $('#buscador').val()
-                    },
-                    success: function (result) {
-                        $('#Results').html(result);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
-                    }
-                });
-            });
-
-
+            function search() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Catalogo/ListaCatalogo',
+                        data: {
+                            texto: $('#buscador').val()
+                        },
+                        success: function (result) {
+                            $('#Results').html(result);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log("Status: " + textStatus);
+                            alert("Error: " + errorThrown);
+                        }
+                    });
+            }
+            $('#ajaxform').click(search);
+            if ('@texto'.length > 0) search();
         });
 
     </script>
@@ -55,7 +55,7 @@
         <div class="w-100 d-flex justify-content-center pb-3">
             <div class="w-75r table-responsive">
                 @*<p class="font-raleway fs-4 fw-bold">10 Recursos encontrados</p>*@
-                <div id="Results"></div>
+                <div id="Results">@texto</div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
