@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using UnlaLibrary.Data.Context;
 using UnlaLibrary.Data.Entities;
 using UnlaLibrary.Data.Interface;
+using UnlaLibrary.UI.Web.Helper;
 using UnlaLibrary.UI.Web.Models;
 
 namespace UnlaLibrary.UI.Web.Controllers
@@ -37,7 +38,8 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult ListaCatalogo(string texto)
         {
-            var cat = texto == null ? _Catalogo.GetCatalogo() : _Catalogo.GetCatalogo(texto);
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            var cat = texto == null ? _Catalogo.GetCatalogo(iduser) : _Catalogo.GetCatalogo(texto, iduser);
             ViewBag.Catalogo = cat;
             return View(cat);
         }
