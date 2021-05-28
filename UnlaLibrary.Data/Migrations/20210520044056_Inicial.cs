@@ -151,8 +151,8 @@ namespace UnlaLibrary.Data.Migrations
                     IdMaterial = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     titulo = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    prologo = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
+                    descripcion = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 45, nullable: false),
+                    prologo = table.Column<string>(type: "varchar(1250)", unicode: false, maxLength: 45, nullable: false),
                     autor = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
                     archivo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     miniatura = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
