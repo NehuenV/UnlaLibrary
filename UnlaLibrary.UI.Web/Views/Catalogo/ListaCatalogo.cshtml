@@ -2,48 +2,26 @@
     Layout = "";
 }
 @model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
-<table class="table table-hover table-striped w-100 border border-secondary">
-    <thead>
-        <tr class="table-dark">
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Autor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdMateriaNavigation.Materia1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdIdiomaNavigation.Idioma1)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="w-100 d-flex justify-content-center pb-3">
+    <ul class="d-flex flex-row flex-wrap">
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                <a href="@Url.Action("Detalle","Catalogo", new { id = item.IdMaterial})">
-                    @Html.DisplayFor(modelItem => item.Titulo)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Autor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdMateriaNavigation.Materia1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdIdiomaNavigation.Idioma1)
-            </td>
-        </tr>
+            <li class="m-2">
+                <a href="@Url.Action("Detalle", "Catalogo", new { id = item.IdMaterial })">
+                    <div class="card2">
+                        <div class="card2__image" style="background-image: url('data:image;base64,@Convert.ToBase64String(item.Miniatura)')"></div>
+                        <div class="card2__details">
+                            <h6 class="card2__title">@Html.DisplayFor(modelItem => item.Titulo)</h6>
+                            <p class="card2__author">@Html.DisplayFor(modelItem => item.Autor)</p>
+                            <div class="card2__extra">
+                                <span class="card2__asignature">@Html.DisplayFor(modelItem => item.IdMateriaNavigation.Materia1)</span>
+                                @{  var idiomaIcono = "/images/idiomas/" + item.IdIdioma + ".png"; }
+                                <img src=@idiomaIcono alt="" class="card2__languaje" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
         }
-    </tbody>
-</table>
+    </ul>
+</div>

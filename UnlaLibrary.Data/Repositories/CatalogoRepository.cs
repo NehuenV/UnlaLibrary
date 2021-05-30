@@ -99,7 +99,10 @@ namespace UnlaLibrary.Data.Repositories
 
         public MaterialEstudio GetMaterial(int id)
         {
-            return _Library.MaterialEstudio.Include(p => p.IdMateriaNavigation).Where(x => x.IdMaterial==id).FirstOrDefault();
+            return _Library.MaterialEstudio
+                .Include(p => p.IdMateriaNavigation)
+                .Include(p=> p.IdIdiomaNavigation)
+                .Where(x => x.IdMaterial==id).FirstOrDefault();
         }
 
     }
