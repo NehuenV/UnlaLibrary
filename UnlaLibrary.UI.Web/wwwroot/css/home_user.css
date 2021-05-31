@@ -268,3 +268,24 @@ a {
 .card2__languaje {
     height: 70%;
 }
+
+.button_remove {
+    text-decoration: underline !important;
+    color: rgba(255, 30, 30, 0.8);
+    display: block;
+    border-style: none;
+    display: inline;
+    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-style: none;
+    border-radius: 50% 50% 0 0;
+    transition-duration: 0.4s;
+    text-decoration-color: transparent !important;
+    padding: 0 3pt;
+}
+
+    .button_remove:hover {
+        background-color: rgba(0, 0, 0, 0.95);
+        color: rgb(255, 0, 0);
+        cursor: pointer;
+    }

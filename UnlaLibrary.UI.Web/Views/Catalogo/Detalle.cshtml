@@ -74,8 +74,9 @@
                             </a>
 
                             <button type="button" class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Agregar a favoritos">
-                                <i class="fas fa-heart text-danger fs-1"></i>
+                                    title="Agregar a la biblioteca" data-idMaterial="@Model.IdMaterial" 
+                                    data-enbiblioteca="false" onclick="cambiarEstado(this)" id="botonBibliteca">
+                                <i class="fas fa-heart fs-1 text-secondary "></i>
                             </button>
                             <button type="button" class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Compartir">
@@ -92,6 +93,22 @@
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a83f82191e.js" crossorigin="anonymous"></script>
+    <script>
+        function cambiarEstado(button) {
+            // alterna colores
+            button.firstElementChild.classList.toggle('text-danger')
+            button.firstElementChild.classList.toggle('text-secondary')
+
+            let enbiblioteca = button.dataset.enbiblioteca == "true";
+            button.dataset.enbiblioteca = !enbiblioteca;
+            $('#botonBibliteca').attr('title', enbiblioteca ? 'Agregar a la bibliteca' : 'Remover de la bibliteca');
+
+            //¿puede servir ▼?
+            //let idMaterial = button.dataset.idmaterial;
+            //if (agregado) {} else {}
+        }
+    
+    </script>
 </body>
 
 </html>
