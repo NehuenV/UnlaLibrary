@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UnlaLibrary.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -151,15 +151,16 @@ namespace UnlaLibrary.Data.Migrations
                     IdMaterial = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     titulo = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 45, nullable: false),
-                    prologo = table.Column<string>(type: "varchar(1250)", unicode: false, maxLength: 45, nullable: false),
+                    descripcion = table.Column<string>(type: "varchar(180)", unicode: false, maxLength: 180, nullable: false),
+                    prologo = table.Column<string>(type: "varchar(1250)", unicode: false, maxLength: 1250, nullable: false),
                     autor = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
                     archivo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     miniatura = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     idIdioma = table.Column<int>(type: "int", nullable: false),
                     idUsuario = table.Column<int>(type: "int", nullable: false),
                     idMateria = table.Column<int>(type: "int", nullable: false),
-                    idUniversidad = table.Column<int>(type: "int", nullable: false)
+                    idUniversidad = table.Column<int>(type: "int", nullable: false),
+                    tipoArchivo = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,13 +247,37 @@ namespace UnlaLibrary.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Favoritos",
+                columns: table => new
+                {
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    idMaterial = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favoritos", x => new { x.idUsuario, x.idMaterial });
+                    table.ForeignKey(
+                        name: "FK_Favoritos_MaterialEstudio",
+                        column: x => x.idMaterial,
+                        principalTable: "MaterialEstudio",
+                        principalColumn: "IdMaterial",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Favoritos_Usuario",
+                        column: x => x.idUsuario,
+                        principalTable: "Usuario",
+                        principalColumn: "idUsuario",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reseña",
                 columns: table => new
                 {
                     idReseña = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    comentario = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: false),
-                    puntuacion = table.Column<int>(type: "int", nullable: false),
+                    comentario = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: true),
+                    puntuacion = table.Column<int>(type: "int", nullable: true),
                     idMaterial = table.Column<int>(type: "int", nullable: false),
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                 },
@@ -277,6 +302,11 @@ namespace UnlaLibrary.Data.Migrations
                 name: "IX_CarreraMateria_idMateria",
                 table: "CarreraMateria",
                 column: "idMateria");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favoritos_idMaterial",
+                table: "Favoritos",
+                column: "idMaterial");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MaterialEstudio_idIdioma",
@@ -338,6 +368,9 @@ namespace UnlaLibrary.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CarreraMateria");
+
+            migrationBuilder.DropTable(
+                name: "Favoritos");
 
             migrationBuilder.DropTable(
                 name: "Reseña");

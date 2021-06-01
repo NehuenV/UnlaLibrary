@@ -20,6 +20,7 @@ namespace UnlaLibrary.Data.Context
 
         public virtual DbSet<Carrera> Carrera { get; set; }
         public virtual DbSet<CarreraMateria> CarreraMateria { get; set; }
+        public virtual DbSet<Favoritos> Favoritos { get; set; }
         public virtual DbSet<Idioma> Idioma { get; set; }
         public virtual DbSet<Materia> Materia { get; set; }
         public virtual DbSet<MaterialEstudio> MaterialEstudio { get; set; }
@@ -33,6 +34,10 @@ namespace UnlaLibrary.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=DESKTOP-1LSVL80;Database=UnlaLibrary2.0;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +61,8 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => new { e.IdCarrera, e.IdMateria });
 
+                entity.HasIndex(e => e.IdMateria, "IX_CarreraMateria_idMateria");
+
                 entity.Property(e => e.IdCarrera).HasColumnName("idCarrera");
 
                 entity.Property(e => e.IdMateria).HasColumnName("idMateria");
@@ -71,6 +78,27 @@ namespace UnlaLibrary.Data.Context
                     .HasForeignKey(d => d.IdMateria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CarreraMateria_Materia");
+            });
+
+            modelBuilder.Entity<Favoritos>(entity =>
+            {
+                entity.HasKey(e => new { e.IdUsuario, e.IdMaterial });
+
+                entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
+
+                entity.Property(e => e.IdMaterial).HasColumnName("idMaterial");
+
+                entity.HasOne(d => d.IdMaterialNavigation)
+                    .WithMany(p => p.Favoritos)
+                    .HasForeignKey(d => d.IdMaterial)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Favoritos_MaterialEstudio");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Favoritos)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Favoritos_Usuario");
             });
 
             modelBuilder.Entity<Idioma>(entity =>
@@ -103,6 +131,14 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => e.IdMaterial);
 
+                entity.HasIndex(e => e.IdIdioma, "IX_MaterialEstudio_idIdioma");
+
+                entity.HasIndex(e => e.IdMateria, "IX_MaterialEstudio_idMateria");
+
+                entity.HasIndex(e => e.IdUniversidad, "IX_MaterialEstudio_idUniversidad");
+
+                entity.HasIndex(e => e.IdUsuario, "IX_MaterialEstudio_idUsuario");
+
                 entity.Property(e => e.Archivo)
                     .IsRequired()
                     .HasColumnName("archivo");
@@ -115,7 +151,7 @@ namespace UnlaLibrary.Data.Context
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(45)
+                    .HasMaxLength(180)
                     .IsUnicode(false)
                     .HasColumnName("descripcion");
 
@@ -133,9 +169,14 @@ namespace UnlaLibrary.Data.Context
 
                 entity.Property(e => e.Prologo)
                     .IsRequired()
-                    .HasMaxLength(45)
+                    .HasMaxLength(1250)
                     .IsUnicode(false)
                     .HasColumnName("prologo");
+
+                entity.Property(e => e.TipoArchivo)
+                    .IsRequired()
+                    .HasMaxLength(3)
+                    .HasColumnName("tipoArchivo");
 
                 entity.Property(e => e.Titulo)
                     .IsRequired()
@@ -172,10 +213,13 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => e.IdReseña);
 
+                entity.HasIndex(e => e.IdMaterial, "IX_Reseña_idMaterial");
+
+                entity.HasIndex(e => e.IdUsuario, "IX_Reseña_idUsuario");
+
                 entity.Property(e => e.IdReseña).HasColumnName("idReseña");
 
                 entity.Property(e => e.Comentario)
-                    .IsRequired()
                     .HasMaxLength(45)
                     .IsUnicode(false)
                     .HasColumnName("comentario");
@@ -229,6 +273,8 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => new { e.IdUniversidad, e.IdCarrera });
 
+                entity.HasIndex(e => e.IdCarrera, "IX_UniversidadCarrera_idCarrera");
+
                 entity.Property(e => e.IdUniversidad).HasColumnName("idUniversidad");
 
                 entity.Property(e => e.IdCarrera).HasColumnName("idCarrera");
@@ -249,6 +295,8 @@ namespace UnlaLibrary.Data.Context
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario);
+
+                entity.HasIndex(e => e.IdTipoUsuario, "IX_Usuario_idTipoUsuario");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 
@@ -295,6 +343,10 @@ namespace UnlaLibrary.Data.Context
             {
                 entity.HasKey(e => new { e.IdUsuario, e.IdCarrera, e.IdUniversidad });
 
+                entity.HasIndex(e => e.IdCarrera, "IX_UsuarioCarreraUniversidad_idCarrera");
+
+                entity.HasIndex(e => e.IdUniversidad, "IX_UsuarioCarreraUniversidad_idUniversidad");
+
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 
                 entity.Property(e => e.IdCarrera).HasColumnName("idCarrera");
@@ -323,6 +375,8 @@ namespace UnlaLibrary.Data.Context
             modelBuilder.Entity<UsuarioMateria>(entity =>
             {
                 entity.HasKey(e => new { e.IdUsuario, e.IdMateria });
+
+                entity.HasIndex(e => e.IdMateria, "IX_UsuarioMateria_idMateria");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 

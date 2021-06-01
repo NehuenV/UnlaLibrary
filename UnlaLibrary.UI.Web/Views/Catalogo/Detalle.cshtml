@@ -61,22 +61,31 @@
                             <figcaption>4.5 estrellas de 15 calificaciones</figcaption>
                         </figure>
                         <div class="w-100 justify-content-center d-flex">
-                            <a href="@Url.Action("ViewFile","Catalogo", new { id = Model.IdMaterial})" target="_nblank" class="text-decoration-none">
+                            <a href="@Url.Action("ViewFile", "Catalogo", new { id = Model.IdMaterial })" target="_nblank" class="text-decoration-none">
                                 <span class="button__visualizar">
                                     VISUALIZAR
                                 </span>
                             </a>
                         </div>
                         <div class="d-flex flex-row justify-content-center">
-                            <a href="@Url.Action("DownloadFile","Catalogo", new { id = Model.IdMaterial})" target="_nblank"
+                            <a href="@Url.Action("DownloadFile", "Catalogo", new { id = Model.IdMaterial })" target="_nblank"
                                class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Descargar">
                                 <i class="fas fa-file-download text-success fs-1"></i>
                             </a>
+                            @{
+                                var clase = "fas fa-heart fs-1 text-secondary ";
+                                var title = "Agregar a la bibliteca";
+                                if ((bool)ViewData["Fav"])
+                                {
+                                    clase = "fas fa-heart fs-1 text-danger";
+                                    title = "Remover de la bibliteca";
+                                }
 
+                            }
                             <button type="button" class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    title="Agregar a la biblioteca" data-idMaterial="@Model.IdMaterial" 
-                                    data-enbiblioteca="false" onclick="cambiarEstado(this)" id="botonBibliteca">
-                                <i class="fas fa-heart fs-1 text-secondary "></i>
+                                    title="@title" data-idMaterial="@Model.IdMaterial"
+                                    data-enbiblioteca="@ViewData["Fav"]" onclick="cambiarEstado(this)" id="botonBibliteca">
+                                <i class="@clase"></i>
                             </button>
                             <button type="button" class="no-button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="Compartir">
@@ -96,18 +105,32 @@
     <script>
         function cambiarEstado(button) {
             // alterna colores
+            debugger;
             button.firstElementChild.classList.toggle('text-danger')
             button.firstElementChild.classList.toggle('text-secondary')
 
-            let enbiblioteca = button.dataset.enbiblioteca == "true";
-            button.dataset.enbiblioteca = !enbiblioteca;
-            $('#botonBibliteca').attr('title', enbiblioteca ? 'Agregar a la bibliteca' : 'Remover de la bibliteca');
+            $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("ModificarFav", "Biblioteca")", // we are calling json method
+                    dataType: 'json',
+                    data: {
+                        idMaterial: @Model.IdMaterial
+                    },
+                    success: function (data) {
+                        button.dataset.enbiblioteca = !enbiblioteca;
+                        $('#botonBibliteca').attr('title', enbiblioteca ? 'Agregar a la bibliteca' : 'Remover de la bibliteca');
+                    }
+            });
+            return false;
+
+            //let enbiblioteca = button.dataset.enbiblioteca == "true";
+
 
             //¿puede servir ▼?
             //let idMaterial = button.dataset.idmaterial;
             //if (agregado) {} else {}
         }
-    
+
     </script>
 </body>
 

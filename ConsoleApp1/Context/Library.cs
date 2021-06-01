@@ -57,7 +57,7 @@ namespace ConsoleApp1.Context
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(45)
+                    .HasMaxLength(180)
                     .IsUnicode(false)
                     .HasColumnName("descripcion");
 
@@ -75,9 +75,14 @@ namespace ConsoleApp1.Context
 
                 entity.Property(e => e.Prologo)
                     .IsRequired()
-                    .HasMaxLength(45)
+                    .HasMaxLength(1250)
                     .IsUnicode(false)
                     .HasColumnName("prologo");
+
+                entity.Property(e => e.TipoArchivo)
+                    .IsRequired()
+                    .HasMaxLength(3)
+                    .HasColumnName("tipoArchivo");
 
                 entity.Property(e => e.Titulo)
                     .IsRequired()

@@ -25,12 +25,14 @@ namespace UnlaLibrary.UI.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly Library _Library;
         private readonly ICatalogoRepository _Catalogo;
+        private readonly IBibliotecaRepository _Biblioteca;
 
-        public BibliotecaController(ILogger<HomeController> logger, Library Library, ICatalogoRepository Catalogo)
+        public BibliotecaController(ILogger<HomeController> logger, Library Library, ICatalogoRepository Catalogo, IBibliotecaRepository Biblioteca)
         {
             _logger = logger;
             _Library = Library;
             _Catalogo = Catalogo;
+            _Biblioteca = Biblioteca;
         }
         public IActionResult Biblioteca()
         {
@@ -41,6 +43,12 @@ namespace UnlaLibrary.UI.Web.Controllers
             return View(cat);
         }
         
+        public JsonResult ModificarFav(int idMaterial)
+        {
+            int idUser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            var r = _Biblioteca.ModificarFavoritos(idMaterial, idUser);
+            return Json(new { status = r });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

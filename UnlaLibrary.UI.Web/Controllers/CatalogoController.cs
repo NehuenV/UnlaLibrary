@@ -25,12 +25,14 @@ namespace UnlaLibrary.UI.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly Library _Library;
         private readonly ICatalogoRepository _Catalogo;
+        private readonly IBibliotecaRepository _Biblioteca;
 
-        public CatalogoController(ILogger<HomeController> logger, Library Library, ICatalogoRepository Catalogo)
+        public CatalogoController(ILogger<HomeController> logger, Library Library, ICatalogoRepository Catalogo, IBibliotecaRepository Biblioteca)
         {
             _logger = logger;
             _Library = Library;
             _Catalogo = Catalogo;
+            _Biblioteca = Biblioteca;
         }
         public IActionResult Catalogo()
         {
@@ -53,7 +55,8 @@ namespace UnlaLibrary.UI.Web.Controllers
         public IActionResult Detalle(int id)
         {
             var detalle = _Catalogo.GetMaterial(id);
-            ViewBag.Detalle = detalle;
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            ViewData["Fav"] = _Biblioteca.GetFavorito(id, iduser)!=null ? true : false ;
             return View(detalle);
         }
         public FileResult DownloadFile(int id)

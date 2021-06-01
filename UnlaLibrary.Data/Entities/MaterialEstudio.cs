@@ -9,6 +9,7 @@ namespace UnlaLibrary.Data.Entities
     {
         public MaterialEstudio()
         {
+            Favoritos = new HashSet<Favoritos>();
             Reseña = new HashSet<Reseña>();
         }
 
@@ -23,11 +24,13 @@ namespace UnlaLibrary.Data.Entities
         public int IdUsuario { get; set; }
         public int IdMateria { get; set; }
         public int IdUniversidad { get; set; }
+        public string TipoArchivo { get; set; }
 
         public virtual Idioma IdIdiomaNavigation { get; set; }
         public virtual Materia IdMateriaNavigation { get; set; }
         public virtual Universidad IdUniversidadNavigation { get; set; }
         public virtual Usuario IdUsuarioNavigation { get; set; }
+        public virtual ICollection<Favoritos> Favoritos { get; set; }
         public virtual ICollection<Reseña> Reseña { get; set; }
     }
 }

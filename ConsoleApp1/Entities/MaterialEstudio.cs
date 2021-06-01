@@ -18,5 +18,6 @@ namespace ConsoleApp1.Entities
         public int IdUsuario { get; set; }
         public int IdMateria { get; set; }
         public int IdUniversidad { get; set; }
+        public string TipoArchivo { get; set; }
     }
 }

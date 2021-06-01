@@ -10,8 +10,8 @@ using UnlaLibrary.Data.Context;
 namespace UnlaLibrary.Data.Migrations
 {
     [DbContext(typeof(Library))]
-    [Migration("20210520190414_datos")]
-    partial class datos
+    [Migration("20210601013919_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,9 +54,26 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdCarrera", "IdMateria");
 
-                    b.HasIndex("IdMateria");
+                    b.HasIndex(new[] { "IdMateria" }, "IX_CarreraMateria_idMateria");
 
                     b.ToTable("CarreraMateria");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Favoritos", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int")
+                        .HasColumnName("idUsuario");
+
+                    b.Property<int>("IdMaterial")
+                        .HasColumnType("int")
+                        .HasColumnName("idMaterial");
+
+                    b.HasKey("IdUsuario", "IdMaterial");
+
+                    b.HasIndex("IdMaterial");
+
+                    b.ToTable("Favoritos");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Idioma", b =>
@@ -120,9 +137,9 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasMaxLength(45)
+                        .HasMaxLength(180)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(45)")
+                        .HasColumnType("varchar(180)")
                         .HasColumnName("descripcion");
 
                     b.Property<int>("IdIdioma")
@@ -148,10 +165,16 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.Property<string>("Prologo")
                         .IsRequired()
-                        .HasMaxLength(45)
+                        .HasMaxLength(1250)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(45)")
+                        .HasColumnType("varchar(1250)")
                         .HasColumnName("prologo");
+
+                    b.Property<string>("TipoArchivo")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)")
+                        .HasColumnName("tipoArchivo");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -162,13 +185,13 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdMaterial");
 
-                    b.HasIndex("IdIdioma");
+                    b.HasIndex(new[] { "IdIdioma" }, "IX_MaterialEstudio_idIdioma");
 
-                    b.HasIndex("IdMateria");
+                    b.HasIndex(new[] { "IdMateria" }, "IX_MaterialEstudio_idMateria");
 
-                    b.HasIndex("IdUniversidad");
+                    b.HasIndex(new[] { "IdUniversidad" }, "IX_MaterialEstudio_idUniversidad");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex(new[] { "IdUsuario" }, "IX_MaterialEstudio_idUsuario");
 
                     b.ToTable("MaterialEstudio");
                 });
@@ -182,7 +205,6 @@ namespace UnlaLibrary.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comentario")
-                        .IsRequired()
                         .HasMaxLength(45)
                         .IsUnicode(false)
                         .HasColumnType("varchar(45)")
@@ -196,15 +218,15 @@ namespace UnlaLibrary.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idUsuario");
 
-                    b.Property<int>("Puntuacion")
+                    b.Property<int?>("Puntuacion")
                         .HasColumnType("int")
                         .HasColumnName("puntuacion");
 
                     b.HasKey("IdReseña");
 
-                    b.HasIndex("IdMaterial");
+                    b.HasIndex(new[] { "IdMaterial" }, "IX_Reseña_idMaterial");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex(new[] { "IdUsuario" }, "IX_Reseña_idUsuario");
 
                     b.ToTable("Reseña");
                 });
@@ -261,7 +283,7 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdUniversidad", "IdCarrera");
 
-                    b.HasIndex("IdCarrera");
+                    b.HasIndex(new[] { "IdCarrera" }, "IX_UniversidadCarrera_idCarrera");
 
                     b.ToTable("UniversidadCarrera");
                 });
@@ -315,7 +337,7 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdUsuario");
 
-                    b.HasIndex("IdTipoUsuario");
+                    b.HasIndex(new[] { "IdTipoUsuario" }, "IX_Usuario_idTipoUsuario");
 
                     b.ToTable("Usuario");
                 });
@@ -336,9 +358,9 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdUsuario", "IdCarrera", "IdUniversidad");
 
-                    b.HasIndex("IdCarrera");
+                    b.HasIndex(new[] { "IdCarrera" }, "IX_UsuarioCarreraUniversidad_idCarrera");
 
-                    b.HasIndex("IdUniversidad");
+                    b.HasIndex(new[] { "IdUniversidad" }, "IX_UsuarioCarreraUniversidad_idUniversidad");
 
                     b.ToTable("UsuarioCarreraUniversidad");
                 });
@@ -355,7 +377,7 @@ namespace UnlaLibrary.Data.Migrations
 
                     b.HasKey("IdUsuario", "IdMateria");
 
-                    b.HasIndex("IdMateria");
+                    b.HasIndex(new[] { "IdMateria" }, "IX_UsuarioMateria_idMateria");
 
                     b.ToTable("UsuarioMateria");
                 });
@@ -377,6 +399,25 @@ namespace UnlaLibrary.Data.Migrations
                     b.Navigation("IdCarreraNavigation");
 
                     b.Navigation("IdMateriaNavigation");
+                });
+
+            modelBuilder.Entity("UnlaLibrary.Data.Entities.Favoritos", b =>
+                {
+                    b.HasOne("UnlaLibrary.Data.Entities.MaterialEstudio", "IdMaterialNavigation")
+                        .WithMany("Favoritos")
+                        .HasForeignKey("IdMaterial")
+                        .HasConstraintName("FK_Favoritos_MaterialEstudio")
+                        .IsRequired();
+
+                    b.HasOne("UnlaLibrary.Data.Entities.Usuario", "IdUsuarioNavigation")
+                        .WithMany("Favoritos")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("FK_Favoritos_Usuario")
+                        .IsRequired();
+
+                    b.Navigation("IdMaterialNavigation");
+
+                    b.Navigation("IdUsuarioNavigation");
                 });
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.MaterialEstudio", b =>
@@ -534,6 +575,8 @@ namespace UnlaLibrary.Data.Migrations
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.MaterialEstudio", b =>
                 {
+                    b.Navigation("Favoritos");
+
                     b.Navigation("Reseña");
                 });
 
@@ -553,6 +596,8 @@ namespace UnlaLibrary.Data.Migrations
 
             modelBuilder.Entity("UnlaLibrary.Data.Entities.Usuario", b =>
                 {
+                    b.Navigation("Favoritos");
+
                     b.Navigation("MaterialEstudio");
 
                     b.Navigation("Reseña");
