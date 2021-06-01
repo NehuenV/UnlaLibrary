@@ -62,8 +62,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             var detalle = _Catalogo.GetMaterial(id);
             ViewBag.Materias = _Catalogo.GetMaterias(iduser);
-            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            ViewData["Fav"] = _Biblioteca.GetFavorito(id, iduser)!=null ? true : false ;
+            ViewData["Fav"] = _Biblioteca.GetFavorito(iduser, id)!=null ? true : false ;
             return View(detalle);
         }
         public FileResult DownloadFile(int id)

@@ -103,12 +103,10 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a83f82191e.js" crossorigin="anonymous"></script>
     <script>
-        function cambiarEstado(button) {
+         function cambiarEstado(button) {
             // alterna colores
-            debugger;
             button.firstElementChild.classList.toggle('text-danger')
             button.firstElementChild.classList.toggle('text-secondary')
-
             $.ajax({
                     type: 'POST',
                     url: "@Url.Action("ModificarFav", "Biblioteca")", // we are calling json method
@@ -116,19 +114,14 @@
                     data: {
                         idMaterial: @Model.IdMaterial
                     },
-                    success: function (data) {
+                success: function (data) {
+                        let enbiblioteca = button.dataset.enbiblioteca == "True";
                         button.dataset.enbiblioteca = !enbiblioteca;
                         $('#botonBibliteca').attr('title', enbiblioteca ? 'Agregar a la bibliteca' : 'Remover de la bibliteca');
                     }
             });
             return false;
-
-            //let enbiblioteca = button.dataset.enbiblioteca == "true";
-
-
-            //¿puede servir ▼?
-            //let idMaterial = button.dataset.idmaterial;
-    
+        }
     </script>
 </body>
 
