@@ -34,25 +34,32 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public IActionResult Catalogo()
         {
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            ViewBag.Materias = _Catalogo.GetMaterias(iduser);
             return View();
         }
-        public IActionResult ListaCatalogo(string texto)
+        public IActionResult ListaCatalogo(string texto, int idmateria)
         {
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            var cat = texto == null ? _Catalogo.GetCatalogo(iduser) : _Catalogo.GetCatalogo(texto, iduser);
+            var cat =  _Catalogo.GetCatalogo(iduser, texto, idmateria);
             ViewBag.Catalogo = cat;
             return View(cat);
         }
 
-        public IActionResult CatalogoCargado(string texto)
+        public IActionResult CatalogoCargado(string texto, int idmateria)
         {
             ViewData["texto"] = texto;
+            ViewData["idmateria"] = idmateria;
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            ViewBag.Materias = _Catalogo.GetMaterias(iduser);
             return View("Catalogo");
         }
 
         public IActionResult Detalle(int id)
         {
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             var detalle = _Catalogo.GetMaterial(id);
+            ViewBag.Materias = _Catalogo.GetMaterias(iduser);
             ViewBag.Detalle = detalle;
             return View(detalle);
         }

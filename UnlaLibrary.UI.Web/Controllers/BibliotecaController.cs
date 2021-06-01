@@ -36,7 +36,7 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             // valores de prueba, quitar luego
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            var cat = _Catalogo.GetCatalogo(iduser);
+            var cat = _Catalogo.GetCatalogo(iduser, "", 1);
             ViewBag.Catalogo = cat;
             return View(cat);
         }
