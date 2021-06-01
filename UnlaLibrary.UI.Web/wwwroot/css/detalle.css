@@ -204,3 +204,12 @@ form {
         width: 70%;
     }
 }
+
+#idmateria {
+    width: 30% !important;
+}
+@media (max-width: 768px) {
+    #idmateria {
+        display: none;
+    }
+}

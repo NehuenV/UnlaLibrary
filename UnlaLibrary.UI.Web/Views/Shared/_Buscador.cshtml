@@ -7,9 +7,9 @@
     </div>
     <form class="d-flex flex-column font-raleway" onsubmit="return false">
         <div class="form-group d-flex w-100 search-bar">
-            <input type="search" maxlength="50" id="buscador" name="buscador" placeholder="¿Qué desea buscar?" value="@texto" />
-            <select disabled>
-                <option selected>Todas las materias</option>
+            <input type="search" maxlength="50" id="buscador" name="buscador" placeholder="¿Qué desea buscar?" value="@texto" class="form-control" />
+            <select asp-items="@(new SelectList(ViewBag.Materias,"IdMateria","Materia1") )" class="form-select w-50 selectmateria" id="materia">
+                <option selected value="0">Todas las materias</option>
             </select>
             <button type="submit" id="ajaxform">Buscar</button>
         </div>

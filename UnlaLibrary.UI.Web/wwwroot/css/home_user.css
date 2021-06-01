@@ -289,3 +289,15 @@ a {
         color: rgb(255, 0, 0);
         cursor: pointer;
     }
+
+.input_buscador {
+    width: 70%
+}
+.selectmateria {
+    border-radius: 0 !important;
+}
+@media (max-width: 768px) {
+    .selectmateria {
+        width: 100% !important;
+    }
+}
