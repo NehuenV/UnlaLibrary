@@ -9,5 +9,6 @@ namespace UnlaLibrary.Data.Interface
     {
         bool ModificarFavoritos(int idMaterial, int idUsuario);
         Favoritos GetFavorito(int idMaterial, int idUsuario);
+        List<MaterialEstudio> GetBiblioteca(int idusuario);
     }
 }

@@ -38,15 +38,14 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             // valores de prueba, quitar luego
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            var cat = _Catalogo.GetCatalogo(iduser);
-            ViewBag.Catalogo = cat;
+            var cat = _Biblioteca.GetBiblioteca(iduser);
             return View(cat);
         }
         
         public JsonResult ModificarFav(int idMaterial)
         {
             int idUser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            var r = _Biblioteca.ModificarFavoritos(idMaterial, idUser);
+            var r = _Biblioteca.ModificarFavoritos(idUser, idMaterial);
             return Json(new { status = r });
         }
 

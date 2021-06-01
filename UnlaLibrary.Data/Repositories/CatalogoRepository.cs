@@ -16,32 +16,6 @@ namespace UnlaLibrary.Data.Repositories
         {
             _Library = Library;
         }
-        
-        //public List<MaterialEstudio> GetCatalogo()
-        //{
-        //    var catalogo =(
-
-        //                   from ME in _Library.MaterialEstudio
-        //                      join I in _Library.Idioma on ME.IdIdioma equals I.IdIdioma
-        //                      join M in _Library.Materia on ME.IdMateria equals M.IdMateria
-        //                      select
-        //                      new MaterialEstudio
-        //                      {
-        //                          Descripcion = ME.Descripcion,
-        //                          Archivo = ME.Archivo,
-        //                          Autor = ME.Autor,
-        //                          Prologo= ME.Prologo,
-        //                          Reseña = ME.Reseña,
-        //                          Miniatura = ME.Miniatura,
-        //                          IdIdioma = I.IdIdioma,
-        //                          IdMateria= M.IdMateria,
-        //                          IdMaterial = ME.IdMaterial,
-        //                          IdIdiomaNavigation = ME.IdIdiomaNavigation,
-        //                          IdMateriaNavigation = ME.IdMateriaNavigation,
-        //                          Titulo = ME.Titulo
-        //                      }).ToList();
-        //    return catalogo;
-        //}
         public List<MaterialEstudio> GetCatalogo(int idusuario)
         {
             var catalogo = _Library.MaterialEstudio
@@ -55,33 +29,6 @@ namespace UnlaLibrary.Data.Repositories
                 .ToList();
             return catalogo;
         }
-
-        //public List<MaterialEstudio> GetCatalogo(string texto)
-        //{
-        //    var catalogo = (
-
-        //                   from ME in _Library.MaterialEstudio
-        //                   join I in _Library.Idioma on ME.IdIdioma equals I.IdIdioma
-        //                   join M in _Library.Materia on ME.IdMateria equals M.IdMateria
-        //                   where ME.Titulo.Contains(texto) || ME.Descripcion.Contains(texto) || ME.Autor.Contains(texto)
-        //                   select
-        //                   new MaterialEstudio
-        //                   {
-        //                       Descripcion = ME.Descripcion,
-        //                       Archivo = ME.Archivo,
-        //                       Autor = ME.Autor,
-        //                       Prologo = ME.Prologo,
-        //                       Reseña = ME.Reseña,
-        //                       Miniatura = ME.Miniatura,
-        //                       IdIdioma = I.IdIdioma,
-        //                       IdMateria = M.IdMateria,
-        //                       IdMaterial = ME.IdMaterial,
-        //                       IdIdiomaNavigation = ME.IdIdiomaNavigation,
-        //                       IdMateriaNavigation = ME.IdMateriaNavigation,
-        //                       Titulo = ME.Titulo
-        //                   }).ToList();
-        //    return catalogo;
-        //}
         public List<MaterialEstudio> GetCatalogo(string texto, int idusuario)
         {
             var catalogo = _Library.MaterialEstudio

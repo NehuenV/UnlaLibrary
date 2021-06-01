@@ -9,6 +9,26 @@
             // elimina el libro de la lista
             let item = document.getElementById(`item${idMaterial}`)
             item.parentElement.removeChild(item);
+
+            debugger;
+
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("ModificarFav", "Biblioteca")", // we are calling json method
+                dataType: 'json',
+                data: {
+                    idMaterial: idMaterial
+                }
+            })
+            .done(function (result) {
+                if (result.status) {
+                    $(location).attr('href', "@Url.Action("Biblioteca", "Biblioteca")")
+                } else {
+                    $("#message").text(result.message);
+                }
+            })
+            
         }
         $(document).ready(function () {
             // ...
