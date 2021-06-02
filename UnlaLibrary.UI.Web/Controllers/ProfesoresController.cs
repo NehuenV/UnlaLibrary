@@ -16,6 +16,7 @@ using UnlaLibrary.Data.Models;
 using UnlaLibrary.UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using UnlaLibrary.UI.Web.Helper;
+using System.Linq;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
@@ -82,7 +83,6 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         #endregion
 
-       
         public IActionResult AlumnoMateria()
         {
 
@@ -118,6 +118,17 @@ namespace UnlaLibrary.UI.Web.Controllers
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             List<Materia> lista = _ProfesoresRepository.GetMateriasByUserAndCarreraAndUniversidad(iduser, idcarrera, iduniversidad);
             return Json(new SelectList(lista, "IdMateria", "Materia1"));
+        }
+        public IActionResult MaterialSubido()
+        {
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            var materiales = _ProfesoresRepository.GetMaterialEstudio(iduser);
+            return View(materiales);
+        }
+        public JsonResult EliminarMaterial(int idMaterial)
+        {
+            var eliminado = _ProfesoresRepository.EliminarMaterial(idMaterial);
+            return Json(new { status = eliminado });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

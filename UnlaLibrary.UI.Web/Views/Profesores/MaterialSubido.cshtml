@@ -1,0 +1,116 @@
+﻿@model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
+@{
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+
+@section scripts{
+    <script>
+        function prepararEliminacion(id, nombre) {
+            document.getElementById("titulo").innerText = nombre;
+            document.getElementById("botonEliminar").dataset.id = id;
+        }
+
+        function eliminar(botonMaterial) {
+            let idMaterial = botonMaterial.dataset.id;
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("EliminarMaterial", "Profesores")",
+                data: {
+                    idMaterial: idMaterial,
+                },
+                success: function (result) {
+                    let item = document.getElementById(`item${idMaterial}`)
+                    item.parentElement.removeChild(item);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }
+            });
+        }
+    </script>
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link href="@Url.Content("~/css/home_user.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="w-100 d-flex justify-content-center pb-3">
+        <div class="w-75r">
+            <h2 class="display-5 my-3 text-center">Material Subido</h2>
+            <ul class="d-flex flex-row flex-wrap">
+                @foreach (var item in Model)
+                {
+                    var itemId = "item" + item.IdMaterial;
+                    <li class="m-2" id=@itemId>
+                        <div class="d-flex justify-content-end">
+                            <button data-toggle="tooltip" data-placement="top" title="Remover" class="button_remove"
+                                    data-idMaterial=@item.IdMaterial onclick="prepararEliminacion(@item.IdMaterial, '@item.Titulo')"
+                                    data-bs-toggle="modal" data-bs-target="#alertModal"
+                                    >
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        <a href="@Url.Action("Detalle", "Catalogo", new { id = item.IdMaterial })">
+                            <div class="card2">
+                                <div class="card2__image d-flex justify-content-end align-items-end" style="background-image: url('data:image;base64,@Convert.ToBase64String(item.Miniatura)')">
+                                    @{
+                                        var claseIcono = "fs-6 m-1 icono_tipo";
+                                        switch (item.TipoArchivo)
+                                        {
+                                            case "PDF": claseIcono += " fas fa-book"; break;
+                                            case "MP3": claseIcono += " fas fa-headphones"; break;
+                                            case "MP4": claseIcono += " fas fa-video"; break;
+                                            default: claseIcono += " fas fa-question-circle"; break;
+                                        }
+                                    }
+                                    <i class="@claseIcono"></i>
+                                </div>
+                                <div class="card2__details">
+                                    <h6 class="card2__title">@Html.DisplayFor(modelItem => item.Titulo)</h6>
+                                    <p class="card2__author">@Html.DisplayFor(modelItem => item.Autor)</p>
+                                    <div class="card2__extra">
+                                        <span class="card2__asignature">@Html.DisplayFor(modelItem => item.IdMateriaNavigation.Materia1)</span>
+                                        @{ var idiomaIcono = "/images/idiomas/" + item.IdIdioma + ".png"; }
+                                        <img src=@idiomaIcono alt="" class="card2__languaje" />
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">¿Eliminar <span id="titulo"></span>?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fs-6">Esta acción no puede revertirse</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-id="" onclick="eliminar(this)" id="botonEliminar" data-bs-dismiss="modal">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/js/home_user.js")"></script>
+
+</body>
+
+</html>
+
+

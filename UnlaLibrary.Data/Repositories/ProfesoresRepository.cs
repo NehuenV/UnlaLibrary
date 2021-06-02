@@ -7,6 +7,7 @@ using System.Linq;
 using UnlaLibrary.Data.Entities;
 using UnlaLibrary.Data.Models;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace UnlaLibrary.Data.Repositories
 {
@@ -252,6 +253,26 @@ namespace UnlaLibrary.Data.Repositories
 
             return GetMateriasByCarrera(idCarrera);
             
+        }
+
+        public List<MaterialEstudio> GetMaterialEstudio(int idusuario)
+        {
+            return _Library.MaterialEstudio
+                .Include(p => p.IdIdiomaNavigation)
+                .Include(p => p.IdMateriaNavigation)
+                .Where(x => x.IdUsuario == idusuario).ToList();
+        }
+        public bool EliminarMaterial(int IdMaterial)
+        {
+            bool eliminado = false;
+            var material = _Library.MaterialEstudio.Find(IdMaterial);
+            if(material != null)
+            {
+                _Library.MaterialEstudio.Remove(material);
+                _Library.SaveChanges();
+                eliminado = true;
+            }
+            return eliminado;
         }
 
     }

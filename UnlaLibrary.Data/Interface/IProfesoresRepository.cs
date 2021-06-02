@@ -25,5 +25,8 @@ namespace UnlaLibrary.Data.Interface
         bool AgregarAlumnoMateria(int idMat, int idAlumno);
         bool EliminarAlumnoMateria(int idMat, int idAlumno);
         #endregion
+        List<MaterialEstudio> GetMaterialEstudio(int idusuario);
+        bool EliminarMaterial(int idMaterial);
+
     }
 }

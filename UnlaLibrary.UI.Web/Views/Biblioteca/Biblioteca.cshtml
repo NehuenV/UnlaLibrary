@@ -62,8 +62,19 @@
                     </div>
                     <a href="@Url.Action("Detalle", "Catalogo", new { id = item.IdMaterial })">
                         <div class="card2">
-                            <div class="card2__image" style="background-image: url('data:image;base64,@Convert.ToBase64String(item.Miniatura)')"></div>
-                            <div class="card2__details">
+                            <div class="card2__image d-flex justify-content-end align-items-end" style="background-image: url('data:image;base64,@Convert.ToBase64String(item.Miniatura)')">
+                                @{
+                                    var claseIcono = "fs-6 m-1 icono_tipo";
+                                    switch (item.TipoArchivo)
+                                    {
+                                        case "PDF": claseIcono += " fas fa-book"; break;
+                                        case "MP3": claseIcono += " fas fa-headphones"; break;
+                                        case "MP4": claseIcono += " fas fa-video"; break;
+                                        default: claseIcono += " fas fa-question-circle"; break;
+                                    }
+                                }
+                                <i class="@claseIcono"></i>
+                            </div>                            <div class="card2__details">
                                 <h6 class="card2__title">@Html.DisplayFor(modelItem => item.Titulo)</h6>
                                 <p class="card2__author">@Html.DisplayFor(modelItem => item.Autor)</p>
                                 <div class="card2__extra">
