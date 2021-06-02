@@ -11,21 +11,27 @@
     <script>
         $(document).ready(function () {
             function search(idmateria) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/Catalogo/ListaCatalogo',
-                        data: {
-                            texto: $('#buscador').val(),
-                            idmateria: idmateria || $('#materia').val()
-                        },
-                        success: function (result) {
-                            $('#Results').html(result);
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            console.log("Status: " + textStatus);
-                            alert("Error: " + errorThrown);
-                        }
-                    });
+                let idIdiomas = [];
+                for (let idioma of document.getElementsByClassName('check-idioma')) {
+                    if (idioma.checked) idIdiomas.push(parseInt(idioma.value))
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Catalogo/ListaCatalogo',
+                    data: {
+                        texto: $('#buscador').val(),
+                        idmateria: idmateria || $('#materia').val(),
+                        idiomas: idIdiomas
+                    },
+                    success: function (result) {
+                        $('#Results').html(result);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
             }
             $('#ajaxform').click(search);
             if ('@texto'.length > 0 || '@idmateria' != '') {

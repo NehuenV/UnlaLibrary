@@ -13,5 +13,77 @@
             </select>
             <button type="submit" id="ajaxform">Buscar</button>
         </div>
+        <div class="accordion" id="busquedaAvanzada">
+            <div class="accordion-item bg-transparent border-0">
+                <p class="accordion-header" id="headingOne">
+                    <button class="bg-transparent text-primary border-0 collapsed fontshadow fontsmall"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="false" aria-controls="collapseOne">
+                        Busqueda avanzada ▼
+                    </button>
+                </p>
+                <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                     data-bs-parent="#busquedaAvanzada">
+                    <div class="accordion-body text-light  p-0">
+                        <div class="d-flex flex-wrap mt-1">
+                            <label class="fw-bold fontsmall">Idioma:&nbsp;&nbsp;</label>
+                            <div class="form-check">
+                                <input class="form-check-input check-all-idioma check-idioma" type="checkbox" value="0"
+                                       id="flexCheckDefault" checked onclick="uncheck(this, 'check-one-idioma')">
+                                <label class="form-check-label"
+                                       for="flexCheckDefault"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
+                            </div>
+                            @foreach (var idioma in ViewBag.Idiomas)
+                            {<div class="form-check">
+                                    <input class="form-check-input check-one-idioma check-idioma" type="checkbox" value="@idioma.IdIdioma"
+                                           id="flexCheckChecked" onclick="uncheck(this, 'check-all-idioma')">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        <small>@idioma.Idioma1&nbsp;&nbsp;&nbsp;</small>
+                                    </label>
+                                </div>
+                             }
+                        </div>
+
+                        <div class="d-flex flex-wrap mt-1">
+                            <label class="fw-bold fontsmall">Tipo de Archivo:&nbsp;&nbsp;</label>
+                            <div class="form-check">
+                                <input class="form-check-input check-all-archivo" type="checkbox" value="0"
+                                       id="flexCheckDefault" checked onclick="uncheck(this, 'check-archivo')">
+                                <label class="form-check-label"
+                                       for="flexCheckDefault"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input check-archivo" type="checkbox" value=""
+                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <label class="form-check-label"
+                                       for="flexCheckChecked"><small>Libro&nbsp;&nbsp;&nbsp;</small></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input check-archivo" type="checkbox" value=""
+                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <label class="form-check-label"
+                                       for="flexCheckChecked"><small>Audio&nbsp;&nbsp;&nbsp;</small></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input check-archivo" type="checkbox" value=""
+                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <label class="form-check-label"
+                                       for="flexCheckChecked"><small>Video&nbsp;&nbsp;&nbsp;</small></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
+<script>
+    function uncheck(element, id) {
+        if (element.checked) {
+            let checkboxes = document.getElementsByClassName(id);
+            for (let checkbox of checkboxes) {
+                checkbox.checked = false;
+            }
+        }
+    }
+</script>

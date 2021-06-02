@@ -1,9 +1,11 @@
 ﻿@{
     Layout = "";
+    var resultado = (Model.Count() == 0) ? "Sin resultados" : "";
 }
 @model IEnumerable<UnlaLibrary.Data.Entities.MaterialEstudio>
 <div class="w-100 d-flex justify-content-center pb-3">
     <ul class="d-flex flex-row flex-wrap">
+        @resultado
         @foreach (var item in Model)
         {
             <li class="m-2">
