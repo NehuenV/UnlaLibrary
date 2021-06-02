@@ -203,9 +203,22 @@ namespace UnlaLibrary.Data.Repositories
                     IdMateria = m.Materia,
                     IdUsuario = 1,
                     IdUniversidad = m.Universidad
-
                 };
-
+                var content = m.Archivo.ContentType;
+                int cut = content.IndexOf("/")+1;
+                var extension = content.Substring(cut, content.Length-cut);
+                if(extension.ToUpper().Equals("PDF"))
+                {
+                    materialEstudio.TipoArchivo = extension.ToUpper();
+                }
+                if (extension.ToUpper().Equals("MP4"))
+                {
+                    materialEstudio.TipoArchivo = extension.ToUpper();
+                }
+                if (extension.ToUpper().Equals("MPEG"))
+                {
+                    materialEstudio.TipoArchivo = "MP3";
+                }
                 using (var archivo = new MemoryStream())
                 {
                     m.Archivo.CopyTo(archivo);

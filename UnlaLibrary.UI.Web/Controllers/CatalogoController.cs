@@ -38,9 +38,10 @@ namespace UnlaLibrary.UI.Web.Controllers
         {
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             ViewBag.Materias = _Catalogo.GetMaterias(iduser);
+            ViewBag.Idiomas = _Library.Idioma.Select(x => x);
             return View();
         }
-        public IActionResult ListaCatalogo(string texto, int idmateria)
+        public IActionResult ListaCatalogo(string texto, int idmateria, int[] idiomas = null)
         {
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             var cat =  _Catalogo.GetCatalogo(iduser, texto, idmateria);
@@ -54,6 +55,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewData["idmateria"] = idmateria;
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
             ViewBag.Materias = _Catalogo.GetMaterias(iduser);
+            ViewBag.Idiomas = _Library.Idioma.Select(x => x);
             return View("Catalogo");
         }
 
@@ -67,15 +69,30 @@ namespace UnlaLibrary.UI.Web.Controllers
         }
         public FileResult DownloadFile(int id)
         {
-
+            string contentType;
             var detalle = _Catalogo.GetMaterial(id);
-            string contentType = "application/pdf";
-            return File(detalle.Archivo, contentType, string.Format("{0}.pdf", detalle.Titulo));
+            if (detalle.TipoArchivo.Equals("MP3"))
+            {
+                contentType = string.Format("application/{0}","MPEG");
+            }
+            else
+            {
+                contentType = string.Format("application/{0}", detalle.TipoArchivo);
+            }
+            return File(detalle.Archivo, contentType, string.Format("{0}.{1}", detalle.Titulo, detalle.TipoArchivo));
         }
         public FileResult ViewFile(int id)
         {
             var detalle = _Catalogo.GetMaterial(id);
-            string contentType = "application/pdf";
+            string contentType;
+            if (detalle.TipoArchivo.Equals("MP3"))
+            {
+                contentType = string.Format("application/{0}", "MPEG");
+            }
+            else
+            {
+                contentType = string.Format("application/{0}", detalle.TipoArchivo);
+            }
             return File(detalle.Archivo, contentType);
         }
      
