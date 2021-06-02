@@ -301,3 +301,18 @@ a {
         width: 100% !important;
     }
 }
+
+.fontsmall {
+    font-size: 0.9em;
+}
+
+.fontshadow {
+    text-shadow: 0px 1px 10px rgb(0, 0, 0);
+}
+
+.icono_tipo {
+    background-color: #2b2b2bd0;
+    color: rgba(49, 202, 29, 0.85);
+    border-radius: 50%;
+    padding: 0.3em;
+}
