@@ -58,5 +58,34 @@ namespace UnlaLibrary.Data.Repositories
             return materias;
         }
 
+        public bool CambiarReseña(Reseña reseña)
+        {
+            bool flag = false;
+            var r = GetReseña(reseña.IdMaterial,reseña.IdUsuario);
+            if (r == null)
+            {
+                _Library.Reseña.Add(reseña);
+                flag = true;
+            }
+            else
+            {
+                r.Comentario = reseña.Comentario;
+                r.Puntuacion = reseña.Puntuacion;
+                _Library.Reseña.Update(r);
+                flag = true;
+            }
+            _Library.SaveChanges();
+            return flag;
+        }
+
+        public Reseña GetReseña( int IdMaterial, int IdUsuario)
+        {
+            Reseña r = null;
+            var exist = _Library.Reseña.Where(x => x.IdMaterial == IdMaterial && x.IdUsuario == IdUsuario).FirstOrDefault();
+            if(exist!=null)
+                r = _Library.Reseña.Find(exist.IdReseña);
+            return r;
+        }
+
     }
 }

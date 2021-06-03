@@ -188,7 +188,7 @@ namespace UnlaLibrary.Data.Repositories
         }
 
 
-        public bool AgregarMaterial(Material m)
+        public bool AgregarMaterial(Material m, int iduser)
         {
             try
             {
@@ -202,7 +202,7 @@ namespace UnlaLibrary.Data.Repositories
                     Prologo = m.Prologo,
                     IdIdioma = m.Idioma,
                     IdMateria = m.Materia,
-                    IdUsuario = 1,
+                    IdUsuario = iduser,
                     IdUniversidad = m.Universidad
                 };
                 var content = m.Archivo.ContentType;

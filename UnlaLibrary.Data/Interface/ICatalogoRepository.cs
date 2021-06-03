@@ -10,6 +10,7 @@ namespace UnlaLibrary.Data.Interface
         List<MaterialEstudio> GetCatalogo(int idusuario, string texto, int idmateria);
         MaterialEstudio GetMaterial(int id);
         List<Materia> GetMaterias(int idusuario);
+        bool CambiarReseña(Reseña reseña);
 
     }
 }

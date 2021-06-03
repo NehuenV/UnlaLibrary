@@ -130,6 +130,10 @@ form {
     margin: 7pt 0;
 }
 
+.separator2 {
+    height: 0pt;
+    margin: 7pt 0;
+}
 @media (max-width: 800px) {
     .responsive-center {
         display: flex;

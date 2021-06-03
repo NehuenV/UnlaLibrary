@@ -95,6 +95,13 @@ namespace UnlaLibrary.UI.Web.Controllers
             }
             return File(detalle.Archivo, contentType);
         }
+
+        public IActionResult Reseña(string texto, int idMaterial)
+        {
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            _Catalogo.CambiarReseña(new Reseña {Comentario= texto, IdUsuario=iduser,IdMaterial = idMaterial});
+            return Json(new { status = "Ok", message = "hecho" });
+        }
      
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

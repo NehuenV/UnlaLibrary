@@ -65,7 +65,8 @@ namespace UnlaLibrary.UI.Web.Controllers
 
         public JsonResult up(Material mat)
         {
-            bool estado = _ProfesoresRepository.AgregarMaterial(mat);
+            int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
+            bool estado = _ProfesoresRepository.AgregarMaterial(mat, iduser);
             if (estado)
             {
                 return Json(new { status = estado, message = string.Format("El material {0} fue agregado con exito", mat.Titulo) });
