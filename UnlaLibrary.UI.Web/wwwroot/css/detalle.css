@@ -217,3 +217,28 @@ form {
         display: none;
     }
 }
+
+.star:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.comments {
+    max-height: 15em;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .comments {
+        max-height: 20em;
+    }
+}
+
+.littlefont {
+    font-size: 0.9em;
+}
+
+.bg-light2 {
+    background-color: #FFF9D9;
+}

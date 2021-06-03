@@ -276,7 +276,7 @@ namespace UnlaLibrary.Data.Migrations
                 {
                     idReseña = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    comentario = table.Column<string>(type: "varchar(45)", unicode: false, maxLength: 45, nullable: true),
+                    comentario = table.Column<string>(type: "varchar(120)", unicode: false, maxLength: 120, nullable: true),
                     puntuacion = table.Column<int>(type: "int", nullable: true),
                     idMaterial = table.Column<int>(type: "int", nullable: false),
                     idUsuario = table.Column<int>(type: "int", nullable: false)

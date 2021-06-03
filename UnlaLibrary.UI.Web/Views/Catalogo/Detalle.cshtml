@@ -93,12 +93,52 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="separator2"></div>
                 <div class="py-2 border rounded border-1 d-flex flex-column align-items-center bg-semilight ">
-                    <div class="justify-content-center w-75">
-                        <textarea class="form-control" id="Reseña" placeholder="Comentarios" rows="3"></textarea>
-                        <div class="col text-center">
-                            <button type="submit" class="btn btn-primary my-2" id="Enviar" >Comentar</button>
+                    <div class="d-flex flex-column align-items-center w-100" style="box-sizing: border-box">
+                        <div class="d-flex flex-column  comments p-1 " style="width: 98%">
+                            @foreach (var item in ViewData["Res"] as IEnumerable<UnlaLibrary.Data.Entities.Reseña>)
+                            {
+                                <div class="border d-flex flex-column w-100 p-1 bg-light">
+                                    <h6 class="my-0 py-0">@item.IdUsuarioNavigation.Nombre </h6>
+                                    <div class="d-flex">
+                                        @for (var i = 1; i <= item.Puntuacion; i++)
+                                        {
+                                            <i class="fas fa-star text-warning"></i>
+                                        }
+                                    </div>
+                                    <p class="my-0 littlefont">@item.Comentario</p>
+                                </div>
+                            }
+                        </div>
+                        <div class="d-flex flex-column p-1 " style="width: 98%">
+                            @if (ViewBag.MiReseña != null)
+                            {
+                                <div class="border d-flex flex-column w-100 p-1 bg-light2 border border-2">
+                                    <h6 class="my-0 py-0">Yo</h6>
+                                    <div class="d-flex">
+                                        @for (var i = 1; i <= ViewBag.MiReseña.Puntuacion; i++)
+                                        {
+                                            <i class="fas fa-star text-warning"></i>
+                                        }
+                                    </div>
+                                    <p class="my-0 littlefont">@ViewBag.MiReseña.Comentario</p>
+                                    <div class="d-flex w-100 justify-content-center">
+                                        <button type="button" class="btn btn-primary btn-sm my-1" data-bs-toggle="modal"
+                                                data-bs-target="#reseñaModal">
+                                            Cambiar reseña
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-primary btn-lg my-1" data-bs-toggle="modal"
+                                        data-bs-target="#reseñaModal">
+                                    Reseñar
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -106,6 +146,37 @@
         </div>
         <div class="separator w-75r"></div>
 
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="reseñaModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Reseñar "@Model.Titulo"</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column align-items-start mb-2">
+                        <label class="fs-6 border border-bottom-0 rounded-top px-2">Calificación</label>
+                        <div class="d-flex fs-3 mb-2 border rounded p-1 ">
+                            <i class="fas fa-star mx-1  text-secondary star" data-value="1" id="star1"></i>
+                            <i class="fas fa-star mx-1  text-secondary star" data-value="2" id="star2"></i>
+                            <i class="fas fa-star mx-1  text-secondary star" data-value="3" id="star3"></i>
+                            <i class="fas fa-star mx-1  text-secondary star" data-value="4" id="star4"></i>
+                            <i class="fas fa-star mx-1  text-secondary star" data-value="5" id="star5"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column  align-items-start">
+                        <label class="fs-6 border border-bottom-0 rounded-top px-2" for="comentario">Comentario</label>
+                        <textarea class="form-control" maxlength="120" rows="3" placeholder="Escribe tu reseña acá" id="comentario"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="reseñar">Enviar Reseña</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
@@ -133,23 +204,51 @@
             return false;
         }
 
+        function traerCalificacion() {
+            let stars = document.getElementsByClassName("star");
+            let calificacion = 0;
+            for (let star of stars) {
+                if (star.classList.contains('text-warning')) calificacion++;
+            }
+            return calificacion;
+        }
 
-        $("#Enviar").click(function () {
-            debugger;
-            var comentario = $("#Reseña").val()
+        $("#reseñar").click(function () {
+            let calificacion = traerCalificacion();
+            if (calificacion == 0) return alert("Debe elegir un puntaje en estrellas")
+            var comentario = $("#comentario").val()
             $.ajax({
-                    type: 'POST',
-                    url: "@Url.Action("Reseña", "Catalogo")", // we are calling json method
-                    dataType: 'json',
-                    data: {
-                        texto: comentario,
-                        idMaterial : @Model.IdMaterial
-                    },
+                type: 'POST',
+                url: "@Url.Action("Reseña", "Catalogo")", // we are calling json method
+                dataType: 'json',
+                data: {
+                    texto: comentario,
+                    idMaterial: @Model.IdMaterial,
+                    puntuacion: calificacion
+                },
                 success: function (data) {
-
-                    }
+                    $('#reseñaModal').modal('toggle');
+                    location.reload();
+                }
             });
         });
+
+        function calificar(event) {
+            let value = parseInt(event.target.dataset.value)
+            for (let i = 1; i <= value; i++) {
+                document.getElementById(`star${i}`).classList.remove('text-secondary');
+                document.getElementById(`star${i}`).classList.add('text-warning');
+            }
+            for (let i = value + 1; i <= 5; i++) {
+                document.getElementById(`star${i}`).classList.remove('text-warning');
+                document.getElementById(`star${i}`).classList.add('text-secondary');
+            }
+        }
+
+        let stars = document.getElementsByClassName("star");
+        for (let star of stars) {
+            star.addEventListener('click', calificar);
+        }
     </script>
 </body>
 

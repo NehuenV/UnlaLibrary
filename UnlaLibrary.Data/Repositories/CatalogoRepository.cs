@@ -77,16 +77,17 @@ namespace UnlaLibrary.Data.Repositories
             _Library.SaveChanges();
             return flag;
         }
-        public List<Reseña> GetAllReseñas(int IdMaterial)
+
+        public List<Reseña> GetAllReseñas(int IdMaterial, int iduser)
         {
             return _Library.Reseña
                 .Include(p => p.IdUsuarioNavigation)
-                .Where(x=>x.IdMaterial==IdMaterial).ToList();
+                .Where(x=>x.IdMaterial==IdMaterial && x.IdUsuario != iduser).ToList();
         }
         public Reseña GetReseña( int IdMaterial, int IdUsuario)
         {
             Reseña r = null;
-            var exist = _Library.Reseña.Where(x => x.IdMaterial == IdMaterial && x.IdUsuario == IdUsuario).FirstOrDefault();
+            var exist = _Library.Reseña.Include(x => x.IdUsuarioNavigation).Where(x => x.IdMaterial == IdMaterial && x.IdUsuario == IdUsuario).FirstOrDefault();
             if(exist!=null)
                 r = _Library.Reseña.Find(exist.IdReseña);
             return r;
