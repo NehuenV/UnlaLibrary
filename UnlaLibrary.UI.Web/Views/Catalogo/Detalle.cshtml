@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "Catalogo";
     Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+    var reseñas = ViewData["Res"] as List<UnlaLibrary.Data.Entities.Reseña>;
+    var mireseña = ViewBag.MiReseña as UnlaLibrary.Data.Entities.Reseña;
+    if (mireseña != null)
+    {
+        reseñas.Add(mireseña);
+    }
+    var promedio = reseñas.Average(x => x.Puntuacion);
+    var cantidad = reseñas.Count();
+    reseñas.Remove(mireseña);
 }
 
 <!DOCTYPE html>
@@ -57,8 +66,17 @@
             <div class="col">
                 <div class="py-2 border rounded border-1 d-flex flex-column align-items-center bg-semilight">
                     <figure class="d-flex flex-column align-items-center p-2">
-                        <img src="/images/starts.png" alt="" class="stars" />
-                        <figcaption>4.5 estrellas de 15 calificaciones</figcaption>
+                        <div class="d-flex">
+                            @for (var i = 1; i <= Convert.ToInt32(promedio); i++)
+                            {
+                                <i class="fas fa-star text-warning fs-1"></i>
+                            }
+                            @for (var i =5; i > Convert.ToInt32(promedio); i--)
+                            {
+                                <i class="fas fa-star text-secondary fs-1"></i>
+                            }
+                        </div>
+                        <figcaption>@cantidad reseñas</figcaption>
                     </figure>
                     <div class="w-100 justify-content-center d-flex">
                         <a href="@Url.Action("ViewFile", "Catalogo", new { id = Model.IdMaterial })" target="_nblank" class="text-decoration-none">
@@ -97,25 +115,10 @@
                 <div class="separator2"></div>
                 <div class="py-2 border rounded border-1 d-flex flex-column align-items-center bg-semilight ">
                     <div class="d-flex flex-column align-items-center w-100" style="box-sizing: border-box">
-                        <div class="d-flex flex-column  comments p-1 " style="width: 98%">
-                            @foreach (var item in ViewData["Res"] as IEnumerable<UnlaLibrary.Data.Entities.Reseña>)
-                            {
-                                <div class="border d-flex flex-column w-100 p-1 bg-light">
-                                    <h6 class="my-0 py-0">@item.IdUsuarioNavigation.Nombre </h6>
-                                    <div class="d-flex">
-                                        @for (var i = 1; i <= item.Puntuacion; i++)
-                                        {
-                                            <i class="fas fa-star text-warning"></i>
-                                        }
-                                    </div>
-                                    <p class="my-0 littlefont">@item.Comentario</p>
-                                </div>
-                            }
-                        </div>
                         <div class="d-flex flex-column p-1 " style="width: 98%">
                             @if (ViewBag.MiReseña != null)
                             {
-                                <div class="border d-flex flex-column w-100 p-1 bg-light2 border border-2">
+                                <div class="border d-flex flex-column w-100 p-1 bg-light2 border border-2 border-secondary rounded">
                                     <h6 class="my-0 py-0">Yo</h6>
                                     <div class="d-flex">
                                         @for (var i = 1; i <= ViewBag.MiReseña.Puntuacion; i++)
@@ -140,6 +143,22 @@
                                 </button>
                             }
                         </div>
+                        <div class="d-flex flex-column  comments p-1 " style="width: 98%">
+                            @foreach (var item in ViewData["Res"] as IEnumerable<UnlaLibrary.Data.Entities.Reseña>)
+                            {
+                                <div class="border d-flex flex-column w-100 p-1 bg-light">
+                                    <h6 class="my-0 py-0">@item.IdUsuarioNavigation.Nombre </h6>
+                                    <div class="d-flex">
+                                        @for (var i = 1; i <= item.Puntuacion; i++)
+                                        {
+                                            <i class="fas fa-star text-warning"></i>
+                                        }
+                                    </div>
+                                    <p class="my-0 littlefont">@item.Comentario</p>
+                                </div>
+                            }
+                        </div>
+                        
                     </div>
                 </div>
             </div>
