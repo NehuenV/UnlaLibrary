@@ -77,7 +77,12 @@ namespace UnlaLibrary.Data.Repositories
             _Library.SaveChanges();
             return flag;
         }
-
+        public List<Reseña> GetAllReseñas(int IdMaterial)
+        {
+            return _Library.Reseña
+                .Include(p => p.IdUsuarioNavigation)
+                .Where(x=>x.IdMaterial==IdMaterial).ToList();
+        }
         public Reseña GetReseña( int IdMaterial, int IdUsuario)
         {
             Reseña r = null;

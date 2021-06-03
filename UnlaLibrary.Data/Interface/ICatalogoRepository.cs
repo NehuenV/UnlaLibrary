@@ -11,6 +11,7 @@ namespace UnlaLibrary.Data.Interface
         MaterialEstudio GetMaterial(int id);
         List<Materia> GetMaterias(int idusuario);
         bool CambiarReseña(Reseña reseña);
+        List<Reseña> GetAllReseñas(int IdMaterial);
 
     }
 }

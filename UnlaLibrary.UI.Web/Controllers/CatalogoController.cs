@@ -65,6 +65,7 @@ namespace UnlaLibrary.UI.Web.Controllers
             var detalle = _Catalogo.GetMaterial(id);
             ViewBag.Materias = _Catalogo.GetMaterias(iduser);
             ViewData["Fav"] = _Biblioteca.GetFavorito(iduser, id)!=null ? true : false ;
+            ViewData["Res"] = _Catalogo.GetAllReseñas(id);
             return View(detalle);
         }
         public FileResult DownloadFile(int id)
