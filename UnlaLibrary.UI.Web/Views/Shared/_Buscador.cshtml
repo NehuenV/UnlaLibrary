@@ -29,15 +29,15 @@
                             <label class="fw-bold fontsmall">Idioma:&nbsp;&nbsp;</label>
                             <div class="form-check">
                                 <input class="form-check-input check-all-idioma check-idioma" type="checkbox" value="0"
-                                       id="flexCheckDefault" checked onclick="uncheck(this, 'check-one-idioma')">
+                                       id="todosIdiomas" checked onclick="uncheck(this, 'check-one-idioma')">
                                 <label class="form-check-label"
-                                       for="flexCheckDefault"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
+                                       for="todosIdiomas"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
                             </div>
                             @foreach (var idioma in ViewBag.Idiomas)
                             {<div class="form-check">
                                     <input class="form-check-input check-one-idioma check-idioma" type="checkbox" value="@idioma.IdIdioma"
-                                           id="flexCheckChecked" onclick="uncheck(this, 'check-all-idioma')">
-                                    <label class="form-check-label" for="flexCheckChecked">
+                                           id="@idioma.Idioma1" onclick="uncheck(this, 'check-all-idioma')">
+                                    <label class="form-check-label" for="@idioma.Idioma1">
                                         <small>@idioma.Idioma1&nbsp;&nbsp;&nbsp;</small>
                                     </label>
                                 </div>
@@ -47,28 +47,28 @@
                         <div class="d-flex flex-wrap mt-1">
                             <label class="fw-bold fontsmall">Tipo de Archivo:&nbsp;&nbsp;</label>
                             <div class="form-check">
-                                <input class="form-check-input check-all-archivo" type="checkbox" value="0"
-                                       id="flexCheckDefault" checked onclick="uncheck(this, 'check-archivo')">
+                                <input class="form-check-input check-archivo check-all-archivo" type="checkbox" value="TODOS"
+                                       id="todosArchivos" checked onclick="uncheck(this, 'check-one-archivo')">
                                 <label class="form-check-label"
-                                       for="flexCheckDefault"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
+                                       for="todosArchivos"><small>Todos&nbsp;&nbsp;&nbsp;</small></label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input check-archivo" type="checkbox" value=""
-                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <input class="form-check-input check-archivo check-one-archivo" type="checkbox" value="PDF"
+                                       id="libro" onclick="uncheck(this, 'check-all-archivo')">
                                 <label class="form-check-label"
-                                       for="flexCheckChecked"><small>Libro&nbsp;&nbsp;&nbsp;</small></label>
+                                       for="libro"><small>Libro&nbsp;&nbsp;&nbsp;</small></label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input check-archivo" type="checkbox" value=""
-                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <input class="form-check-input check-archivo check-one-archivo" type="checkbox" value="MP3"
+                                       id="audio" onclick="uncheck(this, 'check-all-archivo')">
                                 <label class="form-check-label"
-                                       for="flexCheckChecked"><small>Audio&nbsp;&nbsp;&nbsp;</small></label>
+                                       for="audio"><small>Audio&nbsp;&nbsp;&nbsp;</small></label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input check-archivo" type="checkbox" value=""
-                                       id="flexCheckChecked" onclick="uncheck(this, 'check-all-archivo')">
+                                <input class="form-check-input check-archivo check-one-archivo" type="checkbox" value="MP4"
+                                       id="audio" onclick="uncheck(this, 'check-all-archivo')">
                                 <label class="form-check-label"
-                                       for="flexCheckChecked"><small>Video&nbsp;&nbsp;&nbsp;</small></label>
+                                       for="audio"><small>Video&nbsp;&nbsp;&nbsp;</small></label>
                             </div>
                         </div>
                     </div>

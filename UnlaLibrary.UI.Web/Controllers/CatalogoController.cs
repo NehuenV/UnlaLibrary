@@ -41,10 +41,10 @@ namespace UnlaLibrary.UI.Web.Controllers
             ViewBag.Idiomas = _Library.Idioma.Select(x => x);
             return View();
         }
-        public IActionResult ListaCatalogo(string texto, int idmateria, int[] idiomas = null)
+        public IActionResult ListaCatalogo(string texto, int idmateria, int[] idiomas = null, string[]tipos = null)
         {
             int iduser = Convert.ToInt32(SessionHelper.GetNameIdentifier(HttpContext.User));
-            var cat =  _Catalogo.GetCatalogo(iduser, texto, idmateria);
+            var cat =  _Catalogo.GetCatalogo(iduser, texto, idmateria, idiomas, tipos);
             ViewBag.Catalogo = cat;
             return View(cat);
         }

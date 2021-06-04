@@ -15,6 +15,10 @@
                 for (let idioma of document.getElementsByClassName('check-idioma')) {
                     if (idioma.checked) idIdiomas.push(parseInt(idioma.value))
                 }
+                let tiposDeArchivo = [];
+                for (let tipo of document.getElementsByClassName('check-archivo')) {
+                    if (tipo.checked) tiposDeArchivo.push(tipo.value)
+                }
 
                 $.ajax({
                     type: 'POST',
@@ -22,7 +26,8 @@
                     data: {
                         texto: $('#buscador').val(),
                         idmateria: idmateria || $('#materia').val(),
-                        idiomas: idIdiomas
+                        idiomas: idIdiomas,
+                        tipos: tiposDeArchivo
                     },
                     success: function (result) {
                         $('#Results').html(result);

@@ -16,7 +16,7 @@ namespace UnlaLibrary.Data.Repositories
         {
             _Library = Library;
         }
-        public List<MaterialEstudio> GetCatalogo(int idusuario, string texto, int idmateria)
+        public List<MaterialEstudio> GetCatalogo(int idusuario, string texto, int idmateria, int[] idiomas, string[] tipos = null)
         {
             var catalogo = _Library.MaterialEstudio
                 .Include(p => p.IdIdiomaNavigation)
@@ -29,6 +29,10 @@ namespace UnlaLibrary.Data.Repositories
                   (idmateria == 0 || x.IdMateria == idmateria)
                   &&
                   (texto == null || (x.Titulo.Contains(texto) || x.Descripcion.Contains(texto) || x.Autor.Contains(texto)))
+                  &&
+                  (idiomas[0] == 0 || idiomas.Contains(x.IdIdioma))
+                  &&
+                  (tipos[0] == "TODOS" || tipos.Contains(x.TipoArchivo))
                   )
                 .ToList();
             return catalogo;
