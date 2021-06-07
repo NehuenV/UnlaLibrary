@@ -7,7 +7,7 @@ namespace UnlaLibrary.Data.Interface
 {
     public interface ICatalogoRepository
     {
-        List<MaterialEstudio> GetCatalogo(int idusuario, string texto, int idmateria);
+        List<MaterialEstudio> GetCatalogo(int idusuario, string texto, int idmateria, int[] idiomas, string[] tipos);
         MaterialEstudio GetMaterial(int id);
         List<Materia> GetMaterias(int idusuario);
         bool CambiarReseña(Reseña reseña);
