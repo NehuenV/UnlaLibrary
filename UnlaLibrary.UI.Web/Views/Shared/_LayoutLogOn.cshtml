@@ -54,9 +54,21 @@
                                 <a class="nav-link" aria-current="page" href="@Url.Action("Biblioteca","Biblioteca")">Mi Biblioteca</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nosotros</a>
-                        </li>
+                        @if (SessionHelper.GetValue(User, "TipoDeUsuarioId") == "3")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("Index","Universidad")">Universidades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("Biblioteca","Biblioteca")">Carreras</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("Biblioteca","Biblioteca")">Materias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="@Url.Action("Biblioteca","Biblioteca")">Usuarios</a>
+                            </li>
+                        }
                     </ul>
                     <div class="btn-group">
                         <button class="btn btn-outline-light me-2 rounded" type="button" data-bs-toggle="dropdown"

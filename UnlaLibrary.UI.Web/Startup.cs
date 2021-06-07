@@ -32,6 +32,7 @@ namespace UnlaLibrary.UI.Web
             services.AddScoped<ICatalogoRepository, CatalogoRepository>();
             services.AddScoped<IProfesoresRepository, ProfesoresRepository>();
             services.AddScoped<IBibliotecaRepository, BibliotecaRepository>();
+            services.AddScoped<IUniversidadRepository, UniversidadRepository>();
 
             services.AddAuthorization( x=> x.AddPolicy("UserType", policy => policy.Requirements.Add(new UserType(2))));
             services.AddSingleton<IAuthorizationHandler,UserTypeHandler>();
