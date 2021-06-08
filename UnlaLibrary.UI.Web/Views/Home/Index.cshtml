@@ -25,7 +25,7 @@
                         @buttonText
                     </button>
                 </form>
-                
+
             </div>
         </div>
     </header>
@@ -62,6 +62,37 @@
                         </form>
                         <div>
                             <span id="message" class="text-danger font-weight-bold"></span>
+                            <span>.</span>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-link" data-bs-target="#modalRecuperar" data-bs-toggle="modal" 
+                                    data-bs-dismiss="modal">Olvidé mi contraseña</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL RECUPERAR CONTRASEÑA-->
+    <div class="modal fade bg-semidark" id="modalRecuperar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content ">
+                <div class="modal-body rounded d-flex flex-row row m-0 p-0 bg-light box shadow-sm">
+                    <div class="col-sm-1 col-md-5 col-lg-6 hidden-xs login__image"></div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6 d-flex flex-column align-items-center justify-content-between py-2">
+                        <button type="button" class="btn-close align-self-end justify-self-start"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        <form class="w-100 d-flex flex-column align-items-center justify-content-center" >
+                            <h5 class="font-raleway">Recuperar contraseña</h5>
+                            <p class="text-center">Escriba su correo electrónico y recibirá un email con los pasos para 
+                            recuperar su contraseña</p>
+                            <div class="login__input">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-control" placeholder="Email" name="email" id="emailolvidado">
+                            </div>
+                            <button type="submit" class="login__button mt-4" id="olvido">Recuperar</button>
+                        </form>
+                        <div>
                             <span>.</span>
                         </div>
                     </div>
@@ -105,6 +136,25 @@
                     } else {
                         console.log("nada aun");
                     }
+                })
+                $("#olvido").on('click', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "@Url.Action("Recuperar", "Coso")",
+                        data: {
+                            email: $("#email").val(),
+                        },
+                        type: "post"
+                    }).done(function (result) {
+                        if (result.status) {
+                            $("#mensaje_recuperacion").text('Se envió un email de confirmación');
+                        } else {
+                            alert("Error, no se pudo procesar esta acción");
+                        }
+                    }).fail(function (jqXHR, status, error) {
+                        console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                        alert("Hubo un error en el servidor")
+                    })
                 })
             });
         }
