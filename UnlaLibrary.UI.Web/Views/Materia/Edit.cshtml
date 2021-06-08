@@ -1,0 +1,39 @@
+﻿@model UnlaLibrary.Data.Entities.Materia
+@{
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+
+@section scripts{
+    <script></script>
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link href="@Url.Content("~/css/home_user.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="w-100 d-flex justify-content-center pb-3">
+        <div class="w-75r d-flex flex-column align-items-center">
+            <h2 class="display-5 my-3">MATERIA</h2>
+            <h6 class="my-3">EDITAR MATERIA</h6>
+            <form class="my-4 d-flex flex-column justify-content-center align-items-start w-50r border border-secondary rounded p-3"
+                  asp-controller="Materia" asp-action="Edit" method="post">
+                <input type="number" class="d-none" asp-for="IdMateria" value="@Model.IdMateria" />
+                <div class="w-100">
+                    <label for="archivo" class="form-label">Nombre</label>
+                    <input type="text" maxlength="60" mixlength="3" class="form-control mb-2" placeholder="Nombre de la institución" asp-for="Materia1"
+                           value="@Model.Materia1" required />
+                </div>
+                <div class="w-100 d-flex justify-content-center m-2">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                    <a href="javascript:history.back()" class="btn btn-secondary mx-2">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,33 +8,33 @@ using UnlaLibrary.Data.Interface;
 
 namespace UnlaLibrary.Data.Repositories
 {
-    public class CarreraRepository :ICarreraRepository
+    public class MateriaRepository : IMateriaRepository
     {
         private readonly Library _Library;
-        public CarreraRepository(Library Library)
+        public MateriaRepository(Library Library)
         {
             _Library = Library;
         }
 
-        public List<Carrera> Get()
+        public List<Materia> Get()
         {
-            return _Library.Carrera.Select(x => x).ToList();
+            return _Library.Materia.Select(x => x).ToList();
         }
 
-        public Carrera Get(int idCarrera)
+        public Materia Get(int idMateria)
         {
-            return _Library.Carrera.Where(x => x.IdCarrera == idCarrera).FirstOrDefault();
+            return _Library.Materia.Where(x => x.IdMateria == idMateria).FirstOrDefault();
         }
 
-        public bool Create(Carrera c)
+        public bool Create(Materia m)
         {
             try
             {
-                var carrera = new Carrera
+                var materia = new Materia
                 {
-                    Carrera1 = c.Carrera1
+                    Materia1 = m.Materia1
                 };
-                _Library.Carrera.Add(carrera);
+                _Library.Materia.Add(materia);
                 _Library.SaveChanges();
                 return true;
             }
@@ -44,13 +44,13 @@ namespace UnlaLibrary.Data.Repositories
             }
         }
 
-        public bool Edit(Carrera c)
+        public bool Edit(Materia m)
         {
             try
             {
-                var carrera = _Library.Carrera.Where(x => x.IdCarrera == c.IdCarrera).FirstOrDefault();
-                carrera.Carrera1 = c.Carrera1;
-                _Library.Carrera.Update(carrera);
+                var mat = _Library.Materia.Where(x => x.IdMateria == m.IdMateria).FirstOrDefault();
+                mat.Materia1 = m.Materia1;
+                _Library.Materia.Update(mat);
                 _Library.SaveChanges();
                 return true;
             }
@@ -64,8 +64,8 @@ namespace UnlaLibrary.Data.Repositories
         {
             try
             {
-                var carrera = _Library.Carrera.Where(x => x.IdCarrera == id).FirstOrDefault();
-                _Library.Carrera.Remove(carrera);
+                var mat = _Library.Materia.Where(x => x.IdMateria == id).FirstOrDefault();
+                _Library.Materia.Remove(mat);
                 _Library.SaveChanges();
                 return true;
             }
