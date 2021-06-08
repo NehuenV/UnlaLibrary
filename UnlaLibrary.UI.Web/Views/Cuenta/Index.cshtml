@@ -1,0 +1,79 @@
+﻿@model UnlaLibrary.Data.Entities.Usuario
+@{
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+
+@section scripts{
+    <script>
+        function modificar() {
+            let botonModificar = document.getElementById('botonModificar');
+            let botonGuardar = document.getElementById('botonGuardar');
+            botonGuardar.classList.toggle('d-none');
+            document.getElementById('password').disabled = !document.getElementById('password').disabled;
+            document.getElementById('email').disabled = !document.getElementById('email').disabled;
+            botonModificar.classList.toggle('btn-secondary');
+            botonModificar.innerText = botonModificar.innerText == "Modificar" ? "Cancelar" : "Modificar";
+        }
+        
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Edit", "Cuenta")",
+                data: {
+                    email: document.getElementById('email').value,
+                    clave: document.getElementById('password').value
+                }
+            }).done(function (result) {
+                if (result.status) {
+                    modificar();
+                } else {
+                    alert("No se pudo modificar")
+                }
+            }).fail(function (jqXHR, status, error) {
+                    console.log("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText);
+                    alert("Hubo un error en el servidor")
+            })
+        })
+    </script>
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+</head>
+
+<body>
+
+    <div class="w-100 d-flex justify-content-center pb-3">
+        <div class="w-75r d-flex flex-column align-items-center">
+            <h2 class="display-5 my-3">Mi Cuenta</h2>
+            <form class="w-50r p-3 border border-secondary rounded" id="form">
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="number" class="form-control" id="dni" value="@Model.Dni" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" id="nombre" value="@Model.Nombre @Model.Apellido" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" value="@Model.Email" disabled required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" value="@Model.Clave" disabled required>
+                </div>
+                <div class="d-flex justify-content-center w-100">
+                    <button type="submit" class="btn btn-primary d-none mr-2" id="botonGuardar">Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick="modificar()" id="botonModificar">Modificar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
