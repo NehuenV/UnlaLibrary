@@ -1,7 +1,7 @@
 ﻿@model UnlaLibrary.Data.Entities.MaterialEstudio
 
 @{
-    ViewData["Title"] = "Catalogo";
+    ViewData["Title"] = Model.Titulo;
     Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
     var reseñas = ViewData["Res"] as List<UnlaLibrary.Data.Entities.Reseña>;
     var mireseña = ViewBag.MiReseña as UnlaLibrary.Data.Entities.Reseña;

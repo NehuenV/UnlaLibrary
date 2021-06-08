@@ -19,7 +19,7 @@
                 for (let tipo of document.getElementsByClassName('check-archivo')) {
                     if (tipo.checked) tiposDeArchivo.push(tipo.value)
                 }
-
+                $('#spinnerContainer').removeClass('d-none');
                 $.ajax({
                     type: 'POST',
                     url: '/Catalogo/ListaCatalogo',
@@ -35,6 +35,9 @@
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         console.log("Status: " + textStatus);
                         alert("Error: " + errorThrown);
+                    },
+                    complete: function (data) {
+                        $('#spinnerContainer').addClass('d-none');
                     }
                 });
             }
@@ -62,8 +65,12 @@
 
     <div class="w-100 d-flex justify-content-center pb-3">
         <div class="w-75r table-responsive">
-            @*<p class="font-raleway fs-4 fw-bold">10 Recursos encontrados</p>*@
             <div id="Results"></div>
+            <div class="d-flex justify-content-center m-3 d-none" id="spinnerContainer">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
