@@ -13,5 +13,8 @@ namespace UnlaLibrary.Data.Interface
         bool Create(Carrera universidad);
         bool Edit(Carrera u);
         bool Delete(int id);
+        List<Materia> GetMateriasActuales(int idCarrera);
+        List<Materia> GetMateriasRestantes(int idCarrera);
+        bool modificarMateriaCarrera(int idCarrera, int idMateria);
     }
 }

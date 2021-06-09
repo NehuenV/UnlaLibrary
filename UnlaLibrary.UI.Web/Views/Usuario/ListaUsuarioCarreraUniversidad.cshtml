@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "";
+}
+<script>
+    $(document).ready(function () {
+
+        let filtro = document.getElementById("filtrar");
+        filtro.addEventListener('input', filtrar);
+
+        function filtrar(e) {
+            let filtro = e.target.value;
+            let lista_dni = document.querySelectorAll('.dni');
+            lista_dni.forEach(dni => {
+                if (dni.innerText.includes(filtro)) {
+                    dni.parentElement.classList.remove('d-none')
+                } else {
+                    dni.parentElement.classList.add('d-none')
+                }
+            })
+        }
+
+        $('input').change(function () {
+            console.log('hola')
+            $.ajax({
+                type: 'POST',
+                url: '/Usuario/ModificarUsuarioCarreraUniversidad',
+                data: {
+                    idUniversidad: $("#Universidad").val(),
+                    idCarrera: $("#Carrera").val(),
+                    idUsuario: $(this).val()
+                },
+                success: function (result) {
+                    if (result.status) {
+                        $(this).removeClass('bg-warning');
+                    } else {
+                        $(this).addClass('bg-warning');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }
+            });
+        })
+    })
+
+</script>
+
+
+<div class="d-flex flex-column align-items-end p-1">
+    <input type="text" class="form-control form-control-sm" placeholder="Filtrar por DNI" id="filtrar">
+</div>
+<table class="table table-striped table-hover table-bordered table-sm text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in ViewBag.usuariosAgregados)
+        {
+            <tr>
+                <td scope="row" class="dni">@usuario.Dni</td>
+                <td scope="row">@usuario.Nombre</td>
+                <td scope="row">@usuario.Apellido</td>
+                @{
+                    var tipo = usuario.IdTipoUsuario == 1 ? "Estudiante" : "Profesor";
+                }
+                <td scope="row">@tipo</td>
+                <td scope="row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@usuario.IdUsuario" id="usuario" checked>
+                    </div>
+                </td>
+            </tr>
+        }
+        @foreach (var usuario in ViewBag.usuariosNoAgregados)
+        {
+            <tr>
+                <td scope="row" class="dni">@usuario.Dni</td>
+                <td scope="row">@usuario.Nombre</td>
+                <td scope="row">@usuario.Apellido</td>
+                @{
+                    var tipo = usuario.IdTipoUsuario == 1 ? "Estudiante" : "Profesor";
+                }
+                <td scope="row">@tipo</td>
+                <td scope="row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@usuario.IdUsuario" id="usuario">
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

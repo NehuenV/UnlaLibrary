@@ -1,0 +1,64 @@
+﻿@model UnlaLibrary.Data.Entities.Carrera;
+@{
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+    ViewData["Title"] = "Materias de carrera";
+}
+
+@section scripts{
+    <script>
+        $('input').change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/Carrera/ModificarMaterias',
+                data: {
+                    idCarrera: @Model.IdCarrera,
+                    idMateria: $(this).val()
+                },
+                success: function (result) {
+                    if (result.status) {
+                        $(this).removeClass('bg-warning');
+                    } else {
+                        $(this).addClass('bg-warning');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }
+            });
+        })
+    </script>
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+</head>
+
+<body>
+
+    <div class="w-100 d-flex justify-content-center pb-3">
+        <div class="w-75r d-flex flex-column align-items-center">
+            <h2 class="display-5 my-3">@Model.Carrera1</h2>
+            <form class="my-4 d-flex flex-column w-50r border border-secondary rounded p-3">
+                <h6 class="my-3 text-center">Materias</h6>
+                @foreach (var item in ViewBag.materiasActuales)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@item.IdMateria" checked>
+                        <label class="form-check-label" for="flexCheckDefault">@item.Materia1</label>
+                    </div>
+                }
+                @foreach (var item in ViewBag.materiasRestantes)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@item.IdMateria">
+                        <label class="form-check-label" for="flexCheckDefault">@item.Materia1</label>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,5 +13,8 @@ namespace UnlaLibrary.Data.Interface
         bool Edit(Usuario u);
         bool Delete(int id);
         List<TipoUsuario> GetTipoUsuario();
+        List<Usuario> GetUsuariosAgregados(int idUniversidad, int idCarrera);
+        List<Usuario> GetUsuariosNoAgregados(int idUniversidad, int idCarrera);
+        bool modificarUsuarioCarreraUniversidad(int idUniversidad, int idCarrera, int idUsuario);
     }
 }

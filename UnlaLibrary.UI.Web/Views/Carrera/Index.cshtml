@@ -32,26 +32,30 @@
                             <th scope="col">Nombre</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td scope="row">@item.Carrera1</td>
-                                <td scope="row">
-                                    <a href="/Carrera/Edit/@item.IdCarrera" class="btn btn-sm btn-primary">Editar</a>
-                                </td>
-                                <td scope="row">
-                                    <form asp-controller="Carrera" asp-action="Delete" method="post">
-                                        <input type="number" class="d-none" name="id" value="@item.IdCarrera" />
-                                        <button class="btn btn-danger btn-sm" type="submit">
-                                            Eliminar
-                                        </button>
-                                    </form>
+                        <tr>
+                            <td scope="row">@item.Carrera1</td>
+                            <td scope="row">
+                                <a href="/Carrera/Edit/@item.IdCarrera" class="btn btn-sm btn-primary">Editar</a>
+                            </td>
+                            <td scope="row">
+                                <a href="/Carrera/Materias/@item.IdCarrera" class="btn btn-sm btn-success">Materias</a>
+                            </td>
+                            <td scope="row">
+                                <form asp-controller="Carrera" asp-action="Delete" method="post">
+                                    <input type="number" class="d-none" name="id" value="@item.IdCarrera" />
+                                    <button class="btn btn-danger btn-sm" type="submit">
+                                        Eliminar
+                                    </button>
+                                </form>
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

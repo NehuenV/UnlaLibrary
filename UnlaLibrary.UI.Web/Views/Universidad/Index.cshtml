@@ -32,26 +32,30 @@
                             <th scope="col">Nombre</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td scope="row">@item.NombreUniversidad</td>
-                                <td scope="row">
-                                    <a href="/Universidad/Edit/@item.IdUniversidad" class="btn btn-sm btn-primary">Editar</a>
-                                </td>
-                                <td scope="row">
-                                    <form asp-controller="Universidad" asp-action="Delete" method="post">
-                                        <input type="number" class="d-none" name="id" value="@item.IdUniversidad"/>
-                                        <button class="btn btn-danger btn-sm" type="submit">
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                      
-                                </td>
-                            </tr>
+                        <tr>
+                            <td scope="row">@item.NombreUniversidad</td>
+                            <td scope="row">
+                                <a href="/Universidad/Edit/@item.IdUniversidad" class="btn btn-sm btn-primary">Editar</a>
+                            </td>
+                            <td scope="row">
+                                <a href="/Universidad/Carreras/@item.IdUniversidad" class="btn btn-sm btn-success">Carreras</a>
+                            </td>
+                            <td scope="row">
+                                <form asp-controller="Universidad" asp-action="Delete" method="post">
+                                    <input type="number" class="d-none" name="id" value="@item.IdUniversidad" />
+                                    <button class="btn btn-danger btn-sm" type="submit">
+                                        Eliminar
+                                    </button>
+                                </form>
+
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

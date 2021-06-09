@@ -75,5 +75,51 @@ namespace UnlaLibrary.Data.Repositories
                 return false;
             }
         }
+        public List<Carrera> GetCarrerasActuales(int idUniversidad)
+        {
+           return _Library.UniversidadCarrera
+                           .Include(x => x.IdCarreraNavigation)
+                           .Where(x => x.IdUniversidad == idUniversidad)
+                           .Select(x => x.IdCarreraNavigation)
+                           .OrderBy(x => x.Carrera1)
+                           .ToList();
+        }
+        public List<Carrera> GetCarrerasRestantes(int idUniversidad)
+        {
+            var carrerasActualesIndex = GetCarrerasActuales(idUniversidad).Select(x => x.IdCarrera).ToList();
+            var carreras = _Library.Carrera.Select(x => x).OrderBy(x => x.Carrera1);
+            var carrerasRestantes = carreras.Where(x => !carrerasActualesIndex.Contains(x.IdCarrera)).ToList();
+            return carrerasRestantes;
+        }
+
+        public bool modificarUniversidadCarrera(int idUniversidad, int idCarrera)
+        {
+            try
+            {
+                var universidadCarrera = _Library.UniversidadCarrera
+                    .Where(x => x.IdCarrera == idCarrera && x.IdUniversidad == idUniversidad)
+                    .FirstOrDefault();
+                if (universidadCarrera == null)
+                {
+                    var nuevo = new UniversidadCarrera
+                    {
+                        IdCarrera = idCarrera,
+                        IdUniversidad = idUniversidad
+                    };
+                    _Library.UniversidadCarrera.Add(nuevo);
+                }
+                else
+                {
+                    _Library.UniversidadCarrera.Remove(universidadCarrera);
+                }
+                _Library.SaveChanges();
+                return true;
+            } catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+
     }
 }

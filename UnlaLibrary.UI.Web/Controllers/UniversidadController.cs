@@ -74,5 +74,17 @@ namespace UnlaLibrary.UI.Web.Controllers
             if (!resultado) return View("Error");
             return RedirectToAction("Index");
         }
+        public ActionResult Carreras(int id)
+        {
+            var universidad = _Universidad.Get(id);
+            ViewBag.carrerasActuales = _Universidad.GetCarrerasActuales(id);
+            ViewBag.carrerasRestantes = _Universidad.GetCarrerasRestantes(id);
+            return View(universidad);
+        }
+        public JsonResult ModificarCarreras(int idUniversidad, int idCarrera)
+        {
+            bool status = _Universidad.modificarUniversidadCarrera(idUniversidad, idCarrera);
+            return Json(new { status = status });
+        }
     }
 }

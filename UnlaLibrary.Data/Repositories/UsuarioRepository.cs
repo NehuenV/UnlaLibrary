@@ -81,5 +81,52 @@ namespace UnlaLibrary.Data.Repositories
             }
         }
 
+        public List<Usuario> GetUsuariosAgregados(int idUniversidad, int idCarrera)
+        {
+            return _Library.UsuarioCarreraUniversidad
+                            .Include(x => x.IdUsuarioNavigation)
+                            .Where(x => x.IdUniversidad == idUniversidad && x.IdCarrera == idCarrera)
+                            .Select(x => x.IdUsuarioNavigation)
+                            .ToList();
+        }
+
+        public List<Usuario> GetUsuariosNoAgregados(int idUniversidad, int idCarrera)
+        {
+            var usuariosAgregados = GetUsuariosAgregados(idUniversidad, idCarrera);
+            var usuarios = _Library.Usuario
+                .Where(x => x.IdTipoUsuario != 3 && !usuariosAgregados.Contains(x))
+                .ToList();
+            return usuarios;
+        }
+        public bool modificarUsuarioCarreraUniversidad(int idUniversidad, int idCarrera, int idUsuario)
+        {
+            try
+            {
+                var ucu = _Library.UsuarioCarreraUniversidad
+                    .Where(x => x.IdCarrera == idCarrera && x.IdUniversidad == idUniversidad && x.IdUsuario == idUsuario)
+                    .FirstOrDefault();
+                if (ucu == null)
+                {
+                    var nuevo = new UsuarioCarreraUniversidad
+                    {
+                        IdCarrera = idCarrera,
+                        IdUniversidad = idUniversidad,
+                        IdUsuario = idUsuario
+                    };
+                    _Library.UsuarioCarreraUniversidad.Add(nuevo);
+                }
+                else
+                {
+                    _Library.UsuarioCarreraUniversidad.Remove(ucu);
+                }
+                _Library.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 }

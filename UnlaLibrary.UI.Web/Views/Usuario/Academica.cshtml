@@ -1,0 +1,79 @@
+﻿@model IEnumerable<UnlaLibrary.Data.Entities.Universidad>
+@{
+    ViewData["Title"] = "Información Academica";
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+<html>
+<head>
+</head>
+<body>
+    <div class="d-flex flex-column align-items-center w-100 py-4">
+        <h2 class="display-5 my-3">Información Académica</h2>
+
+        <form class="my-4 d-flex flex-wrap">
+            <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="universidad" class="text-center">Universidad</label>
+                <select class="form-select" id="Universidad">
+                    <option selected disabled>Elegir universidad</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.IdUniversidad">@item.NombreUniversidad</option>
+                    }
+                </select>
+            </div>
+            <div class="px-1  d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="select_carrera">Carrera</label>
+                <select class="form-select" id="Carrera" disabled>
+                    <option selected disabled>Elegir carrera</option>
+                </select>
+            </div>
+        </form>
+
+        <div class="w-75r table-responsive align-middle">
+            <div id="Results"></div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Universidad").change(function () {
+                $("#Carrera").empty();
+                $("#Carrera").prop('disabled', true);
+                $("#Carrera").append("<option disabled selected>Elegir carrera</option>");
+                $('#Results').empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CarrerasDisponibles", "Usuario")', // we are calling json method
+                    dataType: 'json',
+                    data: { idUniversidad: $("#Universidad").val() },
+                    success: function (carreras) {
+                        $("#Carrera").prop('disabled', false);
+                        $.each(carreras, function (i, carrera) {
+                            $("#Carrera").append('<option value="' + carrera.value + '">' +
+                                carrera.text + '</option>');
+                        });
+                    }
+                });
+            });
+            $("#Carrera").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("ListaUsuarioCarreraUniversidad", "Usuario")", // we are calling json method
+                    data: {
+                        idCarrera: $("#Carrera").val(),
+                        idUniversidad: $("#Universidad").val()
+                    },
+                    success: function (result) {
+                        $('#Results').html(result);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

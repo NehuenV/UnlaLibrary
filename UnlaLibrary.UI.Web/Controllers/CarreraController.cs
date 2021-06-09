@@ -61,5 +61,19 @@ namespace UnlaLibrary.UI.Web.Controllers
             if (!resultado) return View("Error");
             return RedirectToAction("Index");
         }
+
+        public ActionResult Materias(int id)
+        {
+            var carrera = _Carrera.Get(id);
+            ViewBag.materiasActuales = _Carrera.GetMateriasActuales(id);
+            ViewBag.materiasRestantes = _Carrera.GetMateriasRestantes(id);
+            return View(carrera);
+        }
+
+        public JsonResult ModificarMaterias(int idCarrera, int idMateria)
+        {
+            bool status = _Carrera.modificarMateriaCarrera(idCarrera, idMateria);
+            return Json(new { status = status });
+        }
     }
 }
