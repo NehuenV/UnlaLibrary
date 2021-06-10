@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "Agregar Alumno";
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+<html>
+<head>
+    <title>Agregar Admin</title>
+</head>
+<body>
+    <div class="d-flex flex-column align-items-center w-100 py-4">
+        <h2 class="display-5 my-3">Agregar Admin</h2>
+
+        <form class="my-4 d-flex flex-wrap">
+            <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="universidad" class="text-center">Universidad</label>
+                <select class="form-select" id="Universidad" asp-items="@(new SelectList(ViewBag.Universidad,"IdUniversidad","NombreUniversidad") )">
+                    <option selected disabled>Elegir universidad</option>
+                </select>
+            </div>
+            <div class="px-1  d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="select_carrera">Carrera</label>
+                <select class="form-select" id="Carrera" disabled>
+                    <option selected disabled>Elegir carrera</option>
+                </select>
+            </div>
+            <div class="px-1 d-flex flex-column align-item-center col-11 col-sm-4 ">
+                <label for="select_materia">Materia</label>
+                <select class="form-select" id="Materia" disabled>
+                    <option selected disabled>Elegir materia</option>
+                </select>
+            </div>
+        </form>
+
+        <div class="w-75r table-responsive align-middle">
+            <div id="Results"></div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-3.6.0.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Universidad").change(function () {
+                $("#Carrera").empty();
+                $("#Carrera").prop('disabled', true);
+                $("#Carrera").append("<option disabled selected>Elegir carrera</option>");
+                $("#Materia").empty();
+                $("#Materia").append("<option disabled selected>Elegir materia</option>");
+                $("#Materia").prop('disabled', true);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CarrerasDisponibles", "Admin")', // we are calling json method
+                    dataType: 'json',
+                    data: { idUniversidad: $("#Universidad").val() },
+                    success: function (universidades) {
+                        $("#Carrera").prop('disabled', false);
+                        $.each(universidades, function (i, universidad) {
+                            $("#Carrera").append('<option value="' + universidad.value + '">' +
+                                universidad.text + '</option>');
+                        });
+                    }
+                });
+                return false;
+            });
+            $("#Carrera").change(function () {
+                $("#Materia").prop('disabled', true);
+                $("#Materia").empty();
+                $("#Materia").append("<option disabled selected>Elegir materia</option>");
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("MateriasDisponibles", "Admin")", // we are calling json method
+                    dataType: 'json',
+                    data: {
+                        idCarrera: $("#Carrera").val()
+                    },
+                    success: function (materias) {
+                        $("#Materia").prop('disabled', false);
+                        $.each(materias, function (i, materia) {
+                            $("#Materia").append('<option value="' + materia.value + '">' +
+                                materia.text + '</option>');
+
+                        });
+                    }
+                });
+                return false;
+            });
+
+            $("#Materia").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("ListaProfesorMateria", "Admin")",
+                    data: {
+                        idMat: $('#Materia').val(),
+                        idCarrera: $('#Carrera').val()
+                    },
+                    success: function (result) {
+                        $('#Results').html(result);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -46,5 +46,10 @@ namespace UnlaLibrary.UI.Web.Controllers
             bool resultado = _Cuenta.Edit(email, clave, iduser);
             return Json(new { status =  resultado });
         }
+        public JsonResult Recuperar(string email)
+        {
+            _Cuenta.RecuperarClave(email);
+            return Json(new { status = true });
+        }
     }
 }

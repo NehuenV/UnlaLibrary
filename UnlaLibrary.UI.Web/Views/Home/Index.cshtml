@@ -138,11 +138,13 @@
                     }
                 })
                 $("#olvido").on('click', function (e) {
+                    debugger;
                     e.preventDefault();
+                    var mail = $("#emailolvidado").val();
                     $.ajax({
-                        url: "@Url.Action("Recuperar", "Coso")",
+                        url: "@Url.Action("Recuperar", "RecuperarContraseña")",
                         data: {
-                            email: $("#email").val(),
+                            email: mail,
                         },
                         type: "post"
                     }).done(function (result) {

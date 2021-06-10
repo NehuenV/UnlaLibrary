@@ -10,5 +10,6 @@ namespace UnlaLibrary.Data.Interface
         //bool Agregar(string nombre);
         Usuario Get(int idUsuario);
         bool Edit(string email, string clave, int iduser);
+        void RecuperarClave(string email);
     }
 }

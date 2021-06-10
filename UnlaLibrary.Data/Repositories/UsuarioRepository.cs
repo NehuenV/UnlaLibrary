@@ -35,6 +35,8 @@ namespace UnlaLibrary.Data.Repositories
         {
             try
             {
+                Random r = new Random();
+                u.Clave = r.Next(0, 9999).ToString();
                 _Library.Usuario.Add(u);
                 _Library.SaveChanges();
                 return true;
