@@ -41,13 +41,26 @@ namespace UnlaLibrary.UI.Web.Controllers
             return Json(new SelectList(lista, "IdMateria", "Materia1"));
         }
 
-        public IActionResult ListaProfesorMateria(int idMat, int idCarrera)
+        public IActionResult ListaProfesorMateria(int idMat, int idCarrera, int idUniversidad)
         {
 
             var lista1 = _AdminRepository.GetProfesoresAgregadosMateria(idMat, idCarrera);
-            var lista2 = _AdminRepository.GetProfesoresNoAgregadosMateria(idMat, idCarrera);
+            var lista2 = _AdminRepository.GetProfesoresNoAgregadosMateria(idMat, idCarrera,idUniversidad);
             lista1.AddRange(lista2);
             return View(lista1);
+        }
+
+        public JsonResult CambiarProfesorMateria(int idUsuario, bool estado, int idMat)
+        {
+            if (estado)
+            {
+                _AdminRepository.EliminarProfesorMateria(idUsuario, idMat);
+            }
+            else
+            {
+                _AdminRepository.AgregarProfesorMateria(idUsuario, idMat);
+            }
+            return Json(new { status = "Ok" });
         }
     }
 }

@@ -92,7 +92,8 @@
                     url: "@Url.Action("ListaProfesorMateria", "Admin")",
                     data: {
                         idMat: $('#Materia').val(),
-                        idCarrera: $('#Carrera').val()
+                        idCarrera: $('#Carrera').val(),
+                        idUniversidad: $("#Universidad").val()
                     },
                     success: function (result) {
                         $('#Results').html(result);

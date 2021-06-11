@@ -12,6 +12,9 @@ namespace UnlaLibrary.Data.Interface
         List<Carrera> GetCarreras(int idUniversidad);
         List<Materia> GetMaterias(int idCarrera);
         List<Alumno> GetProfesoresAgregadosMateria(int idMat, int idCarrera);
-        List<Alumno> GetProfesoresNoAgregadosMateria(int idMat, int idCarrera);
+        List<Alumno> GetProfesoresNoAgregadosMateria(int idMat, int idCarrera, int idUniversidad);
+        bool AgregarProfesorMateria(int idAlumno, int idMat);
+        bool EliminarProfesorMateria(int idAlumno, int idMat);
+        
     }
 }
