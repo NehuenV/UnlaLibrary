@@ -45,4 +45,35 @@ namespace UnlaLibrary.UI.Web.Helper
 
     }
 
+    public class AdminType : IAuthorizationRequirement
+    {
+        public int Tipo { get; set; }
+        public AdminType(int _Tipo)
+        {
+            Tipo = _Tipo;
+        }
+    }
+    public class AdminTypeHandler : AuthorizationHandler<AdminType>
+    {
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdminType requirement)
+        {
+
+            if (!context.User.HasClaim(x => x.Type == "TipoDeUsuarioId"))
+            {
+                return Task.CompletedTask;
+            }
+            int tipo = Convert.ToInt32(context.User.FindFirst(x => x.Type == "TipoDeUsuarioId").Value);
+            if (tipo == requirement.Tipo)
+            {
+                context.Succeed(requirement);
+            }
+            else
+            {
+                context.Fail();
+            }
+            return Task.CompletedTask;
+        }
+
+    }
+
 }

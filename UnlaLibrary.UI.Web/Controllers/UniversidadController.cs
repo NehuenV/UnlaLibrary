@@ -18,6 +18,7 @@ using UnlaLibrary.UI.Web.Models;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
+    [Authorize(Policy = "AdminType")]
     public class UniversidadController : Controller
     {
         private readonly ILogger<UniversidadController> _logger;
