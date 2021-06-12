@@ -46,7 +46,7 @@
             var valor = button.dataset.estado;
                 $.ajax({
                     type: 'POST',
-                    url: "@Url.Action("CambiarAlumnoMateria", "Admin")",
+                    url: "@Url.Action("CambiarProfesorMateria", "Admin")",
                     data: {
                         idUsuario: button.dataset.value,
                         estado: button.dataset.estado,

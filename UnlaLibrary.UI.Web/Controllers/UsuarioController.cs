@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using UnlaLibrary.Data.Interface;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
+    [Authorize(Policy = "AdminType")]
     public class UsuarioController : Controller
     {
         private readonly ILogger<UsuarioController> _logger;

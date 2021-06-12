@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using UnlaLibrary.Data.Interface;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
+    [Authorize(Policy = "AdminType")]
     public class CarreraController : Controller
     {
         private readonly ILogger<CarreraController> _logger;

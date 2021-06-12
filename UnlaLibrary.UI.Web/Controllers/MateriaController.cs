@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UnlaLibrary.Data.Interface;
 
 namespace UnlaLibrary.UI.Web.Controllers
 {
+    [Authorize(Policy = "AdminType")]
     public class MateriaController : Controller
     {
         private readonly ILogger<MateriaController> _logger;

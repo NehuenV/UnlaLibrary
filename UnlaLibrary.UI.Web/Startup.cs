@@ -40,7 +40,9 @@ namespace UnlaLibrary.UI.Web
 
             services.AddScoped<ICuentaRepository, CuentaRepository>();
             services.AddAuthorization( x=> x.AddPolicy("UserType", policy => policy.Requirements.Add(new UserType(2))));
+            services.AddAuthorization( x => x.AddPolicy("AdminType", policy => policy.Requirements.Add(new AdminType(3))));
             services.AddSingleton<IAuthorizationHandler,UserTypeHandler>();
+            services.AddSingleton<IAuthorizationHandler, AdminTypeHandler>();
 
             services.AddDistributedMemoryCache();
             services.AddSession();
