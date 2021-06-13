@@ -34,7 +34,7 @@ namespace UnlaLibrary.Data.Repositories
                   &&
                   (tipos[0] == "TODOS" || tipos.Contains(x.TipoArchivo))
                   )
-                .Select(x => new MaterialEstudio {IdUniversidad= x.IdUniversidad,IdMateriaNavigation=x.IdMateriaNavigation,IdMateria=x.IdMateria,IdIdioma=x.IdIdioma,IdIdiomaNavigation=x.IdIdiomaNavigation,TipoArchivo=x.TipoArchivo,Titulo=x.Titulo, Autor=x.Autor,Descripcion=x.Descripcion ,Miniatura = x.Miniatura })
+                .Select(x => new MaterialEstudio {IdUniversidad= x.IdUniversidad,IdMateriaNavigation=x.IdMateriaNavigation,IdMateria=x.IdMateria,IdIdioma=x.IdIdioma,IdIdiomaNavigation=x.IdIdiomaNavigation,TipoArchivo=x.TipoArchivo,Titulo=x.Titulo, Autor=x.Autor,Descripcion=x.Descripcion ,Miniatura = x.Miniatura, IdMaterial = x.IdMaterial })
                 .ToList();
             return catalogo;
         }
