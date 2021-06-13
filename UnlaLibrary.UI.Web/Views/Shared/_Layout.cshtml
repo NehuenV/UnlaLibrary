@@ -18,43 +18,293 @@
 
 </head>
 <body>
-    <div class="fullscreen w-100">
-        <div class="landingpage w-100">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark-opacity">
-                <div class="container-fluid w-75r">
-                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                        <img class="logo" src="/images/logo.png" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                        @if (User.Identity.IsAuthenticated)
-                        {<div class="btn-group">
-                             <button class="btn btn-outline-light me-2 rounded" type="button" data-bs-toggle="dropdown"
-                                     aria-expanded="false" id="session">
-                                 @User.Identity.Name
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-dark">
-                                 <li><a class="dropdown-item" href="@Url.Action("Index", "Cuenta")">Mi Cuenta</a></li>
-                                 <li><a class="dropdown-item" href="@Url.Action("Logout", "Home" )">Salir</a></li>
-                             </ul>
-                            </div>
-                        } else {
-                        <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="modal"
-                                data-bs-target="#signupmodal">
-                            Iniciar Sesión
+    <div class="body2">
+        <div class="fullscreen w-100">
+            <div class="landingpage w-100">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark-opacity">
+                    <div class="container-fluid w-75r">
+                        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                            <img class="logo" src="/images/logo.png" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
                         </button>
-                        }
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                            @if (User.Identity.IsAuthenticated)
+                            {<div class="btn-group">
+                                    <button class="btn btn-outline-light me-2 rounded" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false" id="session">
+                                        @User.Identity.Name
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" href="@Url.Action("Index", "Cuenta")">Mi Cuenta</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("Logout", "Home" )">Salir</a></li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#signupmodal">
+                                    Iniciar Sesión
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </nav>
+                @RenderBody()
+
+            </div>
+        </div>
+        <div class=" d-flex flex-column align-items-center" style="background-color: rgb(26, 26, 26);">
+            <div class=" w-75r nunito" style="background-color: rgb(44, 44, 44);">
+                <!-- SERVICIO -->
+                <div class="d-flex flex-column w-100 align-items-center container mb-5 ">
+                    <h6 class="text-center mt-5 mb-5 myr text-secondary" style="letter-spacing: 0.05em;">
+                        NUESTRO SERVICIO
+                    </h6>
+                    <div class="d-flex row pxr">
+                        <div class="d-flex flex-column col col-12 col-sm-6 m-0 justify-content-center align-items-center ddd prr">
+                            <p class="m-0 p-0 text-success fs-5 col-12 col-sm-10">Experiencia</p>
+                            <h4 class="m-0 p-0  text-warning col-12 col-sm-10 ttt">Para estudiantes</h4>
+                            <p class="m-0 p-0 text-light col col-12 col-sm-10">
+                                Plataforma intuitiva y sencilla con los
+                                estudiantes para que pueda acceder a todo el material de estudio requerido en su carrera
+                                desde un solo lugar. Guardar sus favoritos, descargarlos y más.
+                            </p>
+                        </div>
+                        <div class="col col-12 col-sm-6  d-flex justify-content-start align-items-center ddd imm mlr">
+                            <div class="w-100">
+                                <img src="images/student.jpg" class="w-90"
+                                     style="box-shadow: -40pt 0px 25pt rgba(29, 29, 29, 0.24);" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex row pxr mt-5">
+                        <div class="col col-12 col-sm-6  d-flex align-items-center justify-content-center ddd imm">
+                            <div class="w-100 d-flex  drr">
+                                <img src="images/techer.jpg" class="w-90"
+                                     style="box-shadow: 40pt 0px 25pt rgba(29, 29, 29, 0.356);" />
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column col col-12 col-sm-6 m-0 justify-content-center align-items-start ddd prr mlr">
+                            <p class="m-0 p-0 text-success fs-5 col-12 col-sm-10">Profesionalismo</p>
+                            <h4 class="m-0 p-0 ttt text-warning col-12 col-sm-10">Para profesores</h4>
+                            <p class="m-0 p-0 text-light col col-12 col-sm-10">
+                                Capacidad de cargar y publicar
+                                instantáneamente la bibliografía que requieran sus estudiantes. Contará con la distinción
+                                entre materias, carreras y universidades para que el acceso sea mucho más sencillo y eficaz.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CLIENTES -->
+                <div class="d-flex flex-column w-100 align-items-center container mb-5 ">
+                    <h6 class="text-center mt-5 mb-5 myr text-secondary" style="letter-spacing: 0.05em;">
+                        CLIENTES QUE NOS
+                        ELIGEN
+                    </h6>
+                    <div class="d-flex row pxr5 mb-5">
+                        <div class="p-3 col-6 col-sm-3 d-flex justify-content-center">
+                            <div class="bg-light p-3">
+                                <img src="/images/uba.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/uca.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/unlp.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/UNLA1.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/UNAB1.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/UNAJ.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/unlz1.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
+                        <div class="p-3 col-6 col-sm-3">
+                            <div class="bg-light p-3 d-flex justify-content-center">
+                                <img src="/images/utn.png" class="w-90" style="filter: invert();" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
-            @RenderBody()
+
+                <!-- EQUIPO -->
+                <div class="d-flex flex-column w-100 align-items-center container mb-5 mt-5">
+                    <div class="d-flex row pxr">
+                        <div class="d-flex flex-column col col-12 col-sm-6 m-0 justify-content-center align-items-center ddd prr">
+                            <p class="m-0 p-0 text-success fs-5 col-12 col-sm-10">Conociendo a</p>
+                            <h4 class="m-0 p-0  text-warning col-12 col-sm-10 ttt">El Equipo</h4>
+                            <p class="m-0 p-0 text-light col col-12 col-sm-10">
+                                Somos un equipo de desarrolladores formados
+                                en la Universidad Nacional de Lanús, donde cada aprovechó su especialidad para lograr la
+                                excelencia en la construcción de UNLa Library, aplicando los últimos estándares del
+                                desarrollo de software y siguiendo las mejores prácticas de la industria.
+                            </p>
+                        </div>
+                        <div class="col col-12 col-sm-6 d-flex justify-content-start align-items-center ddd imm mb-4">
+                            <div class="w-100 d-flex justify-content-start">
+                                <img src="images/equpo.png" class="w-90" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100 row p-5">
+                        <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row align-items-center mb-5 ">
+                            <img src="/images/cristian.png" class="col-6 col-sm-3 " />
+                            <div class="d-flex flex-column justify-content-center plr ">
+                                <p class="m-0 p-0 text-secondary">
+                                    "Un buen diseño aporta un valor añadido más rápido de lo
+                                    que agrega costo"
+                                </p>
+                                <h6 class="m-0 p-0 text-warning">Cristian Villafañe</h6>
+                                <p class="m-0 p-0 text-light" style="font-size: 0.8em;">Frontend Developer</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row align-items-center mb-5 ">
+                            <img src="/images/nehuen.png" class="col-6 col-sm-3 " />
+                            <div class="d-flex flex-column justify-content-center plr ">
+                                <p class="m-0 p-0 text-secondary">
+                                    "Caminar sobre agua y desarrollar software en base a una especificación es sencillo, si ambos están congelados"
+                                </p>
+                                <h6 class="m-0 p-0 text-warning">Nehuen Verges</h6>
+                                <p class="m-0 p-0 text-light" style="font-size: 0.8em;">Backend Developer</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row align-items-center mb-5 ">
+                            <img src="/images/diego.png" class="col-6 col-sm-3 " />
+                            <div class="d-flex flex-column justify-content-center plr ">
+                                <p class="m-0 p-0 text-secondary">
+                                    "El buen código es su mejor documentación"
+                                </p>
+                                <h6 class="m-0 p-0 text-warning">Diego Prociuk</h6>
+                                <p class="m-0 p-0 text-light" style="font-size: 0.8em;">Documentador</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex flex-column flex-sm-row align-items-center mb-5 ">
+                            <img src="/images/claudio.png" class="col-6 col-sm-3 " />
+                            <div class="d-flex flex-column justify-content-center plr ">
+                                <p class="m-0 p-0 text-secondary">
+                                    "En teoría, la teoría y la práctica son los mismos. En la práctica, no es."
+                                </p>
+                                <h6 class="m-0 p-0 text-warning">Claudio Turkula</h6>
+                                <p class="m-0 p-0 text-light" style="font-size: 0.8em;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CULTURA-->
+                <div class="d-flex flex-column w-100 align-items-center container mb-5">
+                    <div class="d-flex row  mt-5 mb-5">
+                        <div class="col col-12 col-sm-6  d-flex align-items-center justify-content-center ddd imm">
+                            <div class="w-100 d-flex drr">
+                                <img src="images/techer.jpg" class="w-90" />
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column col col-12 col-sm-6 m-0 justify-content-center align-items-start ddd prr mlr">
+                            <p class="m-0 p-0 text-success col-12 col-sm-10" style="font-size: 0.9em;">
+                                SERVICIO, TRABAJO Y
+                                EXCELENCIA
+                            </p>
+                            <h4 class="m-0 p-0 ttt text-warning col-12 col-sm-10">Cultura</h4>
+                            <p class="m-0 p-0 text-light col col-12 col-sm-9">
+                                En UNLa Library nos enfocamos a prestar un
+                                servicio que facilite la vida de estudiantes y profesores universitarios. Nos encontramos en
+                                continua retroalimentación con el usuario para que juntos logremos dar a las universidades
+                                argentinas la herramienta de gestión que se merecen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACTO -->
+                <div class="d-flex flex-column w-100 align-items-center container mb-5">
+                    <form class="border border-secondary border-3 col-11 col-sm-8 p-3" id="contact">
+                        <h3 class="text-light display-5">CONTACTANOS</h3>
+                        <div class="linea border border-secondary w-100"></div>
+                        <p class="text-light mb-5">Envíanos un mensaje por este medio y te responderemos a la brevedad</p>
+                        <div class="d-flex flex-column align-items-center">
+                            <input type="text" placeholder="Nombre"
+                                   class="col-12 col-sm-8 fatinput border border-light border-2 mb-4" id="name" required />
+                            <input type="email" placeholder="Correo electrónico"
+                                   class="col-12 col-sm-8 fatinput border border-light border-2 mb-4" id="email2" required />
+                            <textarea class="col-12 col-sm-8 fatinput border border-light border-2" id="message2"
+                                      placeholder="Mensaje" style="height: 10em;" required></textarea>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="col-12 col-sm-8 d-flex justify-content-end">
+                                <button type="submit"
+                                        class="fatinput border border-light border-2 my-4 px-3">
+                                    ENVIAR
+                                </button>
+                            </div>
+                        </div>
+                        <div id="status" class="text-primary">.</div>
+                    </form>
+
+                </div>
+            </div>
 
         </div>
+        <footer class="bg-dark text-white pt-4 ob-3 d-flex justify-content-center">
+            <div class="w-75r d-flex flex-column align-items-center">
+                <p class="m-0 mb-1">UNLa Library</p>
+                <p class="m-0 mb-1">Proyecto de Software - Universidad Nacional de Lanús</p>
+                <p class="m-0 font-raleway" style="font-size: 0.9em;">
+                    <a href="https://github.com/NehuenV" target="_blank" style="text-decoration: none;" class="text-light">• Nehuen Verges</a>
+                    <a href="https://github.com/gazapus" target="_blank" style="text-decoration: none;" class="text-light">• Cristian Villafañe</a>
+                </p>
+                <p class="mt-2" style="font-size: 0.8em;">© 2021. Todos los derechos reservados (?</p>
+            </div>
+        </footer>
     </div>
+    
+    <script>
+        document.getElementById("contact").addEventListener('submit', async function (e) {
+            e.preventDefault();
+            document.getElementById('status').innerText = "Enviando";
+            let data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email2').value,
+                message: document.getElementById('message2').value
+            }
+            const response = await fetch('https://mailserverunla.herokuapp.com/send', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(data)
+            });
+            document.getElementById('status').innerText = response.status == 200 ? "Mensaje enviado" : "Error al enviar";
+            return false;
+        })
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/a83f82191e.js" crossorigin="anonymous"></script>

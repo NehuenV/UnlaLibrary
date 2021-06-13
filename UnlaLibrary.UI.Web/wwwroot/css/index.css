@@ -1,6 +1,11 @@
 body {
     padding: 0;
     margin: 0;
+}
+
+.body2 {
+    padding: 0;
+    margin: 0;
     height: 100vh;
     overflow-y: scroll;
 }
@@ -191,4 +196,112 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(158, 158, 158);
+}
+
+/* aca se pone feo */
+
+.drr {
+    justify-content: flex-end;
+}
+
+.ttt {
+    font-size: 2em !important;
+    font-family: 'Raleway';
+}
+
+.prr {
+    padding-left: 3em !important;
+    padding-right: 3em !important;
+    box-sizing: border-box;
+}
+
+.mlr {
+    padding-left: 4em !important;
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.pxr5 {
+    padding: 0 4em 0 4em;
+}
+
+.plr {
+    margin-left: 0.8em;
+    width: 60%;
+}
+
+.fatinput {
+    height: 2.8em;
+    background-color: rgba(211, 211, 211, 0.089);
+    color: rgb(214, 214, 214);
+    padding: 0 0.5em 0 0.5em;
+}
+
+    .fatinput::placeholder {
+        color: grey;
+    }
+
+    .fatinput:focus {
+        outline: none;
+        background-color: rgba(211, 211, 211, 0.233);
+    }
+
+.nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+@media (max-width: 1200px) {
+    .prr {
+        padding-left: 2em !important;
+        padding-right: 2em !important;
+        box-sizing: border-box;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .pxr {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+
+    .ddd {
+        align-items: center !important;
+        text-align: center;
+    }
+
+    .imm {
+        margin-top: 1em !important;
+    }
+
+    .myr {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+
+    .drr {
+        justify-content: center;
+    }
+
+    .prr {
+        padding-left: 0em !important;
+        padding-right: 0em !important;
+        box-sizing: border-box;
+    }
+
+    .mlr {
+        padding-left: 0 !important;
+    }
+
+    .pxr5 {
+        padding: 0 0em 0 0em;
+    }
+
+    .plr {
+        margin-left: 0em;
+        width: 90%;
+        text-align: center;
+    }
 }
