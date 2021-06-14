@@ -34,7 +34,7 @@ Accede al puerto [5001](http://localhost:5001) para ver el sitio web corriendo d
 - SQL Server
 - Jquery
 
-### Autores ✒️
+## Autores ✒️
 
 - [Nehuen Verges](https://github.com/NehuenV)
 - [Cristian Villafañe](https://github.com/gazapus)
